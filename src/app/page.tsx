@@ -1,16 +1,16 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import MainButton from './components/MainButton';
 import Hero from './layouts/Hero';
+import Athletics from './layouts/NextPhaseAthletics';
+import PromoVideoSection from './layouts/PromoVideo';
 
 export default function Home() {
-  const router = useRouter();
 
   return (
     <div>
       <Hero />
-      <MainButton title="Hi" onClick={() => router.push('/camps')} />
+      <Athletics />
+      <PromoVideoSection />
     </div>
   );
 }
