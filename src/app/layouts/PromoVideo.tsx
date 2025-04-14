@@ -2,12 +2,12 @@ import React from "react";
 
 const PromoVideoSection = () => {
   return (
-    <section className="relative w-full h-screen flex items-center bg-gradient-to-b from-[#0046CC] to-[#091F35] justify-center  overflow-hidden">
+    <section className="relative w-full h-screen flex flex-wrap items-center bg-gradient-to-b from-[#0046CC] to-[#091F35] justify-center  overflow-hidden">
         <div className=" flex items-center justify-center z-30">
           <div className="text-center px-4">
-            <h1 className="">
+            <h2 className="text-2xl">
               Greatness isn&apos;t Born <span className="block">— It&apos;s <strong className="text-[#FFD700]">BUILT.</strong></span>
-            </h1>
+            </h2>
           </div>
         </div>
       <div className="absolute inset-0 bg-black/50 z-10"></div>

@@ -41,25 +41,21 @@ body {
 } */
 h1 {
   font-family: "Montserrat", sans-serif;
-  font-size: 64px;
   font-weight: 800;
   color: var(--text);
 }
 h2 {
   font-family: "Montserrat", sans-serif;
-  font-size: 38px;
   font-weight: 700;
   color: var(--text);
 }
 h3 {
   font-family: "Montserrat", sans-serif;
-  font-size: 24px;
   font-weight: 600;
   color: var(--accent);
 }
 p {
   font-family: "Open Sans", sans-serif;
-  font-size: 18px;
   font-weight: 400;
   color: var(--paragraph);
 }
@@ -68,7 +64,11 @@ p {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(9, 19, 29, 0.75);
-  border-radius: 12px;
+  border-radius: 12px 12px 0 0;
   border: 1px solid rgba(255, 255, 255, 0.125);
   margin-top: -50px;
+}
+
+@media screen and (max-width: 1100px) {
+
 }

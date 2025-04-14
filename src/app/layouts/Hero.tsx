@@ -9,17 +9,17 @@ const Hero = () => {
 
     return (
       <div
-        className="relative bg-cover bg-right-top text-white min-h-screen flex items-center justify-center"
+        className="relative bg-cover bg-right-top min-h-screen flex items-center justify-center"
         style={{ backgroundImage: "url('/images/hero-bg.png')" }}
       >
         <div className=" p-6 sm:p-10 text-center">
-          <h1 className="tracking-wider">
+          <h1 className="text-5xl tracking-wider">
             NEXTPHASE
           </h1>
-          <h2 className=" mt-2">
+          <h2 className=" mt-2 text-3xl">
             ATHLETICS
           </h2>
-          <h3 className="mt-6">
+          <h3 className="mt-2 text-xl mb-4">
             Empowering | Next <br className="sm:hidden" />
             Generation of Champions
           </h3>
