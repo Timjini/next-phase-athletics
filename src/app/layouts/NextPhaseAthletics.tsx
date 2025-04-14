@@ -41,7 +41,7 @@ const NextPhaseAthletics = () => {
         </div>
       </div>
       <div className="">
-        <h2 className="mb-6 text-2xl mt-2">Speed. Power. Mindset.</h2>
+        <h2 className="mb-6 text-3xl mt-2 uppercase">Speed. Power. Mindset.</h2>
         <p className="mb-6 font-light md:text-lg pt-2">
          Every summer, we host immersive speed, agility, and strength camps led by world-class athletes — individuals who have competed at the highest levels and now dedicate their expertise to developing young talent. From middle school to college athletes, our programs are designed to push boundaries, sharpen skills, and elevate mindset.
         </p>

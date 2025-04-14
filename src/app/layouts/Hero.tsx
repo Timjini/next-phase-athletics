@@ -2,6 +2,7 @@
 
 import MainButton from "../components/MainButton";
 import { useRouter } from 'next/navigation';
+import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 
 
 const Hero = () => {
@@ -20,8 +21,7 @@ const Hero = () => {
             ATHLETICS
           </h2>
           <h3 className="mt-2 text-xl mb-4">
-            Empowering | Next <br className="sm:hidden" />
-            Generation of Champions
+          <TextGenerateEffect words="Empowering | Next Generation of Champions" />
           </h3>
           <MainButton title="JOIN NOW" onClick={() => router.push('/camps')}/>
         </div>
