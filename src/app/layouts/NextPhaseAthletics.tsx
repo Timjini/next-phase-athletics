@@ -26,7 +26,7 @@ const NextPhaseAthletics = () => {
       title: "soccer",
     },
     {
-      image: "/images/lacrosse-illustration.png",
+      image: "/images/Lacrosse-illustration.png",
       title: "lacrosse",
     },
   ];
