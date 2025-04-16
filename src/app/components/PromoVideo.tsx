@@ -13,7 +13,7 @@ const PromoVideoSection = () => {
               </h2>
               <MainButton title="Join The Camp" onClick={() => router.push('/camps')} />
             </div>
-            <div className="mx-auto">
+            <div className="mx-auto mt-8">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/A4qRKUEXvxM?si=i9MkI2Ohupb7Wyq3" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
             </div>
     </div>      
