@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import "./globals.css";
 import { Montserrat, Open_Sans } from 'next/font/google';

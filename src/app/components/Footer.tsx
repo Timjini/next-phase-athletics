@@ -40,8 +40,7 @@ const Footer = () => {
             </div>
             
             <div className="pt-2">
-              <p className="text-gray-400">@NextphaseAthletics</p>
-              <p className="text-gray-400">@NextphaseSports</p>
+              <p className="text-gray-400">@NextPhaseAthletics</p>
             </div>
           </div>
 
