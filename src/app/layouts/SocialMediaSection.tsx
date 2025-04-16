@@ -16,8 +16,8 @@ const SocialMediaSection = () => {
   };
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-b from-[#0046CC] to-[#091F35] min-h-screen">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-12 px-4 bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-screen">
+      <div className="relative gap-8 items-center py-16 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-1 sm:py-16 lg:px-6 glassMorphicSocialMedia">
         <h2 className="text-3xl font-bold text-center mb-2">@AthleticsNetphase</h2>
         <p className="text-center text-gray-600 mb-8">Follow us on Instagram for the latest updates</p>
         

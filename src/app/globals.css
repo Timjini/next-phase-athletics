@@ -102,6 +102,14 @@ p {
   margin-top: -50px;
 }
 
+.glassMorphicSocialMedia{
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(9, 19, 29, 0.75);
+  border-radius: 12px 12px 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
 @media screen and (max-width: 1100px) {
   .glassMorphic {margin-top: -450px;margin-top: -250px;}
   .heroContent{padding-top: 200px;}
@@ -152,6 +160,6 @@ p {
 
 /* END  ================================= */
 
-.promoSection{margin-top: 20px;}
+.promoSection{margin-top: 0%;}
 
 .divider{margin-top: -25px;}
