@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { CarouselOrientation } from "../components/CarouselOrientation";
-import PromoVideo from "../components/PromoVideo";
 import { icons, paragraphs } from "../lib/constants";
 
 const NextPhaseAthletics = () => {
@@ -60,7 +59,6 @@ const NextPhaseAthletics = () => {
           <CarouselOrientation data={paragraphs} />
         </div>
       </div>
-        <PromoVideo />
     </section>
   );
 };
