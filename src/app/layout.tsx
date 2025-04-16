@@ -1,7 +1,11 @@
+/* eslint-disable @next/next/no-img-element */
 import type { Metadata } from "next";
 import "./globals.css";
-import Link from 'next/link';
 import { Montserrat, Open_Sans } from 'next/font/google';
+import Footer from "./components/Footer";
+// import Navigation from "./components/Navigation";
+import { Toaster } from "@/components/ui/sonner"
+
 
 
 export const metadata: Metadata = {
@@ -30,10 +34,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
       <body className="antialiased">
-        <nav style={{ padding: 16, borderBottom: '1px solid #ccc' }} className="hidden">
-          <Link href="/">Home</Link> | <Link href="/camps">Camps</Link>
-        </nav>
-        {children}
+        {/* <Navigation 
+            logoPath="/images/nextPhase-logo-white.png"
+            links={[
+              { href: "/", label: "Home" },
+              { href: "/camps", label: "Camps" },
+              { href: "/about", label: "About" }
+            ]}
+          /> */}
+        <main>{children}</main>
+        <Toaster />
+        <Footer />
       </body>
     </html>
   );

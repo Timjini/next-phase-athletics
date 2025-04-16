@@ -13,7 +13,7 @@ const Hero = () => {
         className="relative bg-cover bg-right-top min-h-screen flex items-center justify-center"
         style={{ backgroundImage: "url('/images/hero-bg.png')" }}
       >
-        <div className=" p-6 sm:p-10 text-center">
+        <div className="heroContent p-6 sm:p-10 text-center">
           <h1 className="text-5xl tracking-wider">
             NEXTPHASE
           </h1>
