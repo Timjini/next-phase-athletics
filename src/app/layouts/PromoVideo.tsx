@@ -2,16 +2,14 @@ import React from "react";
 
 const PromoVideoSection = () => {
   return (
-    <section className="relative w-full h-screen flex flex-wrap items-center bg-gradient-to-b from-[#0046CC] to-[#091F35] justify-center  overflow-hidden">
+    <section className="h-screen grid grid-cols-1 lg:grid-cols-2 items-center bg-gradient-to-b from-[#0046CC] to-[#091F35] justify-center  overflow-hidden">
         <div className=" flex items-center justify-center z-30">
           <div className="text-center px-4">
-            <h2 className="text-2xl">
-              Greatness isn&apos;t Born <span className="block">— It&apos;s <strong className="text-[#FFD700]">BUILT.</strong></span>
+            <h2 className="text-5xl">
+              Greatness isn&apos;t Born <span className="block">— It&apos;s <strong className="text-[#FFD700] text-6xl">BUILT.</strong></span>
             </h2>
           </div>
-        </div>
-      <div className="absolute inset-0 bg-black/50 z-10"></div>
-      
+        </div>      
       {/* Video container */}
       <div className="relative w-full max-w-4xl h-[70vh] mx-auto rounded-lg overflow-hidden shadow-2xl z-20">
         <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
@@ -23,7 +21,7 @@ const PromoVideoSection = () => {
             <p className="text-lg">Promo video</p>
           </div>
         </div>
-    </div>
+      </div>
     </section>
   );
 };
