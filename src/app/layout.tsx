@@ -5,6 +5,9 @@ import { Montserrat, Open_Sans } from 'next/font/google';
 import Footer from "./components/Footer";
 // import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner"
+import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
+import { ClientOnly } from "./components/ClientOnly";
+
 
 
 
@@ -34,6 +37,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
       <body className="antialiased">
+        <ClientOnly>
+        <ScrollToTopOnRouteChange />
+        </ClientOnly>
         {/* <Navigation 
             logoPath="/images/nextPhase-logo-white.png"
             links={[
