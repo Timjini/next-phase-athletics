@@ -11,3 +11,13 @@ export type InstagramPost = {
   timestamp: string;
   isVideo?: boolean;
 };
+
+export interface NavigationProps {
+  logoPath: string;
+  logoAlt?: string;
+  links?: Array<{ href: string; label: string }>;
+}
+
+export interface VideoModalProps {
+  URL: string;
+}

@@ -17,7 +17,7 @@ const PromoVideoSection = () => {
         </div>
         <div className="w-full md:w-1/2 flex justify-center">
           <div className="w-full max-w-[600px]">
-            <VideoModal />
+            <VideoModal URL="https://pub-bc4cae30cb704275a2d82ae56b32c9b6.r2.dev/cfs/warmup.MP4"/>
           </div>
         </div>
       </div>      

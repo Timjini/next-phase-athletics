@@ -1,12 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { NavigationProps } from '../types/common';
 
-interface NavigationProps {
-    logoPath: string;
-    logoAlt?: string;
-    links?: Array<{ href: string; label: string }>;
-}
 
 const Navigation: React.FC<NavigationProps> = ({
     logoPath = "/images/nextPhase-logo-white.png",
