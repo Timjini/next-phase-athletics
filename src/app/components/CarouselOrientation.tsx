@@ -27,7 +27,7 @@ interface CarouselOrientationProps {
           <CarouselContent className="-mt-1 min-h-[220px] md:min-h-[180px]">
             {data.map((paragraph, index) => (
               <CarouselItem key={index} className="pt-1">
-                <div className="p-8 text-center">
+                <div className="p-8 text-left">
                   <p className="text-lg md:text-xl font-medium leading-relaxed text-white">
                     {paragraph}
                   </p>

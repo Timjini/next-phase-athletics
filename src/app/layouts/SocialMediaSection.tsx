@@ -51,7 +51,7 @@ const SocialMediaSection = () => {
   };
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-b from-[#091F35] to-[#0046CC] min-h-screen">
+    <section className="py-12 px-4 bg-gradient-to-b from-[#0046CC] to-[#091F35] min-h-screen">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-2">@AthleticsNetphase</h2>
         <p className="text-center text-gray-600 mb-8">Follow us on Instagram for the latest updates</p>
@@ -108,7 +108,7 @@ const SocialMediaSection = () => {
                 <p className="text-sm text-gray-700 mb-2 line-clamp-2">{post.caption}</p>
                 <p className="text-xs text-gray-500">{post.timestamp}</p>
                 
-                <button className="mt-3 w-full py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-md text-sm font-medium hover:opacity-90 transition-opacity">
+                <button className="cursor-pointer mt-3 w-full py-2 bg-gradient-to-r from-[#002366] to-[#0066CC] text-white rounded-md text-sm font-medium hover:opacity-90 transition-opacity">
                   View Post
                 </button>
               </div>
@@ -121,7 +121,7 @@ const SocialMediaSection = () => {
             href="https://instagram.com/AthleticsNetphase" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-[#002366] to-[#0066CC] hover:opacity-70 transition-opacity"
           >
             Follow Us on Instagram
             <svg className="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
