@@ -3,6 +3,7 @@
 import { ModernHero } from './layouts/ModernHero';
 import Athletics from './layouts/NextPhaseAthletics';
 import PromoVideoSection from './layouts/PromoVideo';
+import SocialMediaSection from './layouts/SocialMediaSection';
 
 export default function Home() {
 
@@ -12,6 +13,7 @@ export default function Home() {
       <Athletics />
       {/* <Features /> */}
       <PromoVideoSection />
+      <SocialMediaSection />
     </div>
   );
 }

@@ -1,6 +1,9 @@
 import React from "react";
+// import { useRouter } from 'next/navigation';
 
 const PromoVideoSection = () => {
+    // const router = useRouter();
+  
   return (
     <section className="h-screen grid grid-cols-1 lg:grid-cols-2 items-center bg-gradient-to-b from-[#0046CC] to-[#091F35] justify-center  overflow-hidden">
         <div className=" flex items-center justify-center z-30">
