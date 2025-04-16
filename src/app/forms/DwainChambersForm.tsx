@@ -55,7 +55,7 @@ export function DwainChambersForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mb-6">
         <FormField
           control={form.control}
           name="camp"
