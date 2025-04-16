@@ -5,6 +5,9 @@ import { Montserrat, Open_Sans } from 'next/font/google';
 import Footer from "./components/Footer";
 // import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner"
+import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
+import { ClientOnly } from "./components/ClientOnly";
+
 
 
 
@@ -26,26 +29,19 @@ const openSans = Open_Sans({
   weight: ['400', '500', '600'],
 });
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
       <body className="antialiased">
-        {/* <Navigation 
-            logoPath="/images/nextPhase-logo-white.png"
-            links={[
-              { href: "/", label: "Home" },
-              { href: "/camps", label: "Camps" },
-              { href: "/about", label: "About" }
-            ]}
-          /> */}
-        <main>{children}</main>
+        <main>
+          <ClientOnly>
+            <ScrollToTopOnRouteChange />
+          </ClientOnly>
+          {children}
+        </main>
         <Toaster />
         <Footer />
       </body>
     </html>
-  );
+  )
 }

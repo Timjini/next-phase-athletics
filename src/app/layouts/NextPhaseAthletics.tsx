@@ -2,44 +2,12 @@ import React from "react";
 import Image from "next/image";
 import { CarouselOrientation } from "../components/CarouselOrientation";
 import PromoVideo from "../components/PromoVideo";
+import { icons, paragraphs } from "../lib/constants";
 
 const NextPhaseAthletics = () => {
-  const icons = [
-    {
-      image: "/images/basketball-illustration.png",
-      title: "basketball",
-    },
-    {
-      image: "/images/confidence-illustration.png",
-      title: "confidence",
-    },
-    {
-      image: "/images/track-illustration.png",
-      title: "track",
-    },
-    {
-      image: "/images/us-football.png",
-      title: "football",
-    },
-    {
-      image: "/images/soccer-illustration.png",
-      title: "soccer",
-    },
-    {
-      image: "/images/Lacrosse-illustration.png",
-      title: "lacrosse",
-    },
-  ];
-
-  const paragraphs = [
-    "Every summer, we host immersive speed, agility, and strength camps led by world-class athletes — individuals who have competed at the highest levels and now dedicate their expertise to developing young talent. From middle school to college athletes, our programs are designed to push boundaries, sharpen skills, and elevate mindset.",
-    "Whether you're a track athlete chasing speed, a football player craving explosiveness, or a soccer player seeking control and agility, NextPhase delivers the tools, mentorship, and intensity to get you there. Athletes from all sports — basketball, hockey, baseball, lacrosse, cross country and beyond — find their competitive edge in our training systems.",
-    "But our mission is bigger than just physical performance. We believe that mental strength, confidence, and consistency are just as vital as the reps you grind through. That’s why we bring a champion’s mindset into every drill, every session, every day.",
-    "At NextPhase Athletics, you’re not just working out — you’re leveling up. This is where your next chapter begins. This is where champions start.",
-  ];
-
+ 
   return (
-    <section className="bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-screen pb-8">
+    <section className="bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-screen pb-12">
       <div className="relative gap-8 items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6 glassMorphic">
         <div className="grid grid-cols-2">
           <div className="col-span-1 relative mb-2">
