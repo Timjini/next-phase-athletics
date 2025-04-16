@@ -1,44 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-
-type InstagramPost = {
-  id: string;
-  imageUrl: string;
-  caption: string;
-  likes: number;
-  comments: number;
-  timestamp: string;
-  isVideo?: boolean;
-};
+import { posts } from '../lib/constants';
 
 const SocialMediaSection = () => {
-  const posts: InstagramPost[] = [
-    {
-      id: '1',
-      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      caption: 'Team training session at the new facility! #Athletics #Netphase',
-      likes: 1243,
-      comments: 89,
-      timestamp: '2 hours ago'
-    },
-    {
-      id: '2',
-      imageUrl: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      caption: 'Game day prep! Getting ready for the championship finals.',
-      likes: 2456,
-      comments: 134,
-      timestamp: '1 day ago',
-      isVideo: true
-    },
-    {
-      id: '3',
-      imageUrl: 'https://images.unsplash.com/photo-1517649763962-0c623066013b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80',
-      caption: 'New uniforms unveiled for the upcoming season! What do you think?',
-      likes: 3210,
-      comments: 287,
-      timestamp: '3 days ago'
-    },
-  ];
+
 
   const formatNumber = (num: number): string => {
     if (num >= 1000000) {
@@ -58,7 +23,7 @@ const SocialMediaSection = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
-            <div key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div key={post.id} className=" rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
               <div className="relative aspect-square">
                 {post.isVideo === true ? (
                   <>
@@ -67,10 +32,10 @@ const SocialMediaSection = () => {
                       alt={post.caption}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
+                    <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-30">
                       <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white bg-opacity-80">
                         <svg 
-                          className="w-6 h-6 text-gray-900" 
+                          className="w-6 h-6 text-white" 
                           fill="currentColor" 
                           viewBox="0 0 20 20"
                         >
@@ -95,18 +60,18 @@ const SocialMediaSection = () => {
                     <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm font-medium">{formatNumber(post.likes)}</span>
+                    <span className="text-sm font-medium text-white">{formatNumber(post.likes)}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm font-medium">{formatNumber(post.comments)}</span>
+                    <span className="text-sm font-medium text-white">{formatNumber(post.comments)}</span>
                   </div>
                 </div>
                 
-                <p className="text-sm text-gray-700 mb-2 line-clamp-2">{post.caption}</p>
-                <p className="text-xs text-gray-500">{post.timestamp}</p>
+                <p className="text-sm text-white mb-2 line-clamp-2">{post.caption}</p>
+                <p className="text-xs text-white">{post.timestamp}</p>
                 
                 <button className="cursor-pointer mt-3 w-full py-2 bg-gradient-to-r from-[#002366] to-[#0066CC] text-white rounded-md text-sm font-medium hover:opacity-90 transition-opacity">
                   View Post
