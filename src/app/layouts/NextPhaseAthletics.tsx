@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { CarouselOrientation } from "../components/CarouselOrientation";
 
 const NextPhaseAthletics = () => {
   const icons = [
@@ -10,6 +11,13 @@ const NextPhaseAthletics = () => {
     "/images/soccer-illustration.png",
     "/images/lacrosse-illustration.png",
   ];
+
+  const paragraphs = [
+    "Every summer, we host immersive speed, agility, and strength camps led by world-class athletes — individuals who have competed at the highest levels and now dedicate their expertise to developing young talent. From middle school to college athletes, our programs are designed to push boundaries, sharpen skills, and elevate mindset.",
+    "Whether you're a track athlete chasing speed, a football player craving explosiveness, or a soccer player seeking control and agility, NextPhase delivers the tools, mentorship, and intensity to get you there. Athletes from all sports — basketball, hockey, baseball, lacrosse, cross country and beyond — find their competitive edge in our training systems.",
+    "But our mission is bigger than just physical performance. We believe that mental strength, confidence, and consistency are just as vital as the reps you grind through. That’s why we bring a champion’s mindset into every drill, every session, every day.",
+    "At NextPhase Athletics, you’re not just working out — you’re leveling up. This is where your next chapter begins. This is where champions start."
+  ]
 
   return (
     <section className="bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-screen">
@@ -41,21 +49,8 @@ const NextPhaseAthletics = () => {
         </div>
       </div>
       <div className="">
-        <h2 className="mb-6 text-3xl mt-2 uppercase">Speed. Power. Mindset.</h2>
-        <p className="mb-6 font-light md:text-lg pt-2">
-         Every summer, we host immersive speed, agility, and strength camps led by world-class athletes — individuals who have competed at the highest levels and now dedicate their expertise to developing young talent. From middle school to college athletes, our programs are designed to push boundaries, sharpen skills, and elevate mindset.
-        </p>
-        <p className="mb-6 font-light md:text-lg pt-2">
-          Whether you&apos;re a track athlete chasing speed, a football player craving explosiveness, or a soccer player seeking control and agility, NextPhase delivers the tools, mentorship, and intensity to get you there. Athletes from all sports — basketball, hockey, baseball, lacrosse, cross country and beyond — find their competitive edge in our training systems.
-        </p>
-        <p className="mb-6 font-light md:text-lg pt-2">
-          But our mission is bigger than just physical performance. We believe that mental strength, confidence, and consistency are just as vital as the reps you grind through. That’s why we bring a champion’s mindset into every drill, every session, every day.
-        </p>
-        <p className="mb-6 font-light md:text-lg pt-2">
-        At NextPhase Athletics, you’re not just working out — you’re leveling up.
-        This is where your next chapter begins.
-        This is where champions start.
-        </p>
+        <h2 className="mb-6 text-4xl mt-2  text-center uppercase">Speed. Power. Mindset.</h2>
+        <CarouselOrientation data={paragraphs}/>
       </div>
       </div>
     </section>
