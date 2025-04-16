@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { CarouselOrientation } from "../components/CarouselOrientation";
 
+
 const NextPhaseAthletics = () => {
   const icons = [
     "/images/basketball-illustration.png",

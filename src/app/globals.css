@@ -106,8 +106,9 @@ p {
   .glassMorphic {margin-top: -450px;}
 }
 
+
+
 /* Button css */
-/* From Uiverse.io by SelfMadeSystem */ 
 .button {
   position: relative;
   cursor: pointer;
@@ -314,3 +315,21 @@ p {
     @apply bg-background text-foreground;
   }
 }
+/* END BUTTON ============================= */
+
+/* MOTION  ================================ */
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.vertical-marquee {
+  animation: scroll-vertical 10s linear infinite;
+}
+
+/* END  ================================= */
