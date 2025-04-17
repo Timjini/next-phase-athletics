@@ -16,9 +16,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import { campOptions } from "../lib/constants"
 import { formSchema, FormValues } from "../types/form";
+import { createCheckoutSession } from "../lib/stripe";
+import { loadStripe } from "@stripe/stripe-js";
 
 
-export function DwainChambersForm() {
+
+
+export function CampForm() {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -27,21 +31,26 @@ export function DwainChambersForm() {
       guardianName: "",
       email: "",
       phone: "",
-      address: "",
-      cardNumber: "",
-      expiry: "",
-      cvc: "",
+      address: ""
     },
   });
 
-  const onSubmit = (data: FormValues) => {
-    // const response = await apiEndpoints.subscribeAthlete(data)
-    // const resBody = response.data
-    toast(`Thank you, ${data.athleteName} for subscribing`);
+  const onSubmit = async (data: FormValues) => {
+    console.log("data", data)
+    try {
+      const { sessionId } = await createCheckoutSession(data);
+  
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+      if (stripe) {
+        await stripe.redirectToCheckout({ sessionId });
+      }
+    } catch (err) {
+      console.error("Stripe Checkout error:", err);
+      toast.error("Something went wrong during payment.");
+    }
   };
-
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mb-6">
         <FormField
           control={form.control}
@@ -151,53 +160,12 @@ export function DwainChambersForm() {
           Includes a t-shirt, water bottle, and bag.
         </p>
 
-        <div className="text-md font-medium">Payment Information</div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <FormField
-            control={form.control}
-            name="cardNumber"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Card Number</FormLabel>
-                <FormControl>
-                  <Input placeholder="1234 5678 9012 3456" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="expiry"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Expiry</FormLabel>
-                <FormControl>
-                  <Input placeholder="MM / YY" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="cvc"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>CVC</FormLabel>
-                <FormControl>
-                  <Input placeholder="CVC" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-
-        <Button type="submit" className="w-full bg-blue-950 text-white pointer-cursor">
-          Submit Registration
+        <Button 
+          type="submit" 
+          className="w-full bg-blue-950 text-white hover:bg-blue-900"
+          disabled={form.formState.isSubmitting}
+        >
+          {form.formState.isSubmitting ? "Processing..." : "Submit Registration"}
         </Button>
       </form>
     </Form>
