@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: next-phase
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    env_file:
+      - .env
+    environment:
+      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - DATABASE_URL=${DATABASE_URL}
+    networks:
+      - app-network
+  
+  postgres:
+    container_name: ${PSQL_DB_HOST}
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  pgadmin:
+    container_name: ${PGADMIN_HOST}
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${DB_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5050:80"
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

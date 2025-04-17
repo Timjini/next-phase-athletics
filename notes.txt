@@ -1,0 +1,11 @@
+#run migration
+npx prisma migrate dev
+
+#run migration with name
+npx prisma migrate dev --name add_new_table
+
+#check migration status 
+npx prisma migrate status
+
+#run prisma studio 
+npx prisma studio --hostname 0.0.0.0
