@@ -6,6 +6,8 @@ import Footer from "./components/Footer";
 import { Toaster } from "@/components/ui/sonner"
 // import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
 // import { ClientOnly } from "./components/ClientOnly";
+import { ClerkProvider } from '@clerk/nextjs'
+
 
 
 
@@ -31,6 +33,9 @@ const openSans = Open_Sans({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
+    <ClerkProvider
+    publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+  >
       <body className="antialiased">
         <main>
           {children}
@@ -38,6 +43,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Toaster />
         <Footer />
       </body>
+    </ClerkProvider>
     </html>
+
   )
 }
