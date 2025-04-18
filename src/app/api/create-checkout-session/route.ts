@@ -19,7 +19,7 @@ export async function POST(request: Request) {
             product_data: {
               name: `Camp Registration - ${formData.camp}`,
             },
-            unit_amount: 55000,
+            unit_amount: 65000,
           },
           quantity: 1,
         },

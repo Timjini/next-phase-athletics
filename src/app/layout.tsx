@@ -11,8 +11,8 @@ import { Toaster } from "@/components/ui/sonner"
 
 
 export const metadata: Metadata = {
-  title: "Next Phase Athletics",
-  description: "Next Phase Athletics",
+  title: "NextPhase",
+  description: "NextPhase",
 };
 
 const montserrat = Montserrat({

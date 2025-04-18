@@ -31,7 +31,8 @@ export function CampForm() {
       guardianName: "",
       email: "",
       phone: "",
-      address: ""
+      address: "",
+      // acceptedTerms: false,
     },
   });
 
@@ -155,9 +156,33 @@ export function CampForm() {
           )}
         />
 
-        <div className="text-lg font-semibold">Camp Fee: $550.00</div>
+        <FormField
+          control={form.control}
+          name="acceptedTerms"
+          render={({ field }) => (
+            <FormItem className="flex items-center space-x-2">
+              <FormControl>
+              <input
+                  type="checkbox"
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                  ref={field.ref}
+                  className="w-4 h-4"
+                />
+              </FormControl>
+              <FormLabel className="text-sm">
+                I accept the <a href="/terms" className="underline" target="_blank">terms and conditions</a>.
+              </FormLabel>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="text-lg font-semibold"></div>
         <p className="text-sm text-muted-foreground">
-          Includes a t-shirt, water bottle, and bag.
+          Includes a t-shirt, and bag.
         </p>
 
         <Button 

@@ -51,6 +51,7 @@ async function main() {
         endDate: new Date(session.dates[1]),
         period: session.period as never,
         availableSlots: 80,
+        price: 650,
         status: "ACTIVE",
         campProgramId: campProgram.id,
       },
