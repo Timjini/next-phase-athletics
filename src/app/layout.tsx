@@ -13,6 +13,15 @@ import { Toaster } from "@/components/ui/sonner"
 export const metadata: Metadata = {
   title: "NextPhase",
   description: "NextPhase",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+  }
 };
 
 const montserrat = Montserrat({
