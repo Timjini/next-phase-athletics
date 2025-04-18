@@ -15,11 +15,8 @@ const Hero = () => {
       >
         <div className="heroContent p-6 sm:p-10 text-center">
           <h1 className="text-5xl tracking-wider">
-            NEXTPHASE
+            NextPhase
           </h1>
-          <h2 className=" mt-2 text-3xl">
-            ATHLETICS
-          </h2>
           <h3 className="mt-2 text-xl mb-4">
           <TextGenerateEffect words="Empowering | Next Generation of Champions" />
           </h3>

@@ -18,6 +18,9 @@ model CampProgram {
   id          String   @id @default(cuid())
   title       String
   description String?
+  imageUrl  String?
+  videoUrl  String?
+  slug      String @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -29,11 +32,12 @@ model CampProgram {
 
 model CampSession {
   id             String        @id @default(cuid())
-  label          String // e.g., "Camp 1"
+  label          String
   startDate      DateTime
   endDate        DateTime
   period         SessionPeriod
   availableSlots Int
+  price Float
   status         CampStatus
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
@@ -94,6 +98,7 @@ model Booking {
   status        BookingStatus
   paymentStatus PaymentStatus
   rawData       String?
+  acceptedTerms Boolean
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
