@@ -1398,8 +1398,20 @@ export namespace Prisma {
 
   export type AggregateCampProgram = {
     _count: CampProgramCountAggregateOutputType | null
+    _avg: CampProgramAvgAggregateOutputType | null
+    _sum: CampProgramSumAggregateOutputType | null
     _min: CampProgramMinAggregateOutputType | null
     _max: CampProgramMaxAggregateOutputType | null
+  }
+
+  export type CampProgramAvgAggregateOutputType = {
+    lat: number | null
+    lng: number | null
+  }
+
+  export type CampProgramSumAggregateOutputType = {
+    lat: number | null
+    lng: number | null
   }
 
   export type CampProgramMinAggregateOutputType = {
@@ -1409,6 +1421,9 @@ export namespace Prisma {
     imageUrl: string | null
     videoUrl: string | null
     slug: string | null
+    location: string | null
+    lat: number | null
+    lng: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1420,6 +1435,9 @@ export namespace Prisma {
     imageUrl: string | null
     videoUrl: string | null
     slug: string | null
+    location: string | null
+    lat: number | null
+    lng: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1431,11 +1449,24 @@ export namespace Prisma {
     imageUrl: number
     videoUrl: number
     slug: number
+    location: number
+    lat: number
+    lng: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
+
+  export type CampProgramAvgAggregateInputType = {
+    lat?: true
+    lng?: true
+  }
+
+  export type CampProgramSumAggregateInputType = {
+    lat?: true
+    lng?: true
+  }
 
   export type CampProgramMinAggregateInputType = {
     id?: true
@@ -1444,6 +1475,9 @@ export namespace Prisma {
     imageUrl?: true
     videoUrl?: true
     slug?: true
+    location?: true
+    lat?: true
+    lng?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1455,6 +1489,9 @@ export namespace Prisma {
     imageUrl?: true
     videoUrl?: true
     slug?: true
+    location?: true
+    lat?: true
+    lng?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1466,6 +1503,9 @@ export namespace Prisma {
     imageUrl?: true
     videoUrl?: true
     slug?: true
+    location?: true
+    lat?: true
+    lng?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1509,6 +1549,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: CampProgramAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CampProgramSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: CampProgramMinAggregateInputType
@@ -1539,6 +1591,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: CampProgramCountAggregateInputType | true
+    _avg?: CampProgramAvgAggregateInputType
+    _sum?: CampProgramSumAggregateInputType
     _min?: CampProgramMinAggregateInputType
     _max?: CampProgramMaxAggregateInputType
   }
@@ -1550,9 +1604,14 @@ export namespace Prisma {
     imageUrl: string | null
     videoUrl: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt: Date
     updatedAt: Date
     _count: CampProgramCountAggregateOutputType | null
+    _avg: CampProgramAvgAggregateOutputType | null
+    _sum: CampProgramSumAggregateOutputType | null
     _min: CampProgramMinAggregateOutputType | null
     _max: CampProgramMaxAggregateOutputType | null
   }
@@ -1578,6 +1637,9 @@ export namespace Prisma {
     imageUrl?: boolean
     videoUrl?: boolean
     slug?: boolean
+    location?: boolean
+    lat?: boolean
+    lng?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     sessions?: boolean | CampProgram$sessionsArgs<ExtArgs>
@@ -1592,6 +1654,9 @@ export namespace Prisma {
     imageUrl?: boolean
     videoUrl?: boolean
     slug?: boolean
+    location?: boolean
+    lat?: boolean
+    lng?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["campProgram"]>
@@ -1603,6 +1668,9 @@ export namespace Prisma {
     imageUrl?: boolean
     videoUrl?: boolean
     slug?: boolean
+    location?: boolean
+    lat?: boolean
+    lng?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["campProgram"]>
@@ -1614,11 +1682,14 @@ export namespace Prisma {
     imageUrl?: boolean
     videoUrl?: boolean
     slug?: boolean
+    location?: boolean
+    lat?: boolean
+    lng?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type CampProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "imageUrl" | "videoUrl" | "slug" | "createdAt" | "updatedAt", ExtArgs["result"]["campProgram"]>
+  export type CampProgramOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "imageUrl" | "videoUrl" | "slug" | "location" | "lat" | "lng" | "createdAt" | "updatedAt", ExtArgs["result"]["campProgram"]>
   export type CampProgramInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | CampProgram$sessionsArgs<ExtArgs>
     hosts?: boolean | CampProgram$hostsArgs<ExtArgs>
@@ -1640,6 +1711,9 @@ export namespace Prisma {
       imageUrl: string | null
       videoUrl: string | null
       slug: string
+      location: string
+      lat: number
+      lng: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["campProgram"]>
@@ -2073,6 +2147,9 @@ export namespace Prisma {
     readonly imageUrl: FieldRef<"CampProgram", 'String'>
     readonly videoUrl: FieldRef<"CampProgram", 'String'>
     readonly slug: FieldRef<"CampProgram", 'String'>
+    readonly location: FieldRef<"CampProgram", 'String'>
+    readonly lat: FieldRef<"CampProgram", 'Float'>
+    readonly lng: FieldRef<"CampProgram", 'Float'>
     readonly createdAt: FieldRef<"CampProgram", 'DateTime'>
     readonly updatedAt: FieldRef<"CampProgram", 'DateTime'>
   }
@@ -2543,10 +2620,12 @@ export namespace Prisma {
 
   export type CampSessionAvgAggregateOutputType = {
     availableSlots: number | null
+    price: number | null
   }
 
   export type CampSessionSumAggregateOutputType = {
     availableSlots: number | null
+    price: number | null
   }
 
   export type CampSessionMinAggregateOutputType = {
@@ -2556,6 +2635,7 @@ export namespace Prisma {
     endDate: Date | null
     period: $Enums.SessionPeriod | null
     availableSlots: number | null
+    price: number | null
     status: $Enums.CampStatus | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2569,6 +2649,7 @@ export namespace Prisma {
     endDate: Date | null
     period: $Enums.SessionPeriod | null
     availableSlots: number | null
+    price: number | null
     status: $Enums.CampStatus | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2582,6 +2663,7 @@ export namespace Prisma {
     endDate: number
     period: number
     availableSlots: number
+    price: number
     status: number
     createdAt: number
     updatedAt: number
@@ -2592,10 +2674,12 @@ export namespace Prisma {
 
   export type CampSessionAvgAggregateInputType = {
     availableSlots?: true
+    price?: true
   }
 
   export type CampSessionSumAggregateInputType = {
     availableSlots?: true
+    price?: true
   }
 
   export type CampSessionMinAggregateInputType = {
@@ -2605,6 +2689,7 @@ export namespace Prisma {
     endDate?: true
     period?: true
     availableSlots?: true
+    price?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -2618,6 +2703,7 @@ export namespace Prisma {
     endDate?: true
     period?: true
     availableSlots?: true
+    price?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -2631,6 +2717,7 @@ export namespace Prisma {
     endDate?: true
     period?: true
     availableSlots?: true
+    price?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -2731,6 +2818,7 @@ export namespace Prisma {
     endDate: Date
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt: Date
     updatedAt: Date
@@ -2763,6 +2851,7 @@ export namespace Prisma {
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
+    price?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2779,6 +2868,7 @@ export namespace Prisma {
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
+    price?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2793,6 +2883,7 @@ export namespace Prisma {
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
+    price?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2807,13 +2898,14 @@ export namespace Prisma {
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
+    price?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     campProgramId?: boolean
   }
 
-  export type CampSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "startDate" | "endDate" | "period" | "availableSlots" | "status" | "createdAt" | "updatedAt" | "campProgramId", ExtArgs["result"]["campSession"]>
+  export type CampSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "startDate" | "endDate" | "period" | "availableSlots" | "price" | "status" | "createdAt" | "updatedAt" | "campProgramId", ExtArgs["result"]["campSession"]>
   export type CampSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campProgram?: boolean | CampProgramDefaultArgs<ExtArgs>
     bookings?: boolean | CampSession$bookingsArgs<ExtArgs>
@@ -2839,6 +2931,7 @@ export namespace Prisma {
       endDate: Date
       period: $Enums.SessionPeriod
       availableSlots: number
+      price: number
       status: $Enums.CampStatus
       createdAt: Date
       updatedAt: Date
@@ -3274,6 +3367,7 @@ export namespace Prisma {
     readonly endDate: FieldRef<"CampSession", 'DateTime'>
     readonly period: FieldRef<"CampSession", 'SessionPeriod'>
     readonly availableSlots: FieldRef<"CampSession", 'Int'>
+    readonly price: FieldRef<"CampSession", 'Float'>
     readonly status: FieldRef<"CampSession", 'CampStatus'>
     readonly createdAt: FieldRef<"CampSession", 'DateTime'>
     readonly updatedAt: FieldRef<"CampSession", 'DateTime'>
@@ -5869,6 +5963,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus | null
     paymentStatus: $Enums.PaymentStatus | null
     rawData: string | null
+    acceptedTerms: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5883,6 +5978,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus | null
     paymentStatus: $Enums.PaymentStatus | null
     rawData: string | null
+    acceptedTerms: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -5897,6 +5993,7 @@ export namespace Prisma {
     status: number
     paymentStatus: number
     rawData: number
+    acceptedTerms: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -5921,6 +6018,7 @@ export namespace Prisma {
     status?: true
     paymentStatus?: true
     rawData?: true
+    acceptedTerms?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5935,6 +6033,7 @@ export namespace Prisma {
     status?: true
     paymentStatus?: true
     rawData?: true
+    acceptedTerms?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -5949,6 +6048,7 @@ export namespace Prisma {
     status?: true
     paymentStatus?: true
     rawData?: true
+    acceptedTerms?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6050,6 +6150,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData: string | null
+    acceptedTerms: boolean
     createdAt: Date
     updatedAt: Date
     _count: BookingCountAggregateOutputType | null
@@ -6083,6 +6184,7 @@ export namespace Prisma {
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
+    acceptedTerms?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
@@ -6098,6 +6200,7 @@ export namespace Prisma {
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
+    acceptedTerms?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
@@ -6113,6 +6216,7 @@ export namespace Prisma {
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
+    acceptedTerms?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
@@ -6128,11 +6232,12 @@ export namespace Prisma {
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
+    acceptedTerms?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "amount" | "campName" | "athleteName" | "email" | "status" | "paymentStatus" | "rawData" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "amount" | "campName" | "athleteName" | "email" | "status" | "paymentStatus" | "rawData" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
   }
@@ -6158,6 +6263,7 @@ export namespace Prisma {
       status: $Enums.BookingStatus
       paymentStatus: $Enums.PaymentStatus
       rawData: string | null
+      acceptedTerms: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["booking"]>
@@ -6593,6 +6699,7 @@ export namespace Prisma {
     readonly status: FieldRef<"Booking", 'BookingStatus'>
     readonly paymentStatus: FieldRef<"Booking", 'PaymentStatus'>
     readonly rawData: FieldRef<"Booking", 'String'>
+    readonly acceptedTerms: FieldRef<"Booking", 'Boolean'>
     readonly createdAt: FieldRef<"Booking", 'DateTime'>
     readonly updatedAt: FieldRef<"Booking", 'DateTime'>
   }
@@ -7030,6 +7137,9 @@ export namespace Prisma {
     imageUrl: 'imageUrl',
     videoUrl: 'videoUrl',
     slug: 'slug',
+    location: 'location',
+    lat: 'lat',
+    lng: 'lng',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7044,6 +7154,7 @@ export namespace Prisma {
     endDate: 'endDate',
     period: 'period',
     availableSlots: 'availableSlots',
+    price: 'price',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
@@ -7084,6 +7195,7 @@ export namespace Prisma {
     status: 'status',
     paymentStatus: 'paymentStatus',
     rawData: 'rawData',
+    acceptedTerms: 'acceptedTerms',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -7131,6 +7243,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -7191,20 +7317,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
    * Reference to a field of type 'BookingStatus'
    */
   export type EnumBookingStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingStatus'>
@@ -7230,6 +7342,13 @@ export namespace Prisma {
    */
   export type ListEnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
   /**
    * Deep Input Types
    */
@@ -7245,6 +7364,9 @@ export namespace Prisma {
     imageUrl?: StringNullableFilter<"CampProgram"> | string | null
     videoUrl?: StringNullableFilter<"CampProgram"> | string | null
     slug?: StringFilter<"CampProgram"> | string
+    location?: StringFilter<"CampProgram"> | string
+    lat?: FloatFilter<"CampProgram"> | number
+    lng?: FloatFilter<"CampProgram"> | number
     createdAt?: DateTimeFilter<"CampProgram"> | Date | string
     updatedAt?: DateTimeFilter<"CampProgram"> | Date | string
     sessions?: CampSessionListRelationFilter
@@ -7258,6 +7380,9 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
     slug?: SortOrder
+    location?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     sessions?: CampSessionOrderByRelationAggregateInput
@@ -7274,6 +7399,9 @@ export namespace Prisma {
     description?: StringNullableFilter<"CampProgram"> | string | null
     imageUrl?: StringNullableFilter<"CampProgram"> | string | null
     videoUrl?: StringNullableFilter<"CampProgram"> | string | null
+    location?: StringFilter<"CampProgram"> | string
+    lat?: FloatFilter<"CampProgram"> | number
+    lng?: FloatFilter<"CampProgram"> | number
     createdAt?: DateTimeFilter<"CampProgram"> | Date | string
     updatedAt?: DateTimeFilter<"CampProgram"> | Date | string
     sessions?: CampSessionListRelationFilter
@@ -7287,11 +7415,16 @@ export namespace Prisma {
     imageUrl?: SortOrderInput | SortOrder
     videoUrl?: SortOrderInput | SortOrder
     slug?: SortOrder
+    location?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CampProgramCountOrderByAggregateInput
+    _avg?: CampProgramAvgOrderByAggregateInput
     _max?: CampProgramMaxOrderByAggregateInput
     _min?: CampProgramMinOrderByAggregateInput
+    _sum?: CampProgramSumOrderByAggregateInput
   }
 
   export type CampProgramScalarWhereWithAggregatesInput = {
@@ -7304,6 +7437,9 @@ export namespace Prisma {
     imageUrl?: StringNullableWithAggregatesFilter<"CampProgram"> | string | null
     videoUrl?: StringNullableWithAggregatesFilter<"CampProgram"> | string | null
     slug?: StringWithAggregatesFilter<"CampProgram"> | string
+    location?: StringWithAggregatesFilter<"CampProgram"> | string
+    lat?: FloatWithAggregatesFilter<"CampProgram"> | number
+    lng?: FloatWithAggregatesFilter<"CampProgram"> | number
     createdAt?: DateTimeWithAggregatesFilter<"CampProgram"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CampProgram"> | Date | string
   }
@@ -7318,6 +7454,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntFilter<"CampSession"> | number
+    price?: FloatFilter<"CampSession"> | number
     status?: EnumCampStatusFilter<"CampSession"> | $Enums.CampStatus
     createdAt?: DateTimeFilter<"CampSession"> | Date | string
     updatedAt?: DateTimeFilter<"CampSession"> | Date | string
@@ -7333,6 +7470,7 @@ export namespace Prisma {
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
+    price?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7351,6 +7489,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntFilter<"CampSession"> | number
+    price?: FloatFilter<"CampSession"> | number
     status?: EnumCampStatusFilter<"CampSession"> | $Enums.CampStatus
     createdAt?: DateTimeFilter<"CampSession"> | Date | string
     updatedAt?: DateTimeFilter<"CampSession"> | Date | string
@@ -7366,6 +7505,7 @@ export namespace Prisma {
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
+    price?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -7387,6 +7527,7 @@ export namespace Prisma {
     endDate?: DateTimeWithAggregatesFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodWithAggregatesFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntWithAggregatesFilter<"CampSession"> | number
+    price?: FloatWithAggregatesFilter<"CampSession"> | number
     status?: EnumCampStatusWithAggregatesFilter<"CampSession"> | $Enums.CampStatus
     createdAt?: DateTimeWithAggregatesFilter<"CampSession"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CampSession"> | Date | string
@@ -7514,6 +7655,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableFilter<"Booking"> | string | null
+    acceptedTerms?: BoolFilter<"Booking"> | boolean
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
     session?: XOR<CampSessionScalarRelationFilter, CampSessionWhereInput>
@@ -7529,6 +7671,7 @@ export namespace Prisma {
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrderInput | SortOrder
+    acceptedTerms?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     session?: CampSessionOrderByWithRelationInput
@@ -7547,6 +7690,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableFilter<"Booking"> | string | null
+    acceptedTerms?: BoolFilter<"Booking"> | boolean
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
     session?: XOR<CampSessionScalarRelationFilter, CampSessionWhereInput>
@@ -7562,6 +7706,7 @@ export namespace Prisma {
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrderInput | SortOrder
+    acceptedTerms?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BookingCountOrderByAggregateInput
@@ -7584,6 +7729,7 @@ export namespace Prisma {
     status?: EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusWithAggregatesFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableWithAggregatesFilter<"Booking"> | string | null
+    acceptedTerms?: BoolWithAggregatesFilter<"Booking"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
   }
@@ -7595,6 +7741,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: CampSessionCreateNestedManyWithoutCampProgramInput
@@ -7608,6 +7757,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: CampSessionUncheckedCreateNestedManyWithoutCampProgramInput
@@ -7621,6 +7773,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: CampSessionUpdateManyWithoutCampProgramNestedInput
@@ -7634,6 +7789,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: CampSessionUncheckedUpdateManyWithoutCampProgramNestedInput
@@ -7647,6 +7805,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7658,6 +7819,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7669,6 +7833,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7680,6 +7847,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7694,6 +7862,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7708,6 +7877,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7722,6 +7892,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7736,6 +7907,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -7749,6 +7921,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7761,6 +7934,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7883,6 +8057,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
+    acceptedTerms: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     session: CampSessionCreateNestedOneWithoutBookingsInput
@@ -7898,6 +8073,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
+    acceptedTerms: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7911,6 +8087,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     session?: CampSessionUpdateOneRequiredWithoutBookingsNestedInput
@@ -7926,6 +8103,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7940,6 +8118,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
+    acceptedTerms: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -7953,6 +8132,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7967,6 +8147,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7999,6 +8180,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -8044,8 +8236,16 @@ export namespace Prisma {
     imageUrl?: SortOrder
     videoUrl?: SortOrder
     slug?: SortOrder
+    location?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type CampProgramAvgOrderByAggregateInput = {
+    lat?: SortOrder
+    lng?: SortOrder
   }
 
   export type CampProgramMaxOrderByAggregateInput = {
@@ -8055,6 +8255,9 @@ export namespace Prisma {
     imageUrl?: SortOrder
     videoUrl?: SortOrder
     slug?: SortOrder
+    location?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8066,8 +8269,16 @@ export namespace Prisma {
     imageUrl?: SortOrder
     videoUrl?: SortOrder
     slug?: SortOrder
+    location?: SortOrder
+    lat?: SortOrder
+    lng?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type CampProgramSumOrderByAggregateInput = {
+    lat?: SortOrder
+    lng?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -8104,6 +8315,22 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -8167,6 +8394,7 @@ export namespace Prisma {
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
+    price?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8175,6 +8403,7 @@ export namespace Prisma {
 
   export type CampSessionAvgOrderByAggregateInput = {
     availableSlots?: SortOrder
+    price?: SortOrder
   }
 
   export type CampSessionMaxOrderByAggregateInput = {
@@ -8184,6 +8413,7 @@ export namespace Prisma {
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
+    price?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8197,6 +8427,7 @@ export namespace Prisma {
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
+    price?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -8205,6 +8436,7 @@ export namespace Prisma {
 
   export type CampSessionSumOrderByAggregateInput = {
     availableSlots?: SortOrder
+    price?: SortOrder
   }
 
   export type EnumSessionPeriodWithAggregatesFilter<$PrismaModel = never> = {
@@ -8293,17 +8525,6 @@ export namespace Prisma {
     hostId?: SortOrder
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type EnumBookingStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
     in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
@@ -8316,6 +8537,11 @@ export namespace Prisma {
     in?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.PaymentStatus[] | ListEnumPaymentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type CampSessionScalarRelationFilter = {
@@ -8333,6 +8559,7 @@ export namespace Prisma {
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrder
+    acceptedTerms?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8351,6 +8578,7 @@ export namespace Prisma {
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrder
+    acceptedTerms?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -8365,28 +8593,13 @@ export namespace Prisma {
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrder
+    acceptedTerms?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type BookingSumOrderByAggregateInput = {
     amount?: SortOrder
-  }
-
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type EnumBookingStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -8407,6 +8620,14 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CampSessionCreateNestedManyWithoutCampProgramInput = {
@@ -8443,6 +8664,14 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -8653,20 +8882,16 @@ export namespace Prisma {
     connect?: CampSessionWhereUniqueInput
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type EnumBookingStatusFieldUpdateOperationsInput = {
     set?: $Enums.BookingStatus
   }
 
   export type EnumPaymentStatusFieldUpdateOperationsInput = {
     set?: $Enums.PaymentStatus
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type CampSessionUpdateOneRequiredWithoutBookingsNestedInput = {
@@ -8703,6 +8928,17 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -8772,6 +9008,22 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -8826,17 +9078,6 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedEnumCampStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.CampStatus | EnumCampStatusFieldRefInput<$PrismaModel>
     in?: $Enums.CampStatus[] | ListEnumCampStatusFieldRefInput<$PrismaModel>
@@ -8861,20 +9102,9 @@ export namespace Prisma {
     not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedEnumBookingStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -8897,6 +9127,14 @@ export namespace Prisma {
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type CampSessionCreateWithoutCampProgramInput = {
     id?: string
     label: string
@@ -8904,6 +9142,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8917,6 +9156,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -8979,6 +9219,7 @@ export namespace Prisma {
     endDate?: DateTimeFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntFilter<"CampSession"> | number
+    price?: FloatFilter<"CampSession"> | number
     status?: EnumCampStatusFilter<"CampSession"> | $Enums.CampStatus
     createdAt?: DateTimeFilter<"CampSession"> | Date | string
     updatedAt?: DateTimeFilter<"CampSession"> | Date | string
@@ -9017,6 +9258,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
     hosts?: CampProgramHostCreateNestedManyWithoutCampProgramInput
@@ -9029,6 +9273,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
     hosts?: CampProgramHostUncheckedCreateNestedManyWithoutCampProgramInput
@@ -9048,6 +9295,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
+    acceptedTerms: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9061,6 +9309,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
+    acceptedTerms: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9093,6 +9342,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hosts?: CampProgramHostUpdateManyWithoutCampProgramNestedInput
@@ -9105,6 +9357,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     hosts?: CampProgramHostUncheckedUpdateManyWithoutCampProgramNestedInput
@@ -9139,6 +9394,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableFilter<"Booking"> | string | null
+    acceptedTerms?: BoolFilter<"Booking"> | boolean
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
   }
@@ -9186,6 +9442,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: CampSessionCreateNestedManyWithoutCampProgramInput
@@ -9198,6 +9457,9 @@ export namespace Prisma {
     imageUrl?: string | null
     videoUrl?: string | null
     slug: string
+    location: string
+    lat: number
+    lng: number
     createdAt?: Date | string
     updatedAt?: Date | string
     sessions?: CampSessionUncheckedCreateNestedManyWithoutCampProgramInput
@@ -9249,6 +9511,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: CampSessionUpdateManyWithoutCampProgramNestedInput
@@ -9261,6 +9526,9 @@ export namespace Prisma {
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
     slug?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    lat?: FloatFieldUpdateOperationsInput | number
+    lng?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: CampSessionUncheckedUpdateManyWithoutCampProgramNestedInput
@@ -9302,6 +9570,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9315,6 +9584,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9344,6 +9614,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9357,6 +9628,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9370,6 +9642,7 @@ export namespace Prisma {
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
+    price: number
     status: $Enums.CampStatus
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -9387,6 +9660,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9400,6 +9674,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9413,6 +9688,7 @@ export namespace Prisma {
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
+    price?: FloatFieldUpdateOperationsInput | number
     status?: EnumCampStatusFieldUpdateOperationsInput | $Enums.CampStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -9442,6 +9718,7 @@ export namespace Prisma {
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
+    acceptedTerms: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -9455,6 +9732,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9468,6 +9746,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -9481,6 +9760,7 @@ export namespace Prisma {
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
+    acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

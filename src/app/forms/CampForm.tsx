@@ -14,15 +14,20 @@ import {
 } from "@/components/ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
-import { campOptions } from "../lib/constants"
 import { formSchema, FormValues } from "../types/form";
 import { createCheckoutSession } from "../lib/stripe";
 import { loadStripe } from "@stripe/stripe-js";
+import AutoCompleteInput from "../components/inputs/AutoCompleteInput";
+import { CampProgram } from "../types/camp";
+import { formatSession } from "../lib/dateUtils";
+import { useState } from "react";
 
+interface CampFormProps {
+  campProgram: CampProgram;
+}
 
-
-
-export function CampForm() {
+export function CampForm({ campProgram }: CampFormProps) {
+  const [selectedCampPrice, setSelectedCampPrice] = useState(0);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,19 +36,27 @@ export function CampForm() {
       guardianName: "",
       email: "",
       phone: "",
-      address: "",
+      address: {
+        address: "",
+        lat: 0,
+        lng: 0,
+      },
       // acceptedTerms: false,
     },
   });
 
   const onSubmit = async (data: FormValues) => {
-    console.log("data", data)
     try {
-      const { sessionId } = await createCheckoutSession(data);
-  
-      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+      const { sessionId } = await createCheckoutSession({
+        ...data,
+        price: selectedCampPrice,
+      });
+
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      );
       if (stripe) {
-        await stripe.redirectToCheckout({ sessionId });
+        await stripe.redirectToCheckout({ sessionId  });
       }
     } catch (err) {
       console.error("Stripe Checkout error:", err);
@@ -51,30 +64,45 @@ export function CampForm() {
     }
   };
   return (
-    <Form {...form} >
+    <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mb-6">
         <FormField
           control={form.control}
           name="camp"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Select Camp</FormLabel>
+              <FormLabel className="text-2xl mb-4 font-bold">
+                Available Dates:
+              </FormLabel>
               <FormControl>
-                <RadioGroup
-                  onValueChange={field.onChange}
+              <RadioGroup
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    const selectedCamp = campProgram.sessions.find(
+                      (session) => session.id === value
+                    );
+                    setSelectedCampPrice(selectedCamp?.price || 0);
+                  }}
                   defaultValue={field.value}
                   autoFocus
                   className="grid gap-2"
                 >
-                  {campOptions.map((camp, index) => (
+                  {campProgram.sessions.map((camp) => (
                     <FormItem
-                      key={index}
+                      key={camp.id}
                       className="flex items-center space-x-3 space-y-0"
                     >
                       <FormControl>
-                        <RadioGroupItem value={camp} />
+                        <RadioGroupItem value={camp.id} />
                       </FormControl>
-                      <FormLabel className="font-normal">{camp}</FormLabel>
+                      <FormLabel className="font-normal">
+                      {formatSession({
+                        label: camp.label,
+                        startDate: new Date(camp.startDate),
+                        endDate: new Date(camp.endDate),
+                        period: camp.period,
+                      })}
+                      </FormLabel>
                     </FormItem>
                   ))}
                 </RadioGroup>
@@ -149,7 +177,13 @@ export function CampForm() {
             <FormItem>
               <FormLabel>Address</FormLabel>
               <FormControl>
-                <Input placeholder="1234 Street Name, City, State" {...field} />
+                <AutoCompleteInput
+                  placeholder="1234 Street Name, City, State"
+                  loadedAlready={true}
+                  onPlaceSelected={({ lat, lng, address }) => {
+                    field.onChange({ address, lat, lng });
+                  }}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -162,7 +196,7 @@ export function CampForm() {
           render={({ field }) => (
             <FormItem className="flex items-center space-x-2">
               <FormControl>
-              <input
+                <input
                   type="checkbox"
                   checked={field.value}
                   onChange={(e) => field.onChange(e.target.checked)}
@@ -173,7 +207,11 @@ export function CampForm() {
                 />
               </FormControl>
               <FormLabel className="text-sm">
-                I accept the <a href="/terms" className="underline" target="_blank">terms and conditions</a>.
+                I accept the{" "}
+                <a href="/terms" className="underline" target="_blank">
+                  terms and conditions
+                </a>
+                .
               </FormLabel>
               <FormMessage />
             </FormItem>
@@ -181,16 +219,16 @@ export function CampForm() {
         />
 
         <div className="text-lg font-semibold"></div>
-        <p className="text-sm text-muted-foreground">
-          Includes a t-shirt, and bag.
-        </p>
+        <p className="text-sm text-muted-foreground"></p>
 
-        <Button 
-          type="submit" 
+        <Button
+          type="submit"
           className="w-full bg-blue-950 text-white hover:bg-blue-900 cursor-pointer"
           disabled={form.formState.isSubmitting}
         >
-          {form.formState.isSubmitting ? "Processing..." : "Submit Registration"}
+          {form.formState.isSubmitting
+            ? "Processing..."
+            : "Submit Registration"}
         </Button>
       </form>
     </Form>

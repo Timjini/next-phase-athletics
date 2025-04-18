@@ -1,7 +1,10 @@
+"use client";
+
 import { useState, useEffect } from 'react';
+import { CampProgram } from '../types/camp';
 
 const useFetchCampProgram = (slug: string) => {
-  const [campProgram, setCampProgram] = useState<unknown>(null);
+  const [campProgram, setCampProgram] = useState<CampProgram | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,11 +20,11 @@ const useFetchCampProgram = (slug: string) => {
           throw new Error('Camp program not found');
         }
 
-        const data = await response.json();
+        const data: CampProgram = await response.json();
         setCampProgram(data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
-        setError(err);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+      } catch (err) {
+        setError('Failed to fetch camp program');
       } finally {
         setLoading(false);
       }
@@ -30,8 +33,8 @@ const useFetchCampProgram = (slug: string) => {
     if (slug) {
       fetchCampProgram();
     }
-  }, [slug]);  // Refetch when `slug` changes
-
+  }, [slug]);
+  
   return { loading, error, campProgram };
 };
 
