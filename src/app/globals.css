@@ -163,3 +163,7 @@ p {
 .promoSection{margin-top: 0%;}
 
 .divider{margin-top: -25px;}
+
+nextjs-portal {
+  display: none;
+}
