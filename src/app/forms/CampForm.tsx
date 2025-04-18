@@ -162,7 +162,7 @@ export function CampForm() {
 
         <Button 
           type="submit" 
-          className="w-full bg-blue-950 text-white hover:bg-blue-900"
+          className="w-full bg-blue-950 text-white hover:bg-blue-900 cursor-pointer"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "Processing..." : "Submit Registration"}
