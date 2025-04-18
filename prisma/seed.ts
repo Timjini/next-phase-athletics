@@ -19,7 +19,10 @@ async function main() {
       description: "Every summer, we host immersive speed, agility, and strength camps led by world-class athletes — individuals who have competed at the highest levels and now dedicate their expertise to developing young talent. From middle school to college athletes, our programs are designed to push boundaries, sharpen skills, and elevate mindset.",
       imageUrl:"/images/xlr8.png",
       slug:"xlr8",
-      videoUrl:"https://pub-bc4cae30cb704275a2d82ae56b32c9b6.r2.dev/cfs/warmup.MP4"
+      videoUrl:"https://pub-bc4cae30cb704275a2d82ae56b32c9b6.r2.dev/cfs/warmup.MP4",
+      location: "3500 Martens Street Franklin Park, IL 60131-2016",
+      lat: 41.942204,
+      lng: -87.861084
     },
   });
 
@@ -34,11 +37,11 @@ async function main() {
   // Define sessions
   const sessions = [
     { label: "Camp 1", dates: ["2025-06-09", "2025-06-12"], period: "MORNING" },
-    { label: "Camp 1", dates: ["2025-06-09", "2025-06-12"], period: "AFTERNOON" },
-    { label: "Camp 2", dates: ["2025-06-16", "2025-06-19"], period: "MORNING" },
-    { label: "Camp 2", dates: ["2025-06-16", "2025-06-19"], period: "AFTERNOON" },
-    { label: "Camp 3", dates: ["2025-06-23", "2025-06-26"], period: "MORNING" },
-    { label: "Camp 4", dates: ["2025-06-24", "2025-06-26"], period: "AFTERNOON" },
+    { label: "Camp 2", dates: ["2025-06-09", "2025-06-12"], period: "AFTERNOON" },
+    { label: "Camp 3", dates: ["2025-06-16", "2025-06-19"], period: "MORNING" },
+    { label: "Camp 4", dates: ["2025-06-16", "2025-06-19"], period: "AFTERNOON" },
+    { label: "Camp 5", dates: ["2025-06-23", "2025-06-26"], period: "MORNING" },
+    { label: "Camp 6", dates: ["2025-06-24", "2025-06-26"], period: "AFTERNOON" },
     { label: "Camp 7", dates: ["2025-06-30", "2025-07-03"], period: "AFTERNOON" },
   ];
 

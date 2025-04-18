@@ -124,6 +124,9 @@ exports.Prisma.CampProgramScalarFieldEnum = {
   imageUrl: 'imageUrl',
   videoUrl: 'videoUrl',
   slug: 'slug',
+  location: 'location',
+  lat: 'lat',
+  lng: 'lng',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -135,6 +138,7 @@ exports.Prisma.CampSessionScalarFieldEnum = {
   endDate: 'endDate',
   period: 'period',
   availableSlots: 'availableSlots',
+  price: 'price',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
@@ -166,6 +170,7 @@ exports.Prisma.BookingScalarFieldEnum = {
   status: 'status',
   paymentStatus: 'paymentStatus',
   rawData: 'rawData',
+  acceptedTerms: 'acceptedTerms',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

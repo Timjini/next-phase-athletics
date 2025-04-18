@@ -93,6 +93,11 @@ p {
   color: var(--paragraph);
 }
 
+.appHero{
+  border-radius: 0px;
+  margin-top: -130px;
+}
+
 .glassMorphic {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -110,9 +115,22 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
+.glassMorphicNAvigation{
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  /* border: 1px solid rgba(255, 255, 255, 0.125); */
+}
+
+.heroContent{
+  display: flex;
+  flex-direction: column;
+  gap:20px;
+  align-items: center;
+}
+
 @media screen and (max-width: 1100px) {
   .glassMorphic {margin-top: -450px;margin-top: -250px;}
-  .heroContent{padding-top: 200px;}
+  .heroContent{padding-top: 150px;}
 }
 
 

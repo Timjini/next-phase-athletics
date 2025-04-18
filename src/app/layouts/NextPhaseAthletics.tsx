@@ -6,7 +6,7 @@ import { icons, paragraphs } from "../lib/constants";
 const NextPhaseAthletics = () => {
  
   return (
-    <section className="bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-[75vh] pb-12">
+    <section className="bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-[75vh] pb-12 appHero">
       <div className="relative gap-8 items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6 glassMorphic">
         <div className="grid grid-cols-2">
           <div className="col-span-1 relative mb-2">

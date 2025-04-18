@@ -8,7 +8,7 @@ const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY!, {
 export async function POST(request: Request) {
   try {
     const formData = await request.json();
-
+    
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
             product_data: {
               name: `Camp Registration - ${formData.camp}`,
             },
-            unit_amount: 65000,
+            unit_amount: formData.price * 100,
           },
           quantity: 1,
         },

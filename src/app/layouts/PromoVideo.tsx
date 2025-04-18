@@ -20,7 +20,7 @@ const PromoVideoSection = () => {
             <h2 className="text-4xl md:text-5xl mb-12">
               Greatness isn&apos;t Born <span className="block">— It&apos;s <strong className="text-[#FFD700] text-5xl md:text-6xl">BUILT.</strong></span>
             </h2>
-            <MainButton title="Join The Camp" onClick={() => router.push('/camps')} />
+            <MainButton title="Join The Camp" onClick={() => router.push('/camps/xlr8')} />
           </div>
           <div className="w-full md:w-1/2 flex justify-center">
             <div className="w-full max-w-[600px]">
