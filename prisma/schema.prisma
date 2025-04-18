@@ -18,6 +18,9 @@ model CampProgram {
   id          String   @id @default(cuid())
   title       String
   description String?
+  imageUrl  String?
+  videoUrl  String?
+  slug      String @unique
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -29,7 +32,7 @@ model CampProgram {
 
 model CampSession {
   id             String        @id @default(cuid())
-  label          String // e.g., "Camp 1"
+  label          String
   startDate      DateTime
   endDate        DateTime
   period         SessionPeriod

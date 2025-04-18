@@ -4,8 +4,8 @@ import { Montserrat, Open_Sans } from 'next/font/google';
 import Footer from "./components/Footer";
 // import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner"
-import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
-import { ClientOnly } from "./components/ClientOnly";
+// import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
+// import { ClientOnly } from "./components/ClientOnly";
 
 
 
@@ -33,9 +33,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
       <body className="antialiased">
         <main>
-          <ClientOnly>
+          {/* <ClientOnly>
             <ScrollToTopOnRouteChange />
-          </ClientOnly>
+          </ClientOnly> */}
           {children}
         </main>
         <Toaster />
