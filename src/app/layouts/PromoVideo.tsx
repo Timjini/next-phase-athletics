@@ -4,11 +4,11 @@ import React from "react";
 import MainButton from "../components/MainButton";
 import { useRouter } from 'next/navigation';
 import VideoModal from "../components/VideoModal";
-// import useFetchCampProgram from "../hooks/useFetchCampProgram";
+import useFetchCampProgram from "../hooks/useFetchCampProgram";
 import { Skeleton } from "@/components/ui/skeleton"
 
 const PromoVideoSection = () => {
-  // const { loading, error, campProgram } = useFetchCampProgram('xlr8');
+  const { loading, campProgram } = useFetchCampProgram('xlr8');
   console.log("camps", campProgram)
   const router = useRouter();
 
