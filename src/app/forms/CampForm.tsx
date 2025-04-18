@@ -21,6 +21,7 @@ import AutoCompleteInput from "../components/inputs/AutoCompleteInput";
 import { CampProgram } from "../types/camp";
 import { formatSession } from "../lib/dateUtils";
 import { useState } from "react";
+import { formatAddress } from "../lib/formatAddress";
 
 interface CampFormProps {
   campProgram: CampProgram;
@@ -38,13 +39,13 @@ export function CampForm({ campProgram }: CampFormProps) {
       phone: "",
       address: {
         address: "",
-        lat: 0,
-        lng: 0,
+        lat: null,
+        lng: null,
       },
       // acceptedTerms: false,
     },
   });
-
+  console.log("price",selectedCampPrice)
   const onSubmit = async (data: FormValues) => {
     try {
       const { sessionId } = await createCheckoutSession({
@@ -79,7 +80,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                   onValueChange={(value) => {
                     field.onChange(value);
                     const selectedCamp = campProgram.sessions.find(
-                      (session) => session.id === value
+                      (session) => session.label === value
                     );
                     setSelectedCampPrice(selectedCamp?.price || 0);
                   }}
@@ -93,7 +94,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                       className="flex items-center space-x-3 space-y-0"
                     >
                       <FormControl>
-                        <RadioGroupItem value={camp.id} />
+                        <RadioGroupItem value={camp.label} />
                       </FormControl>
                       <FormLabel className="font-normal">
                       {formatSession({
@@ -181,7 +182,12 @@ export function CampForm({ campProgram }: CampFormProps) {
                   placeholder="1234 Street Name, City, State"
                   loadedAlready={true}
                   onPlaceSelected={({ lat, lng, address }) => {
-                    field.onChange({ address, lat, lng });
+                    const formattedAddress = formatAddress(address);
+                    field.onChange({
+                      address: formattedAddress,
+                      lat,
+                      lng,
+                    });
                   }}
                 />
               </FormControl>

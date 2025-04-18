@@ -7,9 +7,9 @@ export const formSchema = z.object({
   email: z.string().email(),
   phone: z.string().min(6),
   address: z.object({
-    address: z.string().min(5),
-    lat: z.number(),
-    lng: z.number(),
+    address: z.string().optional(),
+    lat: z.number().nullable().optional(),
+    lng: z.number().nullable().optional(),
   }),
   acceptedTerms: z.literal(true)
 });
