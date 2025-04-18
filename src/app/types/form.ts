@@ -7,6 +7,9 @@ export const formSchema = z.object({
   email: z.string().email(),
   phone: z.string().min(6),
   address: z.string().min(5),
+  acceptedTerms: z.literal(true, {
+    errorMap: () => ({ message: "You must accept the terms and conditions." }),
+  })
 });
 
 export type FormValues = z.infer<typeof formSchema>;

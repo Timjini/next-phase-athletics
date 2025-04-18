@@ -29,7 +29,7 @@ const Navigation: React.FC<NavigationProps> = ({
                     height={96}
                     className="h-8 w-auto hidden"
                 />
-                <span className=''> Next Phase Athletics</span>
+                <span className=''> NextPhase</span>
             </div>
             <div className="flex space-x-6 text-white font-medium">
                 {links.map((link, index) => (
