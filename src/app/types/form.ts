@@ -6,10 +6,12 @@ export const formSchema = z.object({
   guardianName: z.string().min(2, "Required"),
   email: z.string().email(),
   phone: z.string().min(6),
-  address: z.string().min(5),
-  acceptedTerms: z.literal(true, {
-    errorMap: () => ({ message: "You must accept the terms and conditions." }),
-  })
+  address: z.object({
+    address: z.string().min(5),
+    lat: z.number(),
+    lng: z.number(),
+  }),
+  acceptedTerms: z.literal(true)
 });
 
 export type FormValues = z.infer<typeof formSchema>;

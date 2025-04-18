@@ -1,53 +1,43 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+// components/Navbar.tsx
+"use client";
 
-interface NavigationProps {
-    logoPath: string;
-    logoAlt?: string;
-    links?: Array<{ href: string; label: string }>;
-}
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
-const Navigation: React.FC<NavigationProps> = ({
-    logoPath = "/images/nextPhase-logo-white.png",
-    logoAlt = "NextPhase Logo",
-    links = [
-        { href: "/", label: "Home" },
-        { href: "/camps", label: "Camps" }
-    ]
-}) => {
-    return (
-        <nav className="absolute z-50 w-full flex justify-between items-center px-4 py-4 backdrop-blur-sm">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#09131D]/[0.3] to-[#0046CC]/[0.3] -z-10 px-48" />
+const Navigation = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
 
-            {/* Content */}
-            <div className="flex-shrink-0">
-                <Image
-                    src={logoPath}
-                    alt={logoAlt}
-                    width={96}
-                    height={96}
-                    className="h-8 w-auto hidden"
-                />
-                <span className=''> NextPhase</span>
-            </div>
-            <div className="flex space-x-6 text-white font-medium">
-                {links.map((link, index) => (
-                    <React.Fragment key={link.href}>
-                        <Link
-                            href={link.href}
-                            className="hover:text-blue-300 transition-colors duration-200"
-                        >
-                            {link.label}
-                        </Link>
-                        {index < links.length - 1 && (
-                            <span className="text-gray-400">|</span>
-                        )}
-                    </React.Fragment>
-                ))}
-            </div>
-        </nav>
-    );
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
+
+  return (
+    <nav className="bg-gradient-to-t from-[#09131D] to-[#00215f] text-white px-6 md:px-24 py-4 flex items-center justify-between relative z-50 glassMorphicNAvigation">
+      {/* App name */}
+      <div className="text-xl font-bold"><Link href="/" className="hover:text-gray-300 transition">NextPhase</Link></div>
+
+      {/* Desktop menu */}
+      <div className="hidden md:flex space-x-6">
+        <Link href="/about" className="hover:text-gray-300 transition">Camp</Link>
+        <Link href="/services" className="hover:text-gray-300 transition">Services</Link>
+        <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
+      </div>
+
+      {/* Burger icon */}
+      <button className="md:hidden" onClick={toggleMenu}>
+        {menuOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile menu overlay */}
+      {menuOpen && (
+        <div className="fixed inset-0 bg-gray-900 text-white flex flex-col items-center justify-center space-y-8 text-2xl z-40">
+          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link href="/services" onClick={() => setMenuOpen(false)}>Services</Link>
+          <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+        </div>
+      )}
+    </nav>
+  );
 };
 
 export default Navigation;

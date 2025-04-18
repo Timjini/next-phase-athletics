@@ -6,7 +6,12 @@ export const campProgramRepository = {
   },
 
   findBySlug: async (slug: string) => {
-    return prisma.campProgram.findUnique({ where: { slug } });
+    return prisma.campProgram.findUnique({
+      where: { slug },
+      include: {
+        sessions: true,
+      },
+    });
   },
   
   findAll: async () => {
