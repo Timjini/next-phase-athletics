@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Montserrat, Open_Sans } from 'next/font/google';
 import Footer from "./components/Footer";
-// import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner"
 // import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
 // import { ClientOnly } from "./components/ClientOnly";
@@ -13,6 +13,15 @@ import { Toaster } from "@/components/ui/sonner"
 export const metadata: Metadata = {
   title: "NextPhase",
   description: "NextPhase",
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon-32x32.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+  }
 };
 
 const montserrat = Montserrat({
@@ -32,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
       <body className="antialiased">
+      <Navigation />
         <main>
           {/* <ClientOnly>
             <ScrollToTopOnRouteChange />

@@ -3,11 +3,11 @@ import { InstagramPost } from "../types/common";
 // Camp dates
 export const campOptions = [
     "Camp 1: June 9 - June 12 (Morning)",
-    "Camp 1: June 9 - June 12 (Afternoon)",
-    "Camp 2: June 16 - June 19 (Morning)",
-    "Camp 2: June 16 - June 19 (Afternoon)",
-    "Camp 3: June 23 - June 26 (Morning)",
-    "Camp 4: June 24 - June 26 (Afternoon)",
+    "Camp 2: June 9 - June 12 (Afternoon)",
+    "Camp 3: June 16 - June 19 (Morning)",
+    "Camp 4: June 16 - June 19 (Afternoon)",
+    "Camp 5: June 23 - June 26 (Morning)",
+    "Camp 6: June 24 - June 26 (Afternoon)",
     "Camp 7: June 30 - July 3 (Afternoon)",
   ]
 
