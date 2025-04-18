@@ -1,6 +1,10 @@
 'use client';
+import { useRouter } from 'next/navigation';
+
 
 export default function CancelPage() {
+  const router = useRouter();
+
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg text-center">
@@ -26,9 +30,9 @@ export default function CancelPage() {
           </div>
   
           {/* Heading */}
-          <h2 className="text-3xl font-bold text-red-600 mb-4">
+          <span className="text-3xl font-bold text-red-600 mb-4">
             Payment Failed!
-          </h2>
+          </span>
   
           {/* Error Message */}
           <p className="text-gray-600 mb-6 text-lg">
@@ -41,12 +45,20 @@ export default function CancelPage() {
           </p>
   
           {/* Return Button */}
-          <button
-            className="w-full max-w-md mx-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
-            onClick={() => window.history.back()}
-          >
-            Return to Checkout
-          </button>
+          <div className="gap-4">
+            <button
+              className="w-full max-w-md mx-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 mb-4 cursor-pointer"
+              onClick={() => router.back()}
+            >
+              Return to Checkout
+            </button>
+            <button
+            className="w-full max-w-md mx-auto bg-gray-600 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 cursor-pointer"
+            onClick={() => router.push('/')}
+            >
+              Go Home
+            </button>
+          </div>
         </div>
       </div>
     )

@@ -3,10 +3,12 @@
 
 import MainButton from '@/app/components/MainButton';
 import { usePaymentConfirmation } from '../../hooks/usePaymentConfirmation';
+import { useRouter } from 'next/navigation';
+
 
 export default function SuccessPageContent() {
   const { loading, error } = usePaymentConfirmation();
-
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg text-center">
@@ -76,7 +78,7 @@ export default function SuccessPageContent() {
             </div>
           </div>
         )}
-        <MainButton title="Return to Home" onClick={() => window.location.href = '/'} />
+        <MainButton title="Return to Home" onClick={() => router.push('/')} />
       </div>
     </div>
   );
