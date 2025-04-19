@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React from "react";
 import MapDisplay from "../components/maps/MapDisplay";
 import ContactForm from "../forms/ContactForm";
@@ -57,10 +57,10 @@ const Contact = () => {
                   <div className="ml-3">
                     <p className="text-lg font-medium text-gray-900">Address</p>
                     <p className="text-base text-gray-500">
-                      123 Business Ave, Suite 400
+                      3500 Martens Street
                     </p>
                     <p className="text-base text-gray-500">
-                      San Francisco, CA 94107
+                      Franklin Park, IL 60131-2016
                     </p>
                   </div>
                 </div>
@@ -83,7 +83,7 @@ const Contact = () => {
                   </div>
                   <div className="ml-3">
                     <p className="text-lg font-medium text-gray-900">Phone</p>
-                    <p className="text-base text-gray-500">+1 (555) 123-4567</p>
+                    <p className="text-base text-gray-500">(815) 556-8037</p>
                   </div>
                 </div>
 
@@ -105,9 +105,7 @@ const Contact = () => {
                   </div>
                   <div className="ml-3">
                     <p className="text-lg font-medium text-gray-900">Email</p>
-                    <p className="text-base text-gray-500">
-                      contact@yourcompany.com
-                    </p>
+                    <p className="text-base text-gray-500">info@nxtphs.com</p>
                   </div>
                 </div>
               </div>
@@ -119,9 +117,9 @@ const Contact = () => {
                 Our Location
               </h2>
               <div className="h-96 w-full rounded-md overflow-hidden">
-              <GoogleMapsWrapper>
-                <MapDisplay lat={location.lat} lng={location.lng} />
-            </GoogleMapsWrapper>
+                <GoogleMapsWrapper>
+                  <MapDisplay lat={location.lat} lng={location.lng} />
+                </GoogleMapsWrapper>
               </div>
             </div>
           </div>
