@@ -17,7 +17,7 @@ const Navigation = () => {
 
       {/* Desktop menu */}
       <div className="hidden md:flex space-x-6">
-        <Link href="/about" className="hover:text-gray-300 transition">Camp</Link>
+        <Link href="/about" className="hover:text-gray-300 transition" prefetch={false}>Camp</Link>
         <Link href="/services" className="hover:text-gray-300 transition">Services</Link>
         <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
       </div>
