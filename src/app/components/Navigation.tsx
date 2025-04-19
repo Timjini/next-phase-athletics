@@ -17,8 +17,7 @@ const Navigation = () => {
 
       {/* Desktop menu */}
       <div className="hidden md:flex space-x-6">
-        <Link href="/about" className="hover:text-gray-300 transition" prefetch={false}>Camp</Link>
-        <Link href="/services" className="hover:text-gray-300 transition">Services</Link>
+        <Link href="/camps/xlr8" className="hover:text-gray-300 transition" prefetch={false}>Camp</Link>
         <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
       </div>
 
@@ -30,9 +29,7 @@ const Navigation = () => {
       {/* Mobile menu overlay */}
       {menuOpen && (
         <div className="min-h-screen fixed inset-0 bg-gray-900 text-white flex flex-col items-center justify-center space-y-8 text-2xl z-40">
-          <Link href="/" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link href="/about" onClick={() => setMenuOpen(false)}>About</Link>
-          <Link href="/services" onClick={() => setMenuOpen(false)}>Services</Link>
+          <Link href="/camps/xlr8" onClick={() => setMenuOpen(false)}>Home</Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
         </div>
       )}
