@@ -110,6 +110,17 @@ model Booking {
   @@map("bookings")
 }
 
+model User {
+  id        String    @id @default(cuid())
+  auth_id   String
+  email     String    @unique
+  username  String
+  password  String
+  role      UserRoles
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
 enum BookingStatus {
   PENDING
   CONFIRMED
@@ -120,4 +131,9 @@ enum PaymentStatus {
   UNPAID
   PAID
   REFUNDED
+}
+
+enum UserRoles {
+  USER
+  ADMIN
 }

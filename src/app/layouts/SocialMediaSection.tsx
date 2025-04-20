@@ -16,14 +16,14 @@ const SocialMediaSection = () => {
   };
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen">
+    <section className="py-12 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen">
       <div className="relative gap-8 items-center py-16 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-1 sm:py-16 lg:px-6 glassMorphicSocialMedia">
         <h2 className="text-3xl font-bold text-center mb-2">@NextPhase</h2>
         <p className="text-center text-gray-600 mb-8">Follow us on Instagram for the latest updates</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
-            <div key={post.id} className=" rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+            <div key={post.id} className=" rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 mb-4">
               <div className="relative aspect-square">
                 {post.isVideo === true ? (
                   <>
@@ -83,7 +83,7 @@ const SocialMediaSection = () => {
         
         <div className="text-center mt-8">
           <a 
-            href="https://instagram.com/AthleticsNetphase" 
+            href="https://www.instagram.com/nextphasexlr8" 
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-[#002366] to-[#0066CC] hover:opacity-70 transition-opacity"

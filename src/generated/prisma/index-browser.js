@@ -175,6 +175,17 @@ exports.Prisma.BookingScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.UserScalarFieldEnum = {
+  id: 'id',
+  auth_id: 'auth_id',
+  email: 'email',
+  username: 'username',
+  password: 'password',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -214,12 +225,18 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   REFUNDED: 'REFUNDED'
 };
 
+exports.UserRoles = exports.$Enums.UserRoles = {
+  USER: 'USER',
+  ADMIN: 'ADMIN'
+};
+
 exports.Prisma.ModelName = {
   CampProgram: 'CampProgram',
   CampSession: 'CampSession',
   Host: 'Host',
   CampProgramHost: 'CampProgramHost',
-  Booking: 'Booking'
+  Booking: 'Booking',
+  User: 'User'
 };
 
 /**

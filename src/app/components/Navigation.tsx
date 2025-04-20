@@ -4,6 +4,13 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import {
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -11,14 +18,26 @@ const Navigation = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <nav className="bg-gradient-to-t from-[#09131D] to-[#00215f] text-white px-6 md:px-24 py-4 flex items-center justify-between relative z-50 glassMorphicNAvigation">
+    <nav className="bg-gradient-to-t from-[#09131D] to-[#00215f] text-white px-6 md:px-8 py-4 flex items-center justify-between relative z-50 glassMorphicNAvigation">
       {/* App name */}
-      <div className="text-xl font-bold"><Link href="/" className="hover:text-gray-300 transition">NextPhase</Link></div>
+      <div className="text-xl font-bold">
+        <Link href="/" className="hover:text-gray-300 transition">NextPhase</Link>
+      </div>
 
       {/* Desktop menu */}
       <div className="hidden md:flex space-x-6">
         <Link href="/camps/xlr8" className="hover:text-gray-300 transition" prefetch={false}>Camp</Link>
         <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
+      </div>
+
+      <div className="hidden md:flex space-x-6">
+        <SignedOut>
+                      <SignInButton />
+                      <SignUpButton />
+                    </SignedOut>
+                    <SignedIn>
+                      <UserButton />
+                    </SignedIn>
       </div>
 
       {/* Burger icon */}
