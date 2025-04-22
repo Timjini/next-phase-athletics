@@ -1,19 +1,19 @@
-import { verifyAdminAccess } from '@/app/lib/auth'
+"use client";
 
-export default async function AdminPage() {
+import { useAdminUser } from "@/app/context/AdminUserContext";
+
+export default function AdminPage() {
   try {
-    const { user } = await verifyAdminAccess()
-    
+    const user = useAdminUser();
+
     return (
-      <section className='py-12 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen'>
         <div className="p-4">
           <h1 className="text-2xl font-bold">Admin Dashboard</h1>
-          <p>Welcome, {user.firstName}!</p>
+          <p>Welcome, {user?.firstName}!</p>
         </div>
-      </section>
-    )
+    );
   } catch (error) {
-    console.error('Admin page error:', error)
-    return <div>An error occurred. Please try again later.</div>
+    console.error("Admin page error:", error);
+    return <div>An error occurred. Please try again later.</div>;
   }
 }
