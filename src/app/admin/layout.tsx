@@ -16,7 +16,7 @@ export default async function AdminLayout({
     <AdminUserProvider user={user}>
       <section className="bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen grid grid-cols-6">
         <SideBar />
-        <main className="col-span-5">{children}</main>
+        <main className="col-span-6 lg:col-span-5">{children}</main>
       </section>
     </AdminUserProvider>
   );

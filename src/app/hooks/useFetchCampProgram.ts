@@ -22,7 +22,6 @@ const useFetchCampProgram = (slug: string) => {
 
         const data: CampProgram = await response.json();
         setCampProgram(data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
       } catch (err) {
         setError('Failed to fetch camp program');
       } finally {

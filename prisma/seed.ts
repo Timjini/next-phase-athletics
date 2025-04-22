@@ -61,6 +61,25 @@ async function main() {
     });
   }
 
+  const postsContent = [
+    { description: "The countdown is on.Train with the best this summer.Speed. Agility. Strength. Mindset.", tags: "🚀 #NextPhaseAthletics #TrainWithTheBest #SummerGrind #LevelUp", url: "/", imageUrl:"post1.jpg" },
+    { description: "Athlete Feature Real athletes. Real results. From pro mentorship to elite training — we’re giving the next generation every tool to win.", tags: "#NextPhaseMode #SpeedKills #AthleteLife", url: "/", imageUrl:"post2.jpg" },
+    { description: "Real athletes. Real results. 💪 From pro mentorship to elite training — we’re giving the next generation every tool to win. 🏆", tags: "#AthleteFeature #RealResults #ProMentorship #EliteTraining #NextGenAthletes", url: "/", imageUrl:"post3.jpg" },
+  ];
+
+    // Create posts
+    for (const postContent of postsContent) {
+      await prisma.post.create({
+        data: {
+          description: postContent.description,
+          tags: postContent.tags,
+          url: postContent.url,
+          imageUrl: postContent.imageUrl
+        },
+      });
+    }
+  
+
   console.log("Seeding complete.");
 }
 
