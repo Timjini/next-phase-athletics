@@ -40,7 +40,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      signInUrl={`${process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}/sign-in`}
+      signUpUrl={`${process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}/sign-up`}
+    >
       <html 
         lang="en" 
         className={`${montserrat.variable} ${openSans.variable} font-sans`}
