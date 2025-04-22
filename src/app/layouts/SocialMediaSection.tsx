@@ -7,14 +7,16 @@ const SocialMediaSection = () => {
   const { loading, posts } = useFetchPosts();
   
   if (loading) {
-    return <div className="flex justify-center items-center min-h-screen">
+    return <div className="py-12 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen mx-auto">
       <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
     </div>;
   }
 
   if (!posts || !Array.isArray(posts))
   {
-    return <div>No posts available</div>
+    return <div className="py-12 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen text-white mx-auto text-center">
+      <span className='text-2xl'>No posts available</span>
+      </div>
   }
 
   return (
