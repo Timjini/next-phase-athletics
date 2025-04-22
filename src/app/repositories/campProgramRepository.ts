@@ -15,7 +15,11 @@ export const campProgramRepository = {
   },
   
   findAll: async () => {
-    return prisma.campProgram.findMany();
+    return prisma.campProgram.findMany({
+      include: {
+        sessions: true,
+      },
+    });
   },
 
 };

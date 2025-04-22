@@ -3,7 +3,6 @@ import { createContext, useState, useContext } from 'react'
 
 const LoadingContext = createContext({
   loading: false,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setLoading: (_loading: boolean) => {},
 })
 

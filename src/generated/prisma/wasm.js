@@ -186,6 +186,16 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PostScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  tags: 'tags',
+  url: 'url',
+  imageUrl: 'imageUrl',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -236,7 +246,8 @@ exports.Prisma.ModelName = {
   Host: 'Host',
   CampProgramHost: 'CampProgramHost',
   Booking: 'Booking',
-  User: 'User'
+  User: 'User',
+  Post: 'Post'
 };
 
 /**

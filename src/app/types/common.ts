@@ -11,3 +11,9 @@ export type InstagramPost = {
   timestamp: string;
   isVideo?: boolean;
 };
+
+export  type MenuItems = {
+  name: string,
+  icon: string,
+  slug: string,
+}
