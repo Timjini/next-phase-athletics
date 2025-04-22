@@ -137,3 +137,15 @@ enum UserRoles {
   USER
   ADMIN
 }
+
+model Post {
+  id          String   @id @default(cuid())
+  description String
+  tags        String
+  url         String
+  imageUrl    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("posts")
+}

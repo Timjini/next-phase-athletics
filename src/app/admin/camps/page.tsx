@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from 'react';
 import { CampProgram, columns } from './columns';
-import { DataTable } from './data-table';
+import  DataTable  from './data-table';
 import Loader from '@/app/components/Loader';
 
 async function getData(): Promise<CampProgram[]> {
@@ -23,7 +23,6 @@ export default function Page() {
       try {
         const fetchedData = await getData();
         setData(fetchedData);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
         setError('Failed to load data');
       } finally {

@@ -1,20 +1,20 @@
 'use client';
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { MenuItems } from "@/app/types/common";
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const router = useRouter();
-  const [activeItem, setActiveItem] = useState(router);
+  const pathname = usePathname();
+  const [activeItem, setActiveItem] = useState(pathname);
 
-  const menuItems = [
+  const menuItems: MenuItems[] = [
     { name: 'Dashboard', icon: '🏠', slug: '/admin/dashboard' },
     { name: 'Camps', icon: '⛺', slug: '/admin/camps' },
     { name: 'Users', icon: '👥', slug: '/admin/users' },
-    { name: 'Settings', icon: '⚙️', slug: '/admin/settings' },
-    { name: 'Reports', icon: '📊', slug: '/admin/reports' },
+    { name: 'Bookings', icon: '📊', slug: '/admin/bookings' },
   ];
 
   const toggleMenu = () => {
@@ -22,8 +22,8 @@ export default function SideBar() {
   };
 
   useEffect(() => {
-    setActiveItem(router);
-  }, [router]);
+    setActiveItem(pathname);
+  }, [pathname]);
 
   return (
     <>

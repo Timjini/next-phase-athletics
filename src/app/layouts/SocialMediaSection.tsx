@@ -1,81 +1,65 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { posts } from '../lib/constants';
+import useFetchPosts from '../hooks/usePosts';
+import { validateImage } from '../lib/utils';
 
 const SocialMediaSection = () => {
+  const { loading, posts } = useFetchPosts();
+  
+  if (loading) {
+    return <div className="flex justify-center items-center min-h-screen">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+    </div>;
+  }
 
-
-  const formatNumber = (num: number): string => {
-    if (num >= 1000000) {
-      return (num / 1000000).toFixed(1) + 'M';
-    }
-    if (num >= 1000) {
-      return (num / 1000).toFixed(1) + 'K';
-    }
-    return num.toString();
-  };
+  if (!posts || !Array.isArray(posts))
+  {
+    return <div>No posts available</div>
+  }
 
   return (
     <section className="py-12 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen">
       <div className="relative gap-8 items-center py-16 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-1 sm:py-16 lg:px-6 glassMorphicSocialMedia">
-        <h2 className="text-3xl font-bold text-center mb-2">@NextPhase</h2>
-        <p className="text-center text-gray-600 mb-8">Follow us on Instagram for the latest updates</p>
+        <h2 className="text-3xl font-bold text-center mb-2 text-white">@NextPhase</h2>
+        <p className="text-center text-gray-300 mb-8">Follow us on Instagram for the latest updates</p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {posts.map((post) => (
-            <div key={post.id} className=" rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 mb-4">
+          {posts && posts.map((post) => (
+            <div key={post.id} className="rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 mb-4 bg-gray-800">
               <div className="relative aspect-square">
-                {post.isVideo === true ? (
-                  <>
-                    <img 
-                      src={post.imageUrl || '/default-video-thumbnail.jpg'} 
-                      alt={post.caption}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-30">
-                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-white bg-opacity-80">
-                        <svg 
-                          className="w-6 h-6 text-white" 
-                          fill="currentColor" 
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M6.3 2.841A1.5 1.5 0 004 4.11v11.78a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
-                        </svg>
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  // Regular image post
-                  <img 
-                    src={post.imageUrl} 
-                    alt={post.caption} 
-                    className="w-full h-full object-cover"
-                  />
-                )}
+                <img 
+                  src={validateImage(post.imageUrl)} 
+                  alt={post.description} 
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
               </div>
               
               <div className="p-4">
-                <div className="flex items-center space-x-4 mb-3">
+                {/* likes and comments */}
+                <div className="items-center space-x-4 mb-3 hidden">
                   <div className="flex items-center space-x-1">
                     <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm font-medium text-white">{formatNumber(post.likes)}</span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm font-medium text-white">{formatNumber(post.comments)}</span>
                   </div>
                 </div>
                 
-                <p className="text-sm text-white mb-2 line-clamp-2">{post.caption}</p>
-                <p className="text-xs text-white">{post.timestamp}</p>
+                <p className="text-sm text-white mb-2 line-clamp-2">{post.description}</p>
                 
-                <button className="cursor-pointer mt-3 w-full py-2 bg-gradient-to-r from-[#002366] to-[#0066CC] text-white rounded-md text-sm font-medium hover:opacity-90 transition-opacity">
+                <a 
+                  href={post.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="block mt-3 w-full py-2 bg-gradient-to-r from-[#002366] to-[#0066CC] text-white rounded-md text-sm font-medium hover:opacity-90 transition-opacity text-center"
+                >
                   View Post
-                </button>
+                </a>
               </div>
             </div>
           ))}
