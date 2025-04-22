@@ -5,11 +5,13 @@ export const formatDate = (date: Date) => {
   };
   
   // Utility function to format a session
-  export const formatSession = (session: { label: string; startDate: Date; endDate: Date; period: string }) => {
+  export const formatSession = (session: { label: string; startDate: Date; endDate: Date; period: string , slots: number }) => {
     const formattedStartDate = formatDate(session.startDate);
     const formattedEndDate = formatDate(session.endDate);
     const sessionPeriod = session.period.toLowerCase();
+    const time = sessionPeriod === 'MORNING' ? '8AM - 11AM' : sessionPeriod === 'AFTERNOON' ? '2PM - 5PM' : '5PM - 8PM';
+    const availableSlots = session.slots;
   
-    return `${session.label}: ${formattedStartDate} - ${formattedEndDate} (${sessionPeriod})`;
+    return `${session.label}: ${formattedStartDate} - ${formattedEndDate} (${time})`;
   };
   

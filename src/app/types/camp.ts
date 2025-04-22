@@ -80,7 +80,7 @@ export type CampSession = {
   export type CampProgram = {
     id: string;
     title: string;
-    description?: string | null;
+    description: string | null;
     imageUrl?: string | null;
     videoUrl?: string | null;
     slug: string;

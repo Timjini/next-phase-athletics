@@ -5,6 +5,7 @@ import { TextGenerateEffect } from "../components/ui/text-generate-effect";
 import MainButton from "../components/MainButton";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 export function ModernHero() {
   const router = useRouter();
@@ -33,8 +34,8 @@ export function ModernHero() {
           </span>
         </div>
         <div className="flex flex-row justify-center mx-auto">
-          <Link href="/camps/xlr8" className="actionBtn w-72 mx-auto">
-              <span className="text-center">Join The Camp</span>
+          <Link href="/camps/xlr8">
+            <Image src="/images/action-button.png" alt="hero icon" width={150} height={150} className="w-64 h-auto mx-auto mb-2" />
           </Link>
         </div>  
       </div>

@@ -9,8 +9,8 @@ const NextPhaseAthletics = () => {
     <section className="bg-gradient-to-b from-[#09131D] to-[#0046CC] min-h-[75vh] pb-12 appHero">
       <div className="relative gap-8 items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6 glassMorphic">
         <div className="grid grid-cols-2">
-          <div className="col-span-1 relative mb-2">
-            {icons.slice(3, 6).map((icon, index) => (
+          <div className="col-span-1 relative mb-2 firstIcons">
+            {icons.slice(3, 7).map((icon, index) => (
               <div
                 key={index}
                 className="py-2 flex flex-col items-center justify-center"
@@ -19,9 +19,9 @@ const NextPhaseAthletics = () => {
                   <Image
                     src={icon.image}
                     alt="Basketball Illustration"
-                    className="object-contain"
-                    width={200}
-                    height={200}
+                    className="object-contain hover:scale-110 transition-transform duration-300"
+                    width={180}
+                    height={180}
                   />
                 </div>
                 <span className="uppercase text-center font-bold text-white text-sm  bg-gradient-to-l from-[#02386e] to-[#002366] px-2  rounded-lg ">
@@ -40,7 +40,7 @@ const NextPhaseAthletics = () => {
                   <Image
                     src={icon.image}
                     alt="Basketball Illustration"
-                    className="object-contain"
+                    className="object-contain hover:scale-110 transition-transform duration-300"
                     width={200}
                     height={200}
                   />
