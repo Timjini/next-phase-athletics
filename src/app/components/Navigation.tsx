@@ -30,16 +30,6 @@ const Navigation = () => {
         <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
       </div>
 
-      <div className="hidden md:flex space-x-6">
-        <SignedOut>
-                      <SignInButton />
-                      <SignUpButton />
-                    </SignedOut>
-                    <SignedIn>
-                      <UserButton />
-                    </SignedIn>
-      </div>
-
       {/* Burger icon */}
       <button className="md:hidden" onClick={toggleMenu}>
         {menuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -48,7 +38,7 @@ const Navigation = () => {
       {/* Mobile menu overlay */}
       {menuOpen && (
         <div className="min-h-screen fixed inset-0 bg-gray-900 text-white flex flex-col items-center justify-center space-y-8 text-2xl z-40">
-          <Link href="/camps/xlr8" onClick={() => setMenuOpen(false)}>Home</Link>
+          <Link href="/camps/xlr8" onClick={() => setMenuOpen(false)}>Camps</Link>
           <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
         </div>
       )}

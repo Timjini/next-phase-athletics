@@ -6,6 +6,8 @@ import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner";
 import { ClerkProvider } from "@clerk/nextjs";
 import { LoadingProvider } from "./context/LoadingContext";
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 
 export const metadata: Metadata = {
   title: "NextPhase",
@@ -40,11 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      signInUrl={`${process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}/sign-in`}
-      signUpUrl={`${process.env.NEXT_PUBLIC_CLERK_FRONTEND_API}/sign-up`}
-    >
+    <ClerkProvider>
       <html 
         lang="en" 
         className={`${montserrat.variable} ${openSans.variable} font-sans`}
@@ -62,6 +60,7 @@ export default function RootLayout({
             <Toaster position="top-center" richColors />
           </LoadingProvider>
         </body>
+        <GoogleAnalytics gaId="G-K6RWFJ7MTF" />
       </html>
     </ClerkProvider>
   );

@@ -3,7 +3,6 @@ import { MainButtonProps } from "../types/common";
 
 const MainButton: React.FC<MainButtonProps> = ({ title, onClick }) => {
   const [loading, setLoading] = useState(false);
-  console.log("loading=====?",loading)
 
   const handleClick = async () => {
     setLoading(true);

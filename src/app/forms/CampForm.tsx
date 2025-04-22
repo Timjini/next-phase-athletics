@@ -22,6 +22,7 @@ import { CampProgram } from "../types/camp";
 import { formatSession } from "../lib/dateUtils";
 import { useState } from "react";
 import { formatAddress } from "../lib/formatAddress";
+import TermsModal from "../components/modals/TermsModal";
 
 interface CampFormProps {
   campProgram: CampProgram;
@@ -66,7 +67,7 @@ export function CampForm({ campProgram }: CampFormProps) {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mb-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mb-6 text-gray-50">
         <FormField
           control={form.control}
           name="camp"
@@ -102,6 +103,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                         startDate: new Date(camp.startDate),
                         endDate: new Date(camp.endDate),
                         period: camp.period,
+                        slots: camp.availableSlots,
                       })}
                       </FormLabel>
                     </FormItem>
@@ -213,11 +215,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                 />
               </FormControl>
               <FormLabel className="text-sm">
-                I accept the{" "}
-                <a href="/terms" className="underline" target="_blank">
-                  terms and conditions
-                </a>
-                .
+                I accept the <TermsModal />.
               </FormLabel>
               <FormMessage />
             </FormItem>
@@ -229,7 +227,7 @@ export function CampForm({ campProgram }: CampFormProps) {
 
         <Button
           type="submit"
-          className="w-full bg-blue-950 text-white hover:bg-blue-900 cursor-pointer"
+          className="actionBtn w-72 mx-auto cursor-pointer"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting

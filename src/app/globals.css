@@ -142,7 +142,8 @@ p {
 
 @media screen and (max-width: 1100px) {
   .glassMorphic {margin-top: -450px;margin-top: -250px;}
-  .heroContent{padding-top: 150px;}
+  .heroContent{padding-top: 50px;}
+  .appHero{margin-top: 0px;}
 }
 
 /* Button css */
@@ -196,3 +197,13 @@ nextjs-portal {
   display: none;
 }
 
+
+/* icons */
+.firstIcons{
+  margin-top: -50px;
+}
+
+/* Form */
+.text-destructive{
+  color: red!important;
+}
