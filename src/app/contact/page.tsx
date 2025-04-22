@@ -117,9 +117,7 @@ const Contact = () => {
                 Our Location
               </h2>
               <div className="h-96 w-full rounded-md overflow-hidden">
-                <GoogleMapsWrapper>
                   <MapDisplay lat={location.lat} lng={location.lng} />
-                </GoogleMapsWrapper>
               </div>
             </div>
           </div>
