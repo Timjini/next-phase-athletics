@@ -4,8 +4,6 @@ import { Montserrat, Open_Sans } from "next/font/google";
 import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner";
-// import { ScrollToTopOnRouteChange } from "./ScrollToTopOnRouteChange";
-// import { ClientOnly } from "./components/ClientOnly";
 import { ClerkProvider } from "@clerk/nextjs";
 import { LoadingProvider } from "./context/LoadingContext";
 
@@ -14,24 +12,26 @@ export const metadata: Metadata = {
   description: "NextPhase",
   icons: {
     icon: [
-      { url: "/favicon-16x16.png" },
-      { url: "/favicon-32x32.png", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png" }],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
   },
 };
 
+// Font optimizations
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
-// Configure Open Sans for paragraphs
 const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-opensans",
   weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 export default function RootLayout({
@@ -40,20 +40,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${openSans.variable}`}>
-      <body className="antialiased">
-        <ClerkProvider>
-          <Navigation />
-          <main>
-            {/* <ClientOnly>
-            <ScrollToTopOnRouteChange />
-          </ClientOnly> */}
-            <LoadingProvider>{children}</LoadingProvider>
-          </main>
-          <Toaster />
-          <Footer />
-        </ClerkProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html 
+        lang="en" 
+        className={`${montserrat.variable} ${openSans.variable} font-sans`}
+        suppressHydrationWarning
+      >
+        <body className="min-h-screen antialiased bg-background text-foreground">
+          <LoadingProvider>
+            <div className="flex flex-col min-h-screen">
+              <Navigation />
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </div>
+            <Toaster position="top-center" richColors />
+          </LoadingProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
