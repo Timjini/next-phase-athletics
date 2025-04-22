@@ -95,7 +95,7 @@ p {
 
 .appHero{
   border-radius: 0px;
-  margin-top: -130px;
+  margin-top: -50px;
 }
 
 .glassMorphic {
@@ -132,8 +132,6 @@ p {
   .glassMorphic {margin-top: -450px;margin-top: -250px;}
   .heroContent{padding-top: 150px;}
 }
-
-
 
 /* Button css */
 .actionBtn {
@@ -185,3 +183,4 @@ p {
 nextjs-portal {
   display: none;
 }
+

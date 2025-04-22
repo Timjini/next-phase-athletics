@@ -1,4 +1,3 @@
-// import { prisma } from '@/app/lib/prisma';
 import { campProgramRepository } from '@/app/repositories/campProgramRepository';
 import { NextResponse } from 'next/server';
 
