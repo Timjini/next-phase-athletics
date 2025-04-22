@@ -12,3 +12,12 @@ npx prisma studio --hostname 0.0.0.0
 
 #seed 
 npx prisma db seed
+
+
+
+#meeting notes 
+
+-> process 650$ + fees on the checkout 
+-> Form add the Camp text as a button (more about the camp) - a drawer will handle the information
+->add hockey to sports 
+-> google tag 

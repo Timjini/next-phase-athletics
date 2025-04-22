@@ -10,6 +10,7 @@ export type CampProgram = {
   title: string;
   description: string | null;
   location: string;
+  slug: string;
   lat: number;
   lng: number;
   createdAt: string;
@@ -31,16 +32,26 @@ type Session = {
 export const columns: ColumnDef<CampProgram>[] = [
   {
     id: "expander",
+    accessorKey: "id",
     header: () => null,
     cell: ({ row }) => {
+      const toggleExpanded = row.getToggleExpandedHandler();
+      console.log(row.getIsExpanded());
       return row.getCanExpand() ? (
         <button
-          {...{
-            onClick: row.getToggleExpandedHandler(),
-            style: { cursor: "pointer" },
+          onClick={toggleExpanded}
+          style={{
+            cursor: "pointer",
+            background: "lightgray",
+            border: "1px solid black",
           }}
         >
-          {row.getIsExpanded() ? "▼" : "▶"}
+          {row.getIsExpanded() ? (
+            <span className="text-gray-900">▼</span>
+          ) : (
+            <span className="text-gray-900">▶</span>
+          )}{" "}
+          Expand
         </button>
       ) : null;
     },
@@ -49,13 +60,14 @@ export const columns: ColumnDef<CampProgram>[] = [
     header: "Program",
     accessorKey: "title",
     cell: ({ row }) => {
-      const title = row.getValue("title") as string
-      const href = `/admin/camps/${encodeURIComponent(title.toLowerCase())}`
+      const title = row.getValue("title") as string;
+      const slug = row.original.slug;
+      const href = `/admin/camps/${encodeURIComponent(slug.toLowerCase())}`;
       return (
         <Link href={href} className="font-medium text-blue-600 hover:underline">
           {title}
         </Link>
-      )
+      );
     },
   },
   {
