@@ -14,3 +14,26 @@ export async function GET() {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
+
+
+export async function POST(request: Request) {
+  try {
+    const body = await request.json();
+    const { slug } = body;
+
+    if (!slug) {
+      return NextResponse.json({ message: 'Missing slug' }, { status: 400 });
+    }
+
+    const campProgram = await campProgramRepository.findBySlug(slug);
+
+    if (!campProgram) {
+      return NextResponse.json({ message: 'Camp program not found' }, { status: 404 });
+    }
+
+    return NextResponse.json(campProgram);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+  }
+}

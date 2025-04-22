@@ -10,10 +10,11 @@ type PlaceSelected = {
   lng: number | undefined;
 };
 
-type AutoCompleteInputProps = {
+interface AutoCompleteInputProps {
   placeholder: string;
-  onPlaceSelected: (place: PlaceSelected) => void;
-};
+  onPlaceSelected: ({ lat, lng, address }: PlaceSelected) => void;
+  loadedAlready?: boolean;
+}
 
 const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
   placeholder,

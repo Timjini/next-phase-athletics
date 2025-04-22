@@ -14,7 +14,11 @@ const useFetchCampProgram = (slug: string) => {
       setError(null);
 
       try {
-        const response = await fetch(`/api/camps/${slug}`);
+        const response = await fetch(`/api/camps`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug }),
+        });
 
         if (!response.ok) {
           throw new Error('Camp program not found');
