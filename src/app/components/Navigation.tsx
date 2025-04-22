@@ -18,7 +18,7 @@ const Navigation = () => {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   return (
-    <nav className="bg-gradient-to-t from-[#09131D] to-[#00215f] text-white px-6 md:px-8 py-4 flex items-center justify-between relative z-50 glassMorphicNAvigation">
+    <nav className="bg-gradient-to-t from-[#09131D] to-[#00215f] text-white px-6 md:px-8 py-4 flex items-center justify-between relative z-30 glassMorphicNAvigation">
       {/* App name */}
       <div className="text-xl font-bold">
         <Link href="/" className="hover:text-gray-300 transition">NextPhase</Link>

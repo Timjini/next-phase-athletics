@@ -14,5 +14,11 @@ export async function verifyAdminAccess() {
       redirect('/unauthorized')
     }
   
-    return { user }
+    return { user: {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.emailAddresses[0]?.emailAddress ?? "unknown",
+      imageUrl: user.imageUrl,
+    } }
 }
