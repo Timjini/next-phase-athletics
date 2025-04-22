@@ -5,11 +5,14 @@ import { CampForm } from "../../forms/CampForm";
 import Loader from "../../components/Loader";
 import useFetchCampProgram from "@/app/hooks/useFetchCampProgram";
 import MainButton from "@/app/components/MainButton";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Page() {
+  const pathname = usePathname();
+  const slug = pathname?.split('/').pop() || 'xlr8'
+
   const router = useRouter();
-  const { loading, campProgram } = useFetchCampProgram("xlr8");
+  const { loading, campProgram } = useFetchCampProgram(slug);
 
   if (loading) {
     return <Loader />;
