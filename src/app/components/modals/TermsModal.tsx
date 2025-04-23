@@ -38,7 +38,7 @@ export default function TermsModal() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="text-sm underline text-blue-600 hover:text-blue-800">
+        <button className="text-sm underline text-yellow-400 hover:text-yellow-500 cursor-pointer">
           terms and conditions
         </button>
       </DialogTrigger>

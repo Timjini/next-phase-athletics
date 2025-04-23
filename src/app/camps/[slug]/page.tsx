@@ -36,11 +36,11 @@ export default function Page() {
 
   return (
     <section className="bg-gradient-to-t  from-[#0046CC] to-[#09131D] min-h-[75vh] pb-12 appHero">
-      <div className="relative gap-8 items-center py-4 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid xl:grid-cols-2 sm:py-8 lg:px-6 rounded-lg">
+      <div className="relative items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid xl:grid-cols-2 sm:py-8 lg:px-6 rounded-lg ">
         <div className="fixed bottom-0 right-0 p-4 z-50">
           <CampDetailsModal description={campProgram?.description || ""} />
         </div>
-        <div>
+        <div className="pb-8">
           <CampForm campProgram={campProgram} />
         </div>
         <div className="flex flex-col items-center justify-center gap-4 px-4">
@@ -50,7 +50,7 @@ export default function Page() {
               alt="XLR8 camp"
               width={590}
               height={590}
-              className="w-full h-auto rounded-[10px]"
+              className="w-full h-auto rounded-[10px] mt-4"
               style={{ border: 0 }}
             />
           </div>
