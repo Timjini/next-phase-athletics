@@ -149,3 +149,25 @@ model Post {
 
   @@map("posts")
 }
+
+model Company {
+  id               String   @id @default(cuid())
+  brandName        String
+  shortDescription String
+  description      String
+  logoUrl          String
+  email            String
+  phone            String
+  address          String
+  lat              Float
+  lng              Float
+  facebook         String
+  instagram        String
+  twitter          String
+  tiktok           String
+  youtube          String
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@map("companies")
+}
