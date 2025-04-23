@@ -113,7 +113,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                         <RadioGroupItem value={camp.label} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        {camp.label } - {camp.startDateString} - ({sessionPeriod(camp.period)})
+                        {camp.label } - {camp.startDateString} - {camp.endDateString} - ({sessionPeriod(camp.period)})
                       </FormLabel>
                     </FormItem>
                   ))}
