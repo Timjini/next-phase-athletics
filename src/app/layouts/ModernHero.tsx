@@ -11,7 +11,7 @@ export function ModernHero() {
   const router = useRouter();
   return (
     <div
-      className=" appHero h-[40rem] bg-cover w-full min-h-screen rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden"
+      className=" appHero  bg-cover w-full min-h-screen rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden"
       style={{ backgroundImage: "url('/images/hero-bg.png')" }}
     >
       <Spotlight />
