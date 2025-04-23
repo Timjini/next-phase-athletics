@@ -7,7 +7,7 @@ export const campProgramRepository = {
       include: {
         sessions: {
           orderBy: {
-            priority: "asc",
+            createdAt: "asc",
           },
         },
       },
