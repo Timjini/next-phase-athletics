@@ -3,23 +3,25 @@ import sgMail from "@sendgrid/mail";
 sgMail.setApiKey(process.env.NEXT_SENDGRID_KEY!);
 
 interface ConfirmationEmailParams {
+  id: string;
   email: string;
   name: string;
   camp: string;
   startDate: string;
   endDate: string;
   period: string;
-  amount: number;
+  // amount: number;
 }
 
 export const sendConfirmationEmail = async ({
+  id,
   email,
   name,
   camp,
   startDate,
   endDate,
   period,
-  amount,
+  // amount,
 }: ConfirmationEmailParams) => {
   const msg = {
     to: email,
@@ -35,8 +37,7 @@ export const sendConfirmationEmail = async ({
           <p><strong>📍 Camp:</strong> ${camp}</p>
           <p><strong>📅 Dates:</strong> ${startDate} – ${endDate}</p>
           <p><strong>🕐 Time Period:</strong> ${period}</p>
-          <p><strong>💵 Paid:</strong> $${amount.toFixed(2)}</p>
-          <p><strong>🎫 Booking ID:</strong> Automatically generated</p>
+          <p><strong>🎫 Booking ID:</strong> ${id}</p>
         </div>
 
         <p>We're excited to have you with us. Please keep this email as your voucher and feel free to contact us with any questions.</p>

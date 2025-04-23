@@ -1,3 +1,4 @@
+import { sendAdminNotificationEmail } from "@/app/lib/email/sendAdminEmail";
 import { sendConfirmationEmail } from "@/app/lib/email/sendConfirmationEmail";
 import { prisma } from "@/app/lib/prisma";
 import { updateBookingStatus } from "@/app/services/bookingService";
@@ -39,25 +40,47 @@ export async function POST(request: NextRequest) {
         });
         console.log("Session slot decremented successfully");
       }
-
     } catch (error) {
       console.error("Failed to update booking status:", error);
       // Proceed with payment confirmation even if booking update fails
     }
 
+    // const campPriceInCents = booking?.amount;
+    // const stripeFee = Math.ceil(
+    //   (campPriceInCents + 30) / (1 - 0.029) - campPriceInCents
+    // );
+    // const totalAmount = campPriceInCents + stripeFee;
+
     try {
       await sendConfirmationEmail({
-              email: booking?.email ?? "hatim.jini@gmail.com",
-              name: booking?.athleteName ?? "Unknown Athlete",
-              camp: booking?.session?.label ?? "Unknown Camp",
-              startDate: formatDate(booking?.session?.startDate) ?? "Unknown Start Date",
-              endDate: formatDate(booking?.session?.endDate) ?? "Unknown End Date",
-              amount: booking?.amount ?? 0,
-              period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
-            });
+        id: booking?.id ?? "Unknown ID",
+        email: booking?.email ?? "info@nxtphs.com",
+        name: booking?.athleteName ?? "Unknown Athlete",
+        camp: booking?.session?.label ?? "Unknown Camp",
+        startDate: booking?.session?.startDateString ?? "Unknown Start Date",
+        endDate: booking?.session?.endDateString ?? "Unknown End Date",
+        // amount: totalAmount ?? 0,
+        period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
+      });
       console.log("Email sent successfully");
     } catch (error) {
       console.error("Failed to send confirmation email:", error);
+    }
+
+    try {
+      await sendAdminNotificationEmail({
+        email: booking?.email ?? "info@nxtphs.com",
+        phone: booking?.phone ?? "Unknown Phone",
+        name: booking?.athleteName ?? "Unknown Athlete",
+        camp: booking?.session?.label ?? "Unknown Camp",
+        startDate: booking?.session?.startDateString ?? "Unknown Start Date",
+        endDate: booking?.session?.endDateString ?? "Unknown End Date",
+        // amount: totalAmount ?? 0,
+        period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
+      });
+      console.log("Admin notification sent successfully");
+    } catch (error) {
+      console.error("Failed to send admin notification email:", error);
     }
 
     // Return success response
