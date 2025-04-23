@@ -7,6 +7,9 @@ export type CampSession = {
     availableSlots: number;
     price: number;
     status: CampStatus;
+    startDateString: string;
+    endDateString: string;
+    priority: number;
     createdAt: Date;
     updatedAt: Date;
   

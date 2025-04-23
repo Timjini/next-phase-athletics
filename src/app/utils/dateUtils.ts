@@ -35,5 +35,5 @@ export const formatSession = (session: { label: string; startDate: Date | string
 
   export const sessionPeriod = (period: string) => {
     const sessionPeriod = period.toLowerCase();
-    return sessionPeriod === 'MORNING' ? '8AM - 11AM' : sessionPeriod === 'AFTERNOON' ? '2PM - 5PM' : '5PM - 8PM';
+    return sessionPeriod === 'morning' ? '8AM - 11AM' : sessionPeriod === 'afternoon' ? '2PM - 5PM' : '5PM - 8PM';
   }

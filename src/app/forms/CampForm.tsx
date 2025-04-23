@@ -19,7 +19,7 @@ import { formSchema, FormValues } from "../types/form";
 import { loadStripe } from "@stripe/stripe-js";
 import AutoCompleteInput from "../components/inputs/AutoCompleteInput";
 import { CampProgram } from "../types/camp";
-import { formatSession } from "../utils/dateUtils";
+import { formatSession, sessionPeriod } from "../utils/dateUtils";
 import { useState } from "react";
 import { formatAddress } from "../lib/formatAddress";
 import TermsModal from "../components/modals/TermsModal";
@@ -113,13 +113,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                         <RadioGroupItem value={camp.label} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        {formatSession({
-                          label: camp.label,
-                          startDate: camp.startDate,
-                          endDate: camp.endDate,
-                          period: camp.period,
-                          slots: camp.availableSlots,
-                        })}
+                        {camp.label } - {camp.startDateString} - ({sessionPeriod(camp.period)})
                       </FormLabel>
                     </FormItem>
                   ))}
