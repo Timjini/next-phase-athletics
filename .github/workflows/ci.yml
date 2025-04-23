@@ -1,4 +1,4 @@
-name: CI
+name: CI-NextPhase
 
 on:
   push:
@@ -17,13 +17,17 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm install -D ts-jest @types/jest @testing-library/jest-dom
 
       - name: Run ESLint
         run: npm run lint
 
       - name: Run Tests
-        run: npm test
+        run: |
+          npm test -- --ci --runInBand --detectOpenHandles
