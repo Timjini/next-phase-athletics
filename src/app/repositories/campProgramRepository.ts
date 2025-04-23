@@ -7,7 +7,7 @@ export const campProgramRepository = {
       include: {
         sessions: {
           orderBy: {
-            createdAt: "asc",
+            priority: "asc",
           },
         },
       },
@@ -20,7 +20,7 @@ export const campProgramRepository = {
       include: {
         sessions: {
           orderBy: {
-            createdAt: "asc",
+            priority: "asc",
           },
         },
       },
@@ -39,7 +39,7 @@ export const campProgramRepository = {
       include: {
         sessions: {
           orderBy: {
-            createdAt: "desc",
+            priority: "desc",
           },
         },
       },
