@@ -2904,11 +2904,13 @@ export namespace Prisma {
   }
 
   export type CampSessionAvgAggregateOutputType = {
+    priority: number | null
     availableSlots: number | null
     price: number | null
   }
 
   export type CampSessionSumAggregateOutputType = {
+    priority: number | null
     availableSlots: number | null
     price: number | null
   }
@@ -2916,7 +2918,10 @@ export namespace Prisma {
   export type CampSessionMinAggregateOutputType = {
     id: string | null
     label: string | null
+    priority: number | null
     startDate: Date | null
+    startDateString: string | null
+    endDateString: string | null
     endDate: Date | null
     period: $Enums.SessionPeriod | null
     availableSlots: number | null
@@ -2930,7 +2935,10 @@ export namespace Prisma {
   export type CampSessionMaxAggregateOutputType = {
     id: string | null
     label: string | null
+    priority: number | null
     startDate: Date | null
+    startDateString: string | null
+    endDateString: string | null
     endDate: Date | null
     period: $Enums.SessionPeriod | null
     availableSlots: number | null
@@ -2944,7 +2952,10 @@ export namespace Prisma {
   export type CampSessionCountAggregateOutputType = {
     id: number
     label: number
+    priority: number
     startDate: number
+    startDateString: number
+    endDateString: number
     endDate: number
     period: number
     availableSlots: number
@@ -2958,11 +2969,13 @@ export namespace Prisma {
 
 
   export type CampSessionAvgAggregateInputType = {
+    priority?: true
     availableSlots?: true
     price?: true
   }
 
   export type CampSessionSumAggregateInputType = {
+    priority?: true
     availableSlots?: true
     price?: true
   }
@@ -2970,7 +2983,10 @@ export namespace Prisma {
   export type CampSessionMinAggregateInputType = {
     id?: true
     label?: true
+    priority?: true
     startDate?: true
+    startDateString?: true
+    endDateString?: true
     endDate?: true
     period?: true
     availableSlots?: true
@@ -2984,7 +3000,10 @@ export namespace Prisma {
   export type CampSessionMaxAggregateInputType = {
     id?: true
     label?: true
+    priority?: true
     startDate?: true
+    startDateString?: true
+    endDateString?: true
     endDate?: true
     period?: true
     availableSlots?: true
@@ -2998,7 +3017,10 @@ export namespace Prisma {
   export type CampSessionCountAggregateInputType = {
     id?: true
     label?: true
+    priority?: true
     startDate?: true
+    startDateString?: true
+    endDateString?: true
     endDate?: true
     period?: true
     availableSlots?: true
@@ -3099,7 +3121,10 @@ export namespace Prisma {
   export type CampSessionGroupByOutputType = {
     id: string
     label: string
+    priority: number
     startDate: Date
+    startDateString: string
+    endDateString: string
     endDate: Date
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -3132,7 +3157,10 @@ export namespace Prisma {
   export type CampSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     label?: boolean
+    priority?: boolean
     startDate?: boolean
+    startDateString?: boolean
+    endDateString?: boolean
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
@@ -3149,7 +3177,10 @@ export namespace Prisma {
   export type CampSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     label?: boolean
+    priority?: boolean
     startDate?: boolean
+    startDateString?: boolean
+    endDateString?: boolean
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
@@ -3164,7 +3195,10 @@ export namespace Prisma {
   export type CampSessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     label?: boolean
+    priority?: boolean
     startDate?: boolean
+    startDateString?: boolean
+    endDateString?: boolean
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
@@ -3179,7 +3213,10 @@ export namespace Prisma {
   export type CampSessionSelectScalar = {
     id?: boolean
     label?: boolean
+    priority?: boolean
     startDate?: boolean
+    startDateString?: boolean
+    endDateString?: boolean
     endDate?: boolean
     period?: boolean
     availableSlots?: boolean
@@ -3190,7 +3227,7 @@ export namespace Prisma {
     campProgramId?: boolean
   }
 
-  export type CampSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "startDate" | "endDate" | "period" | "availableSlots" | "price" | "status" | "createdAt" | "updatedAt" | "campProgramId", ExtArgs["result"]["campSession"]>
+  export type CampSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "label" | "priority" | "startDate" | "startDateString" | "endDateString" | "endDate" | "period" | "availableSlots" | "price" | "status" | "createdAt" | "updatedAt" | "campProgramId", ExtArgs["result"]["campSession"]>
   export type CampSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     campProgram?: boolean | CampProgramDefaultArgs<ExtArgs>
     bookings?: boolean | CampSession$bookingsArgs<ExtArgs>
@@ -3212,7 +3249,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       label: string
+      priority: number
       startDate: Date
+      startDateString: string
+      endDateString: string
       endDate: Date
       period: $Enums.SessionPeriod
       availableSlots: number
@@ -3648,7 +3688,10 @@ export namespace Prisma {
   interface CampSessionFieldRefs {
     readonly id: FieldRef<"CampSession", 'String'>
     readonly label: FieldRef<"CampSession", 'String'>
+    readonly priority: FieldRef<"CampSession", 'Int'>
     readonly startDate: FieldRef<"CampSession", 'DateTime'>
+    readonly startDateString: FieldRef<"CampSession", 'String'>
+    readonly endDateString: FieldRef<"CampSession", 'String'>
     readonly endDate: FieldRef<"CampSession", 'DateTime'>
     readonly period: FieldRef<"CampSession", 'SessionPeriod'>
     readonly availableSlots: FieldRef<"CampSession", 'Int'>
@@ -10692,7 +10735,10 @@ export namespace Prisma {
   export const CampSessionScalarFieldEnum: {
     id: 'id',
     label: 'label',
+    priority: 'priority',
     startDate: 'startDate',
+    startDateString: 'startDateString',
+    endDateString: 'endDateString',
     endDate: 'endDate',
     period: 'period',
     availableSlots: 'availableSlots',
@@ -10868,20 +10914,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'SessionPeriod'
-   */
-  export type EnumSessionPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionPeriod'>
-    
-
-
-  /**
-   * Reference to a field of type 'SessionPeriod[]'
-   */
-  export type ListEnumSessionPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionPeriod[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -10892,6 +10924,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'SessionPeriod'
+   */
+  export type EnumSessionPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionPeriod'>
+    
+
+
+  /**
+   * Reference to a field of type 'SessionPeriod[]'
+   */
+  export type ListEnumSessionPeriodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SessionPeriod[]'>
     
 
 
@@ -11057,7 +11103,10 @@ export namespace Prisma {
     NOT?: CampSessionWhereInput | CampSessionWhereInput[]
     id?: StringFilter<"CampSession"> | string
     label?: StringFilter<"CampSession"> | string
+    priority?: IntFilter<"CampSession"> | number
     startDate?: DateTimeFilter<"CampSession"> | Date | string
+    startDateString?: StringFilter<"CampSession"> | string
+    endDateString?: StringFilter<"CampSession"> | string
     endDate?: DateTimeFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntFilter<"CampSession"> | number
@@ -11073,7 +11122,10 @@ export namespace Prisma {
   export type CampSessionOrderByWithRelationInput = {
     id?: SortOrder
     label?: SortOrder
+    priority?: SortOrder
     startDate?: SortOrder
+    startDateString?: SortOrder
+    endDateString?: SortOrder
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
@@ -11092,7 +11144,10 @@ export namespace Prisma {
     OR?: CampSessionWhereInput[]
     NOT?: CampSessionWhereInput | CampSessionWhereInput[]
     label?: StringFilter<"CampSession"> | string
+    priority?: IntFilter<"CampSession"> | number
     startDate?: DateTimeFilter<"CampSession"> | Date | string
+    startDateString?: StringFilter<"CampSession"> | string
+    endDateString?: StringFilter<"CampSession"> | string
     endDate?: DateTimeFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntFilter<"CampSession"> | number
@@ -11108,7 +11163,10 @@ export namespace Prisma {
   export type CampSessionOrderByWithAggregationInput = {
     id?: SortOrder
     label?: SortOrder
+    priority?: SortOrder
     startDate?: SortOrder
+    startDateString?: SortOrder
+    endDateString?: SortOrder
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
@@ -11130,7 +11188,10 @@ export namespace Prisma {
     NOT?: CampSessionScalarWhereWithAggregatesInput | CampSessionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"CampSession"> | string
     label?: StringWithAggregatesFilter<"CampSession"> | string
+    priority?: IntWithAggregatesFilter<"CampSession"> | number
     startDate?: DateTimeWithAggregatesFilter<"CampSession"> | Date | string
+    startDateString?: StringWithAggregatesFilter<"CampSession"> | string
+    endDateString?: StringWithAggregatesFilter<"CampSession"> | string
     endDate?: DateTimeWithAggregatesFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodWithAggregatesFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntWithAggregatesFilter<"CampSession"> | number
@@ -11698,7 +11759,10 @@ export namespace Prisma {
   export type CampSessionCreateInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -11713,7 +11777,10 @@ export namespace Prisma {
   export type CampSessionUncheckedCreateInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -11728,7 +11795,10 @@ export namespace Prisma {
   export type CampSessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -11743,7 +11813,10 @@ export namespace Prisma {
   export type CampSessionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -11758,7 +11831,10 @@ export namespace Prisma {
   export type CampSessionCreateManyInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -11772,7 +11848,10 @@ export namespace Prisma {
   export type CampSessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -11785,7 +11864,10 @@ export namespace Prisma {
   export type CampSessionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -12496,13 +12578,6 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type EnumSessionPeriodFilter<$PrismaModel = never> = {
-    equals?: $Enums.SessionPeriod | EnumSessionPeriodFieldRefInput<$PrismaModel>
-    in?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
-    not?: NestedEnumSessionPeriodFilter<$PrismaModel> | $Enums.SessionPeriod
-  }
-
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -12512,6 +12587,13 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type EnumSessionPeriodFilter<$PrismaModel = never> = {
+    equals?: $Enums.SessionPeriod | EnumSessionPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumSessionPeriodFilter<$PrismaModel> | $Enums.SessionPeriod
   }
 
   export type EnumCampStatusFilter<$PrismaModel = never> = {
@@ -12539,7 +12621,10 @@ export namespace Prisma {
   export type CampSessionCountOrderByAggregateInput = {
     id?: SortOrder
     label?: SortOrder
+    priority?: SortOrder
     startDate?: SortOrder
+    startDateString?: SortOrder
+    endDateString?: SortOrder
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
@@ -12551,6 +12636,7 @@ export namespace Prisma {
   }
 
   export type CampSessionAvgOrderByAggregateInput = {
+    priority?: SortOrder
     availableSlots?: SortOrder
     price?: SortOrder
   }
@@ -12558,7 +12644,10 @@ export namespace Prisma {
   export type CampSessionMaxOrderByAggregateInput = {
     id?: SortOrder
     label?: SortOrder
+    priority?: SortOrder
     startDate?: SortOrder
+    startDateString?: SortOrder
+    endDateString?: SortOrder
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
@@ -12572,7 +12661,10 @@ export namespace Prisma {
   export type CampSessionMinOrderByAggregateInput = {
     id?: SortOrder
     label?: SortOrder
+    priority?: SortOrder
     startDate?: SortOrder
+    startDateString?: SortOrder
+    endDateString?: SortOrder
     endDate?: SortOrder
     period?: SortOrder
     availableSlots?: SortOrder
@@ -12584,18 +12676,9 @@ export namespace Prisma {
   }
 
   export type CampSessionSumOrderByAggregateInput = {
+    priority?: SortOrder
     availableSlots?: SortOrder
     price?: SortOrder
-  }
-
-  export type EnumSessionPeriodWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SessionPeriod | EnumSessionPeriodFieldRefInput<$PrismaModel>
-    in?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
-    not?: NestedEnumSessionPeriodWithAggregatesFilter<$PrismaModel> | $Enums.SessionPeriod
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSessionPeriodFilter<$PrismaModel>
-    _max?: NestedEnumSessionPeriodFilter<$PrismaModel>
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -12612,6 +12695,16 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type EnumSessionPeriodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SessionPeriod | EnumSessionPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumSessionPeriodWithAggregatesFilter<$PrismaModel> | $Enums.SessionPeriod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSessionPeriodFilter<$PrismaModel>
+    _max?: NestedEnumSessionPeriodFilter<$PrismaModel>
   }
 
   export type EnumCampStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -13056,16 +13149,16 @@ export namespace Prisma {
     connect?: BookingWhereUniqueInput | BookingWhereUniqueInput[]
   }
 
-  export type EnumSessionPeriodFieldUpdateOperationsInput = {
-    set?: $Enums.SessionPeriod
-  }
-
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type EnumSessionPeriodFieldUpdateOperationsInput = {
+    set?: $Enums.SessionPeriod
   }
 
   export type EnumCampStatusFieldUpdateOperationsInput = {
@@ -13358,16 +13451,6 @@ export namespace Prisma {
     not?: NestedEnumCampStatusFilter<$PrismaModel> | $Enums.CampStatus
   }
 
-  export type NestedEnumSessionPeriodWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.SessionPeriod | EnumSessionPeriodFieldRefInput<$PrismaModel>
-    in?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
-    notIn?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
-    not?: NestedEnumSessionPeriodWithAggregatesFilter<$PrismaModel> | $Enums.SessionPeriod
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumSessionPeriodFilter<$PrismaModel>
-    _max?: NestedEnumSessionPeriodFilter<$PrismaModel>
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -13382,6 +13465,16 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedEnumSessionPeriodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.SessionPeriod | EnumSessionPeriodFieldRefInput<$PrismaModel>
+    in?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
+    notIn?: $Enums.SessionPeriod[] | ListEnumSessionPeriodFieldRefInput<$PrismaModel>
+    not?: NestedEnumSessionPeriodWithAggregatesFilter<$PrismaModel> | $Enums.SessionPeriod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumSessionPeriodFilter<$PrismaModel>
+    _max?: NestedEnumSessionPeriodFilter<$PrismaModel>
   }
 
   export type NestedEnumCampStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -13461,7 +13554,10 @@ export namespace Prisma {
   export type CampSessionCreateWithoutCampProgramInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -13475,7 +13571,10 @@ export namespace Prisma {
   export type CampSessionUncheckedCreateWithoutCampProgramInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -13538,7 +13637,10 @@ export namespace Prisma {
     NOT?: CampSessionScalarWhereInput | CampSessionScalarWhereInput[]
     id?: StringFilter<"CampSession"> | string
     label?: StringFilter<"CampSession"> | string
+    priority?: IntFilter<"CampSession"> | number
     startDate?: DateTimeFilter<"CampSession"> | Date | string
+    startDateString?: StringFilter<"CampSession"> | string
+    endDateString?: StringFilter<"CampSession"> | string
     endDate?: DateTimeFilter<"CampSession"> | Date | string
     period?: EnumSessionPeriodFilter<"CampSession"> | $Enums.SessionPeriod
     availableSlots?: IntFilter<"CampSession"> | number
@@ -13892,7 +13994,10 @@ export namespace Prisma {
   export type CampSessionCreateWithoutBookingsInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -13906,7 +14011,10 @@ export namespace Prisma {
   export type CampSessionUncheckedCreateWithoutBookingsInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -13936,7 +14044,10 @@ export namespace Prisma {
   export type CampSessionUpdateWithoutBookingsInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -13950,7 +14061,10 @@ export namespace Prisma {
   export type CampSessionUncheckedUpdateWithoutBookingsInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -13964,7 +14078,10 @@ export namespace Prisma {
   export type CampSessionCreateManyCampProgramInput = {
     id?: string
     label: string
+    priority: number
     startDate: Date | string
+    startDateString: string
+    endDateString: string
     endDate: Date | string
     period: $Enums.SessionPeriod
     availableSlots: number
@@ -13982,7 +14099,10 @@ export namespace Prisma {
   export type CampSessionUpdateWithoutCampProgramInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -13996,7 +14116,10 @@ export namespace Prisma {
   export type CampSessionUncheckedUpdateWithoutCampProgramInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number
@@ -14010,7 +14133,10 @@ export namespace Prisma {
   export type CampSessionUncheckedUpdateManyWithoutCampProgramInput = {
     id?: StringFieldUpdateOperationsInput | string
     label?: StringFieldUpdateOperationsInput | string
+    priority?: IntFieldUpdateOperationsInput | number
     startDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    startDateString?: StringFieldUpdateOperationsInput | string
+    endDateString?: StringFieldUpdateOperationsInput | string
     endDate?: DateTimeFieldUpdateOperationsInput | Date | string
     period?: EnumSessionPeriodFieldUpdateOperationsInput | $Enums.SessionPeriod
     availableSlots?: IntFieldUpdateOperationsInput | number

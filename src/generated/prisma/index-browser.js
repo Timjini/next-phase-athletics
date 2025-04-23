@@ -134,7 +134,10 @@ exports.Prisma.CampProgramScalarFieldEnum = {
 exports.Prisma.CampSessionScalarFieldEnum = {
   id: 'id',
   label: 'label',
+  priority: 'priority',
   startDate: 'startDate',
+  startDateString: 'startDateString',
+  endDateString: 'endDateString',
   endDate: 'endDate',
   period: 'period',
   availableSlots: 'availableSlots',
