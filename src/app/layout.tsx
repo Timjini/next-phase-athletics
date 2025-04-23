@@ -6,7 +6,7 @@ import Navigation from "./components/Navigation";
 import { Toaster } from "@/components/ui/sonner";
 // import { ClerkProvider } from "@clerk/nextjs";
 import { LoadingProvider } from "./context/LoadingContext";
-import { GoogleAnalytics } from '@next/third-parties/google'
+// import { GoogleAnalytics } from '@next/third-parties/google'
 
 
 export const metadata: Metadata = {
@@ -60,7 +60,7 @@ export default function RootLayout({
             <Toaster position="top-center" richColors />
           </LoadingProvider>
         </body>
-        <GoogleAnalytics gaId="G-K6RWFJ7MTF" />
+        {/* <GoogleAnalytics gaId="G-K6RWFJ7MTF" /> */}
       </html>
     // </ClerkProvider>
   );
