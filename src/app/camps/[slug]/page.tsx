@@ -58,7 +58,7 @@ export default function Page() {
           <div className="w-full max-w-[590px]">
             <div className="mb-4">
               <span className="text-xl font-semibold text-white">
-                Camps Location
+                Location : Lake Forest Academy Track
               </span>
             </div>
             <div className="w-full">
