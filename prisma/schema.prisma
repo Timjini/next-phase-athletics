@@ -38,6 +38,8 @@ model CampSession {
   label          String
   priority       Int
   startDate      DateTime
+  startDateString String
+  endDateString   String
   endDate        DateTime
   period         SessionPeriod
   availableSlots Int

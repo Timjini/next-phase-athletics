@@ -34,16 +34,19 @@ model CampProgram {
 }
 
 model CampSession {
-  id             String        @id @default(cuid())
-  label          String
-  startDate      DateTime
-  endDate        DateTime
-  period         SessionPeriod
-  availableSlots Int
-  price          Float
-  status         CampStatus
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  id              String        @id @default(cuid())
+  label           String
+  priority        Int
+  startDate       DateTime
+  startDateString String
+  endDateString   String
+  endDate         DateTime
+  period          SessionPeriod
+  availableSlots  Int
+  price           Float
+  status          CampStatus
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 
   campProgram   CampProgram @relation(fields: [campProgramId], references: [id])
   campProgramId String

@@ -53,6 +53,9 @@ async function main() {
       data: {
         label: session.label,
         startDate: new Date(session.dates[0]),
+        startDateString: session.dates[0],
+        endDateString: session.dates[1],
+        priority: 1,
         endDate: new Date(session.dates[1]),
         period: session.period as never,
         availableSlots: 100,
