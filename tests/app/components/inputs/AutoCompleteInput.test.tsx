@@ -5,19 +5,22 @@ import AutoCompleteInput from '@/app/components/inputs/AutoCompleteInput';
 describe('AutoCompleteInput', () => {
   it('calls onPlaceSelected with correct parameters when place is selected', async () => {
     const onPlaceSelected = jest.fn();
-
+  
     render(
       <AutoCompleteInput
         placeholder="Enter a location"
         onPlaceSelected={onPlaceSelected}
       />
     );
-
-    // Simulate typing into the input
+  
+    // typing into the input
     const input = screen.getByPlaceholderText('Enter a location');
     fireEvent.change(input, { target: { value: 'New York' } });
-
-    // Wait for the input to trigger onPlacesChanged (simulating the callback)
+  
+    // search button
+    const searchButton = screen.getByTestId('searchbox-button');
+    fireEvent.click(searchButton);
+  
     await waitFor(() => {
       expect(onPlaceSelected).toHaveBeenCalledWith({
         address: [{ long_name: '123 Main St' }],
