@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [release]
   pull_request:
-    branches: [main]
+    branches: [release]
 
 jobs:
   lint-and-test:
@@ -25,5 +25,5 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      # - name: Run Tests
-      #   run: npm test
+      - name: Run Tests
+        run: npm test
