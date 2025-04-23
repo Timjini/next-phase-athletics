@@ -36,6 +36,7 @@ model CampProgram {
 model CampSession {
   id             String        @id @default(cuid())
   label          String
+  priority       Int
   startDate      DateTime
   endDate        DateTime
   period         SessionPeriod

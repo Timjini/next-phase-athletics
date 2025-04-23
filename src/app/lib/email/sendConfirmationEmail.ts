@@ -10,7 +10,6 @@ interface ConfirmationEmailParams {
   endDate: string;
   period: string;
   amount: number;
-  slotsLeft: number;
 }
 
 export const sendConfirmationEmail = async ({

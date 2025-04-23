@@ -1,6 +1,7 @@
 import { sendConfirmationEmail } from "@/app/lib/email/sendConfirmationEmail";
 import { prisma } from "@/app/lib/prisma";
 import { updateBookingStatus } from "@/app/services/bookingService";
+import { formatDate, sessionPeriod } from "@/app/utils/dateUtils";
 import { NextRequest, NextResponse } from "next/server";
 
 type RequestBody = {
@@ -49,11 +50,10 @@ export async function POST(request: NextRequest) {
               email: booking?.email ?? "hatim.jini@gmail.com",
               name: booking?.athleteName ?? "Unknown Athlete",
               camp: booking?.session?.label ?? "Unknown Camp",
-              startDate: booking?.session?.startDate ?? "Unknown Start Date",
-              endDate: booking?.session?.endDate ?? "Unknown End Date",
+              startDate: formatDate(booking?.session?.startDate) ?? "Unknown Start Date",
+              endDate: formatDate(booking?.session?.endDate) ?? "Unknown End Date",
               amount: booking?.amount ?? 0,
-              period: booking?.session?.period ?? "Unknown Period",
-              slotsLeft: booking?.session?.availableSlots ?? 0,
+              period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
             });
       console.log("Email sent successfully");
     } catch (error) {

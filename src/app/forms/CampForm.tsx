@@ -51,25 +51,31 @@ export function CampForm({ campProgram }: CampFormProps) {
   });
 
   const onSubmit = async (data: FormValues) => {
-    console.log("form data", { ...data, price: selectedCampPrice, campId: selectedCampId });
+    console.log("form data", {
+      ...data,
+      price: selectedCampPrice,
+      campId: selectedCampId,
+    });
     try {
       const { sessionId } = await createCheckoutSession({
         ...data,
         price: selectedCampPrice,
         campId: selectedCampId,
       });
-  
-      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-  
+
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      );
+
       if (!stripe) throw new Error("Stripe failed to load");
-  
+
       await stripe.redirectToCheckout({ sessionId });
     } catch (err: any) {
       console.error("Stripe Checkout error:", err);
       toast.error(err.message || "Something went wrong during payment.");
     }
   };
-  
+
   return (
     <Form {...form}>
       <form
@@ -109,8 +115,8 @@ export function CampForm({ campProgram }: CampFormProps) {
                       <FormLabel className="font-normal">
                         {formatSession({
                           label: camp.label,
-                          startDate: new Date(camp.startDate),
-                          endDate: new Date(camp.endDate),
+                          startDate: camp.startDate,
+                          endDate: camp.endDate,
                           period: camp.period,
                           slots: camp.availableSlots,
                         })}
@@ -240,9 +246,9 @@ export function CampForm({ campProgram }: CampFormProps) {
           disabled={form.formState.isSubmitting}
         >
           <span className="text-lg font-semibold">
-          {form.formState.isSubmitting
-            ? "Processing..."
-            : "Submit Registration"}
+            {form.formState.isSubmitting
+              ? "Processing..."
+              : "Submit Registration"}
           </span>
         </button>
       </form>
