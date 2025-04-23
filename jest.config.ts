@@ -8,6 +8,12 @@ const config: Config = {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@react-google-maps/api$': '<rootDir>/__mocks__/@react-google-maps/api.ts',
   },
+  transform: {
+    '^.+\\.(ts|tsx)$': 'ts-jest',
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!(@react-google-maps/api)/)',
+  ],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/dist/'],
 };
 
