@@ -15,7 +15,7 @@ import {
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import { formSchema, FormValues } from "../types/form";
-import { createCheckoutSession } from "../lib/stripe";
+// import { createCheckoutSession } from "../lib/stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import AutoCompleteInput from "../components/inputs/AutoCompleteInput";
 import { CampProgram } from "../types/camp";
@@ -24,6 +24,7 @@ import { useState } from "react";
 import { formatAddress } from "../lib/formatAddress";
 import TermsModal from "../components/modals/TermsModal";
 import PhoneInput from "../components/inputs/PhoneInput";
+import { createCheckoutSession } from "../services/paymentClientService";
 
 interface CampFormProps {
   campProgram: CampProgram;
@@ -47,25 +48,26 @@ export function CampForm({ campProgram }: CampFormProps) {
       // acceptedTerms: false,
     },
   });
-  console.log("price", selectedCampPrice);
+
   const onSubmit = async (data: FormValues) => {
+    console.log("form data", { ...data, price: selectedCampPrice });
     try {
       const { sessionId } = await createCheckoutSession({
         ...data,
         price: selectedCampPrice,
       });
-
-      const stripe = await loadStripe(
-        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-      );
-      if (stripe) {
-        await stripe.redirectToCheckout({ sessionId });
-      }
-    } catch (err) {
+  
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+  
+      if (!stripe) throw new Error("Stripe failed to load");
+  
+      await stripe.redirectToCheckout({ sessionId });
+    } catch (err: any) {
       console.error("Stripe Checkout error:", err);
-      toast.error("Something went wrong during payment.");
+      toast.error(err.message || "Something went wrong during payment.");
     }
   };
+  
   return (
     <Form {...form}>
       <form

@@ -1,4 +1,3 @@
-// /src/lib/stripe/createCheckoutSession.ts
 import { stripe } from "./client";
 
 export const createStripeCheckoutSession = async (formData: any, origin: string) => {

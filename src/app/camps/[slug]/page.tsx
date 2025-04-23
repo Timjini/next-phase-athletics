@@ -41,6 +41,9 @@ export default function Page() {
           <CampDetailsModal description={campProgram?.description || ""} />
         </div>
         <div className="pb-8">
+          <h1 className="text-4xl font-bold text-white mb-4">
+            {campProgram.title}
+          </h1>
           <CampForm campProgram={campProgram} />
         </div>
         <div className="flex flex-col items-center justify-center gap-4 px-4">
@@ -58,7 +61,7 @@ export default function Page() {
           <div className="w-full max-w-[590px]">
             <div className="mb-4">
               <span className="text-xl font-semibold text-white">
-                Camps Location
+                Location : Lake Forest Academy Track
               </span>
             </div>
             <div className="w-full">

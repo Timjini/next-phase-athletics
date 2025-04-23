@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createStripeCheckoutSession } from "@/app/lib/stripe/createCheckoutSession";
+import { initiateCheckoutWithBooking } from "@/app/services/checkoutService";
 
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
     const origin = request.headers.get("origin") || "";
-    const session = await createStripeCheckoutSession(formData, origin);
+    const session = await initiateCheckoutWithBooking(formData, origin);
 
     return NextResponse.json({ sessionId: session.id });
   } catch (error) {

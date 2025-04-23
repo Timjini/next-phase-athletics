@@ -110,6 +110,18 @@ model Booking {
   @@map("bookings")
 }
 
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  UNPAID
+  PAID
+  REFUNDED
+}
+
 model User {
   id String @id @default(cuid())
   auth_id String
@@ -122,17 +134,6 @@ model User {
 
 }
 
-enum BookingStatus {
-  PENDING
-  CONFIRMED
-  CANCELLED
-}
-
-enum PaymentStatus {
-  UNPAID
-  PAID
-  REFUNDED
-}
 
 enum UserRoles {
   USER
