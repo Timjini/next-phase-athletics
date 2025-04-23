@@ -9,7 +9,13 @@ export const formatDate = (date: Date) => {
     const formattedStartDate = formatDate(session.startDate);
     const formattedEndDate = formatDate(session.endDate);
     const sessionPeriod = session.period.toLowerCase();
-    const time = sessionPeriod === 'MORNING' ? '8AM - 11AM' : sessionPeriod === 'AFTERNOON' ? '2PM - 5PM' : '5PM - 8PM';
+    console.log(sessionPeriod);
+    const time =
+    sessionPeriod.toLowerCase() === 'morning'
+      ? '8AM - 11AM'
+      : sessionPeriod === 'afternoon'
+      ? '5PM - 8PM'
+      : '';
     const availableSlots = session.slots;
   
     return `${session.label}: ${formattedStartDate} - ${formattedEndDate} (${time})`;
