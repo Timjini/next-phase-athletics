@@ -19,10 +19,11 @@ import { createCheckoutSession } from "../lib/stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import AutoCompleteInput from "../components/inputs/AutoCompleteInput";
 import { CampProgram } from "../types/camp";
-import { formatSession } from "../lib/dateUtils";
+import { formatSession } from "../utils/dateUtils";
 import { useState } from "react";
 import { formatAddress } from "../lib/formatAddress";
 import TermsModal from "../components/modals/TermsModal";
+import PhoneInput from "../components/inputs/PhoneInput";
 
 interface CampFormProps {
   campProgram: CampProgram;
@@ -46,7 +47,7 @@ export function CampForm({ campProgram }: CampFormProps) {
       // acceptedTerms: false,
     },
   });
-  console.log("price",selectedCampPrice)
+  console.log("price", selectedCampPrice);
   const onSubmit = async (data: FormValues) => {
     try {
       const { sessionId } = await createCheckoutSession({
@@ -58,7 +59,7 @@ export function CampForm({ campProgram }: CampFormProps) {
         process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
       );
       if (stripe) {
-        await stripe.redirectToCheckout({ sessionId  });
+        await stripe.redirectToCheckout({ sessionId });
       }
     } catch (err) {
       console.error("Stripe Checkout error:", err);
@@ -67,7 +68,10 @@ export function CampForm({ campProgram }: CampFormProps) {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 mb-6 text-gray-50">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6 mb-6 text-gray-50"
+      >
         <FormField
           control={form.control}
           name="camp"
@@ -77,7 +81,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                 Available Dates:
               </FormLabel>
               <FormControl>
-              <RadioGroup
+                <RadioGroup
                   onValueChange={(value) => {
                     field.onChange(value);
                     const selectedCamp = campProgram.sessions.find(
@@ -98,13 +102,13 @@ export function CampForm({ campProgram }: CampFormProps) {
                         <RadioGroupItem value={camp.label} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                      {formatSession({
-                        label: camp.label,
-                        startDate: new Date(camp.startDate),
-                        endDate: new Date(camp.endDate),
-                        period: camp.period,
-                        slots: camp.availableSlots,
-                      })}
+                        {formatSession({
+                          label: camp.label,
+                          startDate: new Date(camp.startDate),
+                          endDate: new Date(camp.endDate),
+                          period: camp.period,
+                          slots: camp.availableSlots,
+                        })}
                       </FormLabel>
                     </FormItem>
                   ))}
@@ -166,7 +170,7 @@ export function CampForm({ campProgram }: CampFormProps) {
             <FormItem>
               <FormLabel>Phone Number</FormLabel>
               <FormControl>
-                <Input placeholder="+1 (555) 123-4567" {...field} />
+                <PhoneInput {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -225,15 +229,17 @@ export function CampForm({ campProgram }: CampFormProps) {
         <div className="text-lg font-semibold"></div>
         <p className="text-sm text-muted-foreground"></p>
 
-        <Button
+        <button
           type="submit"
-          className="actionBtn w-72 mx-auto cursor-pointer"
+          className="actionBtn w-full mx-auto cursor-pointer mt-4"
           disabled={form.formState.isSubmitting}
         >
+          <span className="text-lg font-semibold">
           {form.formState.isSubmitting
             ? "Processing..."
             : "Submit Registration"}
-        </Button>
+          </span>
+        </button>
       </form>
     </Form>
   );
