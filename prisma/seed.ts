@@ -40,31 +40,28 @@ async function main() {
   // 8am - 11am
   // 2pm - 5pm
   // Define sessions
-  const sessions = [
-    { label: "Camp 1", dates: ["2025-06-30", "2025-07-03"], period: "MORNING" }, 
-    { label: "Camp 2", dates: ["2025-06-30", "2025-07-03"], period: "AFTERNOON" },
-    { label: "Camp 3", dates: ["2025-07-07", "2025-07-10"], period: "MORNING" },
-    { label: "Camp 4", dates: ["2025-07-07", "2025-07-10"], period: "AFTERNOON" },
-  ];
+  // const sessions = [
+  //   { label: "Camp 1", dates: ["2025-06-30", "2025-07-03"], period: "MORNING" }, 
+  //   { label: "Camp 2", dates: ["2025-06-30", "2025-07-03"], period: "AFTERNOON" },
+  //   { label: "Camp 3", dates: ["2025-07-07", "2025-07-10"], period: "MORNING" },
+  //   { label: "Camp 4", dates: ["2025-07-07", "2025-07-10"], period: "AFTERNOON" },
+  // ];
 
-  // Create sessions
-  for (const session of sessions) {
-    await prisma.campSession.create({
-      data: {
-        label: session.label,
-        startDate: new Date(session.dates[0]),
-        startDateString: session.dates[0],
-        endDateString: session.dates[1],
-        priority: 1,
-        endDate: new Date(session.dates[1]),
-        period: session.period as never,
-        availableSlots: 100,
-        price: 650,
-        status: "ACTIVE",
-        campProgramId: campProgram.id,
-      },
-    });
-  }
+  // // Create sessions
+  // for (const session of sessions) {
+  //   await prisma.campSession.create({
+  //     data: {
+  //       label: session.label,
+  //       startDate: new Date(session.dates[0]),
+  //       endDate: new Date(session.dates[1]),
+  //       period: session.period as never,
+  //       availableSlots: 100,
+  //       price: 650,
+  //       status: "ACTIVE",
+  //       campProgramId: campProgram.id,
+  //     },
+  //   });
+  // }
 
   const postsContent = [
     { description: "The countdown is on.Train with the best this summer.Speed. Agility. Strength. Mindset.", tags: "🚀 #NextPhaseAthletics #TrainWithTheBest #SummerGrind #LevelUp", url: "/", imageUrl:"post1.jpg" },
