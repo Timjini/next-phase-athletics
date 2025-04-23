@@ -196,6 +196,26 @@ exports.Prisma.PostScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CompanyScalarFieldEnum = {
+  id: 'id',
+  brandName: 'brandName',
+  shortDescription: 'shortDescription',
+  description: 'description',
+  logoUrl: 'logoUrl',
+  email: 'email',
+  phone: 'phone',
+  address: 'address',
+  lat: 'lat',
+  lng: 'lng',
+  facebook: 'facebook',
+  instagram: 'instagram',
+  twitter: 'twitter',
+  tiktok: 'tiktok',
+  youtube: 'youtube',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -247,7 +267,8 @@ exports.Prisma.ModelName = {
   CampProgramHost: 'CampProgramHost',
   Booking: 'Booking',
   User: 'User',
-  Post: 'Post'
+  Post: 'Post',
+  Company: 'Company'
 };
 
 /**
