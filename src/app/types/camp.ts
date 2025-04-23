@@ -43,8 +43,8 @@ export type CampSession = {
     campName: string;
     athleteName: string;
     email: string;
-    status: BookingStatus;
-    paymentStatus: PaymentStatus;
+    status: 'PENDING' | 'CONFIRMED' | 'CANCELLED';
+    paymentStatus: 'UNPAID' | 'PAID' | 'REFUNDED';
     rawData?: string | null;
     acceptedTerms: boolean;
   

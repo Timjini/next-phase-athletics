@@ -6241,6 +6241,7 @@ export namespace Prisma {
   export type BookingMinAggregateOutputType = {
     id: string | null
     sessionId: string | null
+    stripeId: string | null
     amount: number | null
     campName: string | null
     athleteName: string | null
@@ -6256,6 +6257,7 @@ export namespace Prisma {
   export type BookingMaxAggregateOutputType = {
     id: string | null
     sessionId: string | null
+    stripeId: string | null
     amount: number | null
     campName: string | null
     athleteName: string | null
@@ -6271,6 +6273,7 @@ export namespace Prisma {
   export type BookingCountAggregateOutputType = {
     id: number
     sessionId: number
+    stripeId: number
     amount: number
     campName: number
     athleteName: number
@@ -6296,6 +6299,7 @@ export namespace Prisma {
   export type BookingMinAggregateInputType = {
     id?: true
     sessionId?: true
+    stripeId?: true
     amount?: true
     campName?: true
     athleteName?: true
@@ -6311,6 +6315,7 @@ export namespace Prisma {
   export type BookingMaxAggregateInputType = {
     id?: true
     sessionId?: true
+    stripeId?: true
     amount?: true
     campName?: true
     athleteName?: true
@@ -6326,6 +6331,7 @@ export namespace Prisma {
   export type BookingCountAggregateInputType = {
     id?: true
     sessionId?: true
+    stripeId?: true
     amount?: true
     campName?: true
     athleteName?: true
@@ -6428,6 +6434,7 @@ export namespace Prisma {
   export type BookingGroupByOutputType = {
     id: string
     sessionId: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -6462,6 +6469,7 @@ export namespace Prisma {
   export type BookingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sessionId?: boolean
+    stripeId?: boolean
     amount?: boolean
     campName?: boolean
     athleteName?: boolean
@@ -6478,6 +6486,7 @@ export namespace Prisma {
   export type BookingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sessionId?: boolean
+    stripeId?: boolean
     amount?: boolean
     campName?: boolean
     athleteName?: boolean
@@ -6494,6 +6503,7 @@ export namespace Prisma {
   export type BookingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     sessionId?: boolean
+    stripeId?: boolean
     amount?: boolean
     campName?: boolean
     athleteName?: boolean
@@ -6510,6 +6520,7 @@ export namespace Prisma {
   export type BookingSelectScalar = {
     id?: boolean
     sessionId?: boolean
+    stripeId?: boolean
     amount?: boolean
     campName?: boolean
     athleteName?: boolean
@@ -6522,7 +6533,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "amount" | "campName" | "athleteName" | "email" | "status" | "paymentStatus" | "rawData" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "stripeId" | "amount" | "campName" | "athleteName" | "email" | "status" | "paymentStatus" | "rawData" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
   }
@@ -6541,6 +6552,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       sessionId: string
+      stripeId: string
       amount: number
       campName: string
       athleteName: string
@@ -6977,6 +6989,7 @@ export namespace Prisma {
   interface BookingFieldRefs {
     readonly id: FieldRef<"Booking", 'String'>
     readonly sessionId: FieldRef<"Booking", 'String'>
+    readonly stripeId: FieldRef<"Booking", 'String'>
     readonly amount: FieldRef<"Booking", 'Float'>
     readonly campName: FieldRef<"Booking", 'String'>
     readonly athleteName: FieldRef<"Booking", 'String'>
@@ -10717,6 +10730,7 @@ export namespace Prisma {
   export const BookingScalarFieldEnum: {
     id: 'id',
     sessionId: 'sessionId',
+    stripeId: 'stripeId',
     amount: 'amount',
     campName: 'campName',
     athleteName: 'athleteName',
@@ -11241,6 +11255,7 @@ export namespace Prisma {
     NOT?: BookingWhereInput | BookingWhereInput[]
     id?: StringFilter<"Booking"> | string
     sessionId?: StringFilter<"Booking"> | string
+    stripeId?: StringFilter<"Booking"> | string
     amount?: FloatFilter<"Booking"> | number
     campName?: StringFilter<"Booking"> | string
     athleteName?: StringFilter<"Booking"> | string
@@ -11257,6 +11272,7 @@ export namespace Prisma {
   export type BookingOrderByWithRelationInput = {
     id?: SortOrder
     sessionId?: SortOrder
+    stripeId?: SortOrder
     amount?: SortOrder
     campName?: SortOrder
     athleteName?: SortOrder
@@ -11272,6 +11288,7 @@ export namespace Prisma {
 
   export type BookingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    stripeId?: string
     AND?: BookingWhereInput | BookingWhereInput[]
     OR?: BookingWhereInput[]
     NOT?: BookingWhereInput | BookingWhereInput[]
@@ -11287,11 +11304,12 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
     session?: XOR<CampSessionScalarRelationFilter, CampSessionWhereInput>
-  }, "id">
+  }, "id" | "stripeId">
 
   export type BookingOrderByWithAggregationInput = {
     id?: SortOrder
     sessionId?: SortOrder
+    stripeId?: SortOrder
     amount?: SortOrder
     campName?: SortOrder
     athleteName?: SortOrder
@@ -11315,6 +11333,7 @@ export namespace Prisma {
     NOT?: BookingScalarWhereWithAggregatesInput | BookingScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Booking"> | string
     sessionId?: StringWithAggregatesFilter<"Booking"> | string
+    stripeId?: StringWithAggregatesFilter<"Booking"> | string
     amount?: FloatWithAggregatesFilter<"Booking"> | number
     campName?: StringWithAggregatesFilter<"Booking"> | string
     athleteName?: StringWithAggregatesFilter<"Booking"> | string
@@ -11886,6 +11905,7 @@ export namespace Prisma {
 
   export type BookingCreateInput = {
     id?: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -11902,6 +11922,7 @@ export namespace Prisma {
   export type BookingUncheckedCreateInput = {
     id?: string
     sessionId: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -11916,6 +11937,7 @@ export namespace Prisma {
 
   export type BookingUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
@@ -11932,6 +11954,7 @@ export namespace Prisma {
   export type BookingUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionId?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
@@ -11947,6 +11970,7 @@ export namespace Prisma {
   export type BookingCreateManyInput = {
     id?: string
     sessionId: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -11961,6 +11985,7 @@ export namespace Prisma {
 
   export type BookingUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
@@ -11976,6 +12001,7 @@ export namespace Prisma {
   export type BookingUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionId?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
@@ -12675,6 +12701,7 @@ export namespace Prisma {
   export type BookingCountOrderByAggregateInput = {
     id?: SortOrder
     sessionId?: SortOrder
+    stripeId?: SortOrder
     amount?: SortOrder
     campName?: SortOrder
     athleteName?: SortOrder
@@ -12694,6 +12721,7 @@ export namespace Prisma {
   export type BookingMaxOrderByAggregateInput = {
     id?: SortOrder
     sessionId?: SortOrder
+    stripeId?: SortOrder
     amount?: SortOrder
     campName?: SortOrder
     athleteName?: SortOrder
@@ -12709,6 +12737,7 @@ export namespace Prisma {
   export type BookingMinOrderByAggregateInput = {
     id?: SortOrder
     sessionId?: SortOrder
+    stripeId?: SortOrder
     amount?: SortOrder
     campName?: SortOrder
     athleteName?: SortOrder
@@ -13582,6 +13611,7 @@ export namespace Prisma {
 
   export type BookingCreateWithoutSessionInput = {
     id?: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -13596,6 +13626,7 @@ export namespace Prisma {
 
   export type BookingUncheckedCreateWithoutSessionInput = {
     id?: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -13681,6 +13712,7 @@ export namespace Prisma {
     NOT?: BookingScalarWhereInput | BookingScalarWhereInput[]
     id?: StringFilter<"Booking"> | string
     sessionId?: StringFilter<"Booking"> | string
+    stripeId?: StringFilter<"Booking"> | string
     amount?: FloatFilter<"Booking"> | number
     campName?: StringFilter<"Booking"> | string
     athleteName?: StringFilter<"Booking"> | string
@@ -14005,6 +14037,7 @@ export namespace Prisma {
 
   export type BookingCreateManySessionInput = {
     id?: string
+    stripeId: string
     amount: number
     campName: string
     athleteName: string
@@ -14019,6 +14052,7 @@ export namespace Prisma {
 
   export type BookingUpdateWithoutSessionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
@@ -14033,6 +14067,7 @@ export namespace Prisma {
 
   export type BookingUncheckedUpdateWithoutSessionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
@@ -14047,6 +14082,7 @@ export namespace Prisma {
 
   export type BookingUncheckedUpdateManyWithoutSessionInput = {
     id?: StringFieldUpdateOperationsInput | string
+    stripeId?: StringFieldUpdateOperationsInput | string
     amount?: FloatFieldUpdateOperationsInput | number
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string

@@ -92,6 +92,7 @@ enum CampStatus {
 model Booking {
   id        String      @id @default(cuid())
   sessionId String
+  stripeId  String  @unique
   session   CampSession @relation(fields: [sessionId], references: [id])
 
   amount        Float

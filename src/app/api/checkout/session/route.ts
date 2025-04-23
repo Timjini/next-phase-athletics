@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const origin = request.headers.get("origin") || "";
     const session = await initiateCheckoutWithBooking(formData, origin);
 
-    return NextResponse.json({ sessionId: session.id });
+    return NextResponse.json({ sessionId: session?.id });
   } catch (error) {
     console.error("Stripe Checkout error:", error);
     return NextResponse.json({ error: "Failed to create session" }, { status: 500 });

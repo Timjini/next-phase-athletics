@@ -26,6 +26,9 @@ export const campProgramRepository = {
       include: {
         sessions: true,
       },
+      orderBy: {
+        createdAt: 'asc',
+      },
     });
   },
 

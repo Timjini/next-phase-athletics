@@ -14,6 +14,15 @@ export const bookingRepository = {
     return prisma.booking.update({
       where: { id },
       data,
+      include: {
+        session: true,
+      },
+    });
+  },
+  updateBySessionId: async (stripeId: string, data: any) => {
+    return prisma.booking.updateMany({
+      where: { stripeId },
+      data,
     });
   },
   delete: async (id: string) => {

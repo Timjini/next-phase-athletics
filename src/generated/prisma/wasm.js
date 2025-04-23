@@ -163,6 +163,7 @@ exports.Prisma.CampProgramHostScalarFieldEnum = {
 exports.Prisma.BookingScalarFieldEnum = {
   id: 'id',
   sessionId: 'sessionId',
+  stripeId: 'stripeId',
   amount: 'amount',
   campName: 'campName',
   athleteName: 'athleteName',

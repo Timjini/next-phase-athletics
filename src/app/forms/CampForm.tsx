@@ -32,6 +32,7 @@ interface CampFormProps {
 
 export function CampForm({ campProgram }: CampFormProps) {
   const [selectedCampPrice, setSelectedCampPrice] = useState(0);
+  const [selectedCampId, setSelectedCampId] = useState("");
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,11 +51,12 @@ export function CampForm({ campProgram }: CampFormProps) {
   });
 
   const onSubmit = async (data: FormValues) => {
-    console.log("form data", { ...data, price: selectedCampPrice });
+    console.log("form data", { ...data, price: selectedCampPrice, campId: selectedCampId });
     try {
       const { sessionId } = await createCheckoutSession({
         ...data,
         price: selectedCampPrice,
+        campId: selectedCampId,
       });
   
       const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -90,6 +92,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                       (session) => session.label === value
                     );
                     setSelectedCampPrice(selectedCamp?.price || 0);
+                    setSelectedCampId(selectedCamp?.id || "");
                   }}
                   defaultValue={field.value}
                   autoFocus
