@@ -1,23 +1,35 @@
 import React from 'react';
 
-export const LoadScript = ({ googleMapsApiKey, libraries, children }: { googleMapsApiKey: string; libraries: string[]; children: React.ReactNode }) => {
-  // In the mock, you can just return the children since we don't need actual Google Maps functionality
+export const LoadScript = ({ children }: { children: React.ReactNode }) => {
   return <>{children}</>;
 };
 
 export const StandaloneSearchBox = ({ onLoad, onPlacesChanged, children }: any) => {
-  const mockSearchBox = {
-    getPlaces: () => [
-      {
-        address_components: [{ long_name: '123 Main St' }],
-        geometry: { location: { lat: () => 40.7128, lng: () => -74.0060 } },
-      },
-    ],
-  };
+  const [searchBox, setSearchBox] = React.useState<any>(null);
 
-  // Simulate the loading and places change events
-  onLoad(mockSearchBox);
-  onPlacesChanged();
+  React.useEffect(() => {
+    const mockSearchBox = {
+      getPlaces: () => [
+        {
+          address_components: [{ long_name: '123 Main St' }],
+          geometry: { location: { lat: () => 40.7128, lng: () => -74.0060 } },
+        },
+      ],
+    };
+    setSearchBox(mockSearchBox);
+    onLoad?.(mockSearchBox);
+  }, []);
 
-  return <div>{children}</div>; // The JSX will render a div around the children
+  return (
+    <div>
+      <input data-testid="searchbox-input" />
+      <button 
+        data-testid="searchbox-button" 
+        onClick={() => onPlacesChanged?.()}
+      >
+        Search
+      </button>
+      {children}
+    </div>
+  );
 };
