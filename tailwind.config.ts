@@ -11,10 +11,10 @@ const config: Config = {
           '90%': { opacity: '1' },
           '100%': { transform: 'translateY(100%)', opacity: '0' },
         },
-        fontFamily: {
-          montserrat: ['Montserrat', 'sans-serif'],
-          opensans: ['Open Sans', 'sans-serif'],
-        },
+      },
+      fontFamily: {
+        montserrat: ['Montserrat', 'sans-serif'],
+        opensans: ['Open Sans', 'sans-serif'],
       },
       animation: {
         scrollY: 'scrollY 10s linear infinite',

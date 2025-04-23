@@ -1,33 +1,5 @@
 services:
-  app:
-    container_name: next-phase
-    build:
-      context: .
-      args:
-        NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
-        NEXT_STRIPE_SECRET_KEY: ${NEXT_STRIPE_SECRET_KEY}
-        DATABASE_URL: ${DATABASE_URL}
-        CLERK_SECRET_KEY: ${CLERK_SECRET_KEY}
-        NODE_ENV: ${NODE_ENV}
-    ports:
-      - "3000:3000"
-      - "5555:5555"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    env_file:
-      - .env
-    environment:
-      - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=${NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY}
-      - NEXT_STRIPE_SECRET_KEY=${NEXT_STRIPE_SECRET_KEY}
-      - DATABASE_URL=${DATABASE_URL}
-      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
-      - NODE_ENV=${NODE_ENV}
-      - NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}
-    networks:
-      - app-network
-    
-  
+
   postgres:
     container_name: ${PSQL_DB_HOST}
     image: postgres:latest
@@ -39,18 +11,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    networks:
-      - app-network
-
-  pgadmin:
-    container_name: ${PGADMIN_HOST}
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${DB_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${DB_PASSWORD}
-    ports:
-      - "5050:80"
     networks:
       - app-network
 
