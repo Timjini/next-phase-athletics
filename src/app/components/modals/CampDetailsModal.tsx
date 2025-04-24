@@ -24,7 +24,7 @@ export default function CampDetailsModal({
       <DialogTrigger asChild>
         <button
           onClick={() => setOpen(true)}
-          className="actionBtn w-10 rounded-full h-10 mx-auto flex items-center justify-center sm:w-72 sm:h-auto sm:rounded-lg sm:p-0 sm:bg-blue-600 sm:text-white sm:text-lg sm:font-bold"
+          className="actionBtn w-10 rounded-full h-10 mx-auto flex items-center justify-center sm:w-48 sm:h-auto sm:rounded-lg sm:p-0 sm:bg-blue-600 sm:text-white sm:text-lg sm:font-bold hover:opacity-96"
         >
           <span className=" hidden sm:block">
             Camp Details

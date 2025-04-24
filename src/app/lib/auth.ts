@@ -1,24 +1,31 @@
-//simple auth for the app
-import { auth, currentUser } from '@clerk/nextjs/server'
-import { redirect } from 'next/navigation'
+import { auth, currentUser } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 
-export async function verifyAdminAccess() {
-    const user = await currentUser()
-    const { sessionClaims } = await auth()
-    
-    if (!user || !sessionClaims) {
-      redirect('/sign-in')
+type VerifyAdminOptions = {
+  allowRedirect?: boolean;
+};
+
+export async function verifyAdminAccess(options: VerifyAdminOptions = { allowRedirect: true }) {
+  const user = await currentUser();
+  const { sessionClaims } = await auth();
+
+  const isAdmin = sessionClaims?.role === 'admin';
+
+  if (!user || !sessionClaims || !isAdmin) {
+    if (options.allowRedirect) {
+      redirect(!user ? '/sign-in' : '/unauthorized');
+    } else {
+      return { user: null };
     }
-  
-    if (sessionClaims.role !== 'admin') {
-      redirect('/unauthorized')
-    }
-  
-    return { user: {
+  }
+
+  return {
+    user: {
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: user.emailAddresses[0]?.emailAddress ?? "unknown",
+      email: user.emailAddresses[0]?.emailAddress ?? 'unknown',
       imageUrl: user.imageUrl,
-    } }
+    },
+  };
 }

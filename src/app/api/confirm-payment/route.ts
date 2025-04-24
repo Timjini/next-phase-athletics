@@ -1,3 +1,5 @@
+// This route needs a lot of refactoring
+// to make it more readable and maintainable
 import { sendAdminNotificationEmail } from "@/app/lib/email/sendAdminEmail";
 import { sendConfirmationEmail } from "@/app/lib/email/sendConfirmationEmail";
 import { prisma } from "@/app/lib/prisma";
@@ -69,6 +71,7 @@ export async function POST(request: NextRequest) {
 
     try {
       await sendAdminNotificationEmail({
+        
         email: booking?.email ?? "info@nxtphs.com",
         phone: booking?.phone ?? "Unknown Phone",
         name: booking?.athleteName ?? "Unknown Athlete",
@@ -81,6 +84,27 @@ export async function POST(request: NextRequest) {
       console.log("Admin notification sent successfully");
     } catch (error) {
       console.error("Failed to send admin notification email:", error);
+    }
+
+    try {
+      window.gtag("event", "conversion", {
+        transaction_id: body.sessionId ?? "Unknown ID",
+        value: booking?.amount ?? 0,
+        currency: 'USD',
+        items: [
+          {
+            item_name: booking?.session?.label ?? "XLR8 Camp",
+            item_id: booking?.sessionId ?? "Unknown Session ID",
+            price: booking?.amount ?? 0,
+            quantity: 1,
+          },
+        ],
+        event_callback: function () {
+          console.log("Conversion event sent successfully");
+        }
+      });
+    } catch (error) {
+      console.error("Failed to send conversion event:", error);
     }
 
     // Return success response

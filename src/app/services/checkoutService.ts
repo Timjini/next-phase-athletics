@@ -30,6 +30,7 @@ export const initiateCheckoutWithBooking = async (
       campName: formData.camp,
       athleteName: formData.athleteName,
       email: formData.email,
+      phone: formData.phone,
       rawData: JSON.stringify(formData),
       acceptedTerms: formData.acceptedTerms,
       status: "PENDING",
