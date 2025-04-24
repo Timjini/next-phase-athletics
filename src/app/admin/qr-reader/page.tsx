@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Html5QrcodeScanner, Html5QrcodeScanType, Html5QrcodeSupportedFormats } from 'html5-qrcode';
+import { toast } from 'sonner';
 
 export default function QRScannerPage() {
   const [scanResult, setScanResult] = useState<string | null>(null);
@@ -9,11 +10,47 @@ export default function QRScannerPage() {
   const [isLoading, setIsLoading] = useState(false);
   const scannerRef = useRef<Html5QrcodeScanner | null>(null);
   const errorTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [apiResponse, setApiResponse] = useState(null);
+
+  const processScan = async (decodedText: string) => {
+    try {
+      setIsLoading(true);
+      
+      // Show loading toast      
+      const response = await fetch('/api/admin/attendance', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ scanData: decodedText }),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+      
+      const data = await response.json();
+      setApiResponse(data);
+
+      toast.success('Scan processed successfully!');
+            
+    } catch (err) {
+      const errorMessage = err instanceof Error ? err.message : 'Failed to process scan';
+      
+      // Show error toast
+      toast.error(errorMessage);
+      
+      console.error('Error processing scan:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   // Clear all timeouts on unmount
   useEffect(() => {
     return () => {
-      if (errorTimeoutRef.current) clearTimeout(errorTimeoutRef.current);
+      const timeoutId = errorTimeoutRef.current;
+      if (timeoutId) clearTimeout(timeoutId);
       if (scannerRef.current) {
         scannerRef.current.clear().catch(console.error);
       }
@@ -32,7 +69,7 @@ export default function QRScannerPage() {
         rememberLastUsedCamera: true,
         supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
         formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
-        disableFlip: true // Can improve detection for some codes
+        disableFlip: true
       };
 
       scannerRef.current = new Html5QrcodeScanner(
@@ -42,17 +79,17 @@ export default function QRScannerPage() {
       );
 
       let lastErrorTime = 0;
-      const errorThrottleTime = 2000; // Only show errors every 2 seconds
+      const errorThrottleTime = 2000;
 
       scannerRef.current.render(
         (decodedText) => {
           if (decodedText?.trim()) {
             setScanResult(decodedText);
             stopScanner();
+            processScan(decodedText);
           }
         },
         (error) => {
-          // Ignore common non-critical errors
           const now = Date.now();
           if (now - lastErrorTime > errorThrottleTime) {
             lastErrorTime = now;
@@ -61,6 +98,7 @@ export default function QRScannerPage() {
         }
       );
     } catch (err) {
+      toast.error('Failed to initialize scanner');
       console.error('Scanner initialization failed:', err);
     } finally {
       setIsLoading(false);
@@ -74,12 +112,17 @@ export default function QRScannerPage() {
         .then(() => {
           scannerRef.current = null;
         })
-        .catch(console.error);
+        .catch(err => {
+          toast.error('Error stopping scanner');
+          console.error(err);
+        });
     }
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      {/* Add Toaster component at the root of your page */}
+      
       <h1 className="text-2xl font-bold mb-6">Scan QR for Attendance</h1>
 
       {isLoading && (
