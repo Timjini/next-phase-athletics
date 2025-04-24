@@ -10,6 +10,7 @@ export const createBooking = async (data: {
   campName: string;
   athleteName: string;
   email: string;
+  phone: string;
   rawData: string;
   acceptedTerms: boolean;
   status: string;

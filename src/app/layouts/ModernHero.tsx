@@ -19,9 +19,6 @@ export function ModernHero() {
         <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
           NextPhase <br />
         </h1>
-        <div className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
-          <TextGenerateEffect words="Empowering | Next Generation of Champions" />
-        </div>
         <div>
           <span className=" text-white text-3xl md:text-4xl mb-12 text-center font-bold">
             Greatness isn&apos;t Born{" "}
@@ -33,7 +30,10 @@ export function ModernHero() {
             </span>
           </span>
         </div>
-        <div className="flex flex-row justify-center mx-auto">
+        <div className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
+          <TextGenerateEffect words="CLICK HERE TO BEGIN YOUR JOURNEY TO GET THE SECRETS TO BE NUMBER ONE WITH OLYMPIC ATHLETE DWAIN CHAMBERS!" />
+        </div>
+        <div className="flex flex-row justify-center mx-auto animate-pulse">
           <Link href="/camps/xlr8">
             <Image src="/images/action-button.png" alt="hero icon" width={150} height={150} className="w-64 h-auto mx-auto mb-2" />
           </Link>

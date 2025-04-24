@@ -102,6 +102,7 @@ model Booking {
   campName      String
   athleteName   String
   email         String
+  phone         String
   status        BookingStatus
   paymentStatus PaymentStatus
   rawData       String?
