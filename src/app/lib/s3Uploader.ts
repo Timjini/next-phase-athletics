@@ -30,3 +30,27 @@ export const uploadToS3 = async (file: formidable.File) => {
     url: result.Location,
   };
 };
+
+export const uploadBufferToS3 = async (
+  buffer: Buffer,
+  keyPrefix: string = 'qr-codes',
+  contentType: string = 'image/png'
+) => {
+  console.log('Buffer:', process.env.AWS_BUCKET_ACCESS_KEY);
+  const uniqueFilename = `${keyPrefix}/${Date.now()}-${Math.round(Math.random() * 1e9)}.png`;
+
+  const params: S3.PutObjectRequest = {
+    Bucket: process.env.NEW_BUCKET_NAME as string,
+    Key: uniqueFilename,
+    Body: buffer,
+    ContentType: contentType,
+    // ACL: 'public-read',
+  };
+
+  const result = await s3.upload(params).promise();
+
+  return {
+    file_name: uniqueFilename,
+    url: result.Location,
+  };
+};

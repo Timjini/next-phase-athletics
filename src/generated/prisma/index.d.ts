@@ -77,6 +77,15 @@ export const CampStatus: {
 export type CampStatus = (typeof CampStatus)[keyof typeof CampStatus]
 
 
+export const AttendanceStatus: {
+  PENDING: 'PENDING',
+  ATTENDED: 'ATTENDED',
+  NO_SHOW: 'NO_SHOW'
+};
+
+export type AttendanceStatus = (typeof AttendanceStatus)[keyof typeof AttendanceStatus]
+
+
 export const BookingStatus: {
   PENDING: 'PENDING',
   CONFIRMED: 'CONFIRMED',
@@ -111,6 +120,10 @@ export const SessionPeriod: typeof $Enums.SessionPeriod
 export type CampStatus = $Enums.CampStatus
 
 export const CampStatus: typeof $Enums.CampStatus
+
+export type AttendanceStatus = $Enums.AttendanceStatus
+
+export const AttendanceStatus: typeof $Enums.AttendanceStatus
 
 export type BookingStatus = $Enums.BookingStatus
 
@@ -6289,10 +6302,15 @@ export namespace Prisma {
     campName: string | null
     athleteName: string | null
     email: string | null
+    phone: string | null
     status: $Enums.BookingStatus | null
     paymentStatus: $Enums.PaymentStatus | null
     rawData: string | null
     acceptedTerms: boolean | null
+    attended: $Enums.AttendanceStatus | null
+    qrCodeUsed: boolean | null
+    qrCodeData: string | null
+    qrCodeUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6305,10 +6323,15 @@ export namespace Prisma {
     campName: string | null
     athleteName: string | null
     email: string | null
+    phone: string | null
     status: $Enums.BookingStatus | null
     paymentStatus: $Enums.PaymentStatus | null
     rawData: string | null
     acceptedTerms: boolean | null
+    attended: $Enums.AttendanceStatus | null
+    qrCodeUsed: boolean | null
+    qrCodeData: string | null
+    qrCodeUrl: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -6321,10 +6344,15 @@ export namespace Prisma {
     campName: number
     athleteName: number
     email: number
+    phone: number
     status: number
     paymentStatus: number
     rawData: number
     acceptedTerms: number
+    attended: number
+    qrCodeUsed: number
+    qrCodeData: number
+    qrCodeUrl: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -6347,10 +6375,15 @@ export namespace Prisma {
     campName?: true
     athleteName?: true
     email?: true
+    phone?: true
     status?: true
     paymentStatus?: true
     rawData?: true
     acceptedTerms?: true
+    attended?: true
+    qrCodeUsed?: true
+    qrCodeData?: true
+    qrCodeUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6363,10 +6396,15 @@ export namespace Prisma {
     campName?: true
     athleteName?: true
     email?: true
+    phone?: true
     status?: true
     paymentStatus?: true
     rawData?: true
     acceptedTerms?: true
+    attended?: true
+    qrCodeUsed?: true
+    qrCodeData?: true
+    qrCodeUrl?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -6379,10 +6417,15 @@ export namespace Prisma {
     campName?: true
     athleteName?: true
     email?: true
+    phone?: true
     status?: true
     paymentStatus?: true
     rawData?: true
     acceptedTerms?: true
+    attended?: true
+    qrCodeUsed?: true
+    qrCodeData?: true
+    qrCodeUrl?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -6482,10 +6525,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed: boolean
+    qrCodeData: string | null
+    qrCodeUrl: string | null
     createdAt: Date
     updatedAt: Date
     _count: BookingCountAggregateOutputType | null
@@ -6517,10 +6565,15 @@ export namespace Prisma {
     campName?: boolean
     athleteName?: boolean
     email?: boolean
+    phone?: boolean
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
     acceptedTerms?: boolean
+    attended?: boolean
+    qrCodeUsed?: boolean
+    qrCodeData?: boolean
+    qrCodeUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
@@ -6534,10 +6587,15 @@ export namespace Prisma {
     campName?: boolean
     athleteName?: boolean
     email?: boolean
+    phone?: boolean
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
     acceptedTerms?: boolean
+    attended?: boolean
+    qrCodeUsed?: boolean
+    qrCodeData?: boolean
+    qrCodeUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
@@ -6551,10 +6609,15 @@ export namespace Prisma {
     campName?: boolean
     athleteName?: boolean
     email?: boolean
+    phone?: boolean
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
     acceptedTerms?: boolean
+    attended?: boolean
+    qrCodeUsed?: boolean
+    qrCodeData?: boolean
+    qrCodeUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
@@ -6568,15 +6631,20 @@ export namespace Prisma {
     campName?: boolean
     athleteName?: boolean
     email?: boolean
+    phone?: boolean
     status?: boolean
     paymentStatus?: boolean
     rawData?: boolean
     acceptedTerms?: boolean
+    attended?: boolean
+    qrCodeUsed?: boolean
+    qrCodeData?: boolean
+    qrCodeUrl?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "stripeId" | "amount" | "campName" | "athleteName" | "email" | "status" | "paymentStatus" | "rawData" | "acceptedTerms" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
+  export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "stripeId" | "amount" | "campName" | "athleteName" | "email" | "phone" | "status" | "paymentStatus" | "rawData" | "acceptedTerms" | "attended" | "qrCodeUsed" | "qrCodeData" | "qrCodeUrl" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     session?: boolean | CampSessionDefaultArgs<ExtArgs>
   }
@@ -6600,10 +6668,15 @@ export namespace Prisma {
       campName: string
       athleteName: string
       email: string
+      phone: string | null
       status: $Enums.BookingStatus
       paymentStatus: $Enums.PaymentStatus
       rawData: string | null
       acceptedTerms: boolean
+      attended: $Enums.AttendanceStatus
+      qrCodeUsed: boolean
+      qrCodeData: string | null
+      qrCodeUrl: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["booking"]>
@@ -7037,10 +7110,15 @@ export namespace Prisma {
     readonly campName: FieldRef<"Booking", 'String'>
     readonly athleteName: FieldRef<"Booking", 'String'>
     readonly email: FieldRef<"Booking", 'String'>
+    readonly phone: FieldRef<"Booking", 'String'>
     readonly status: FieldRef<"Booking", 'BookingStatus'>
     readonly paymentStatus: FieldRef<"Booking", 'PaymentStatus'>
     readonly rawData: FieldRef<"Booking", 'String'>
     readonly acceptedTerms: FieldRef<"Booking", 'Boolean'>
+    readonly attended: FieldRef<"Booking", 'AttendanceStatus'>
+    readonly qrCodeUsed: FieldRef<"Booking", 'Boolean'>
+    readonly qrCodeData: FieldRef<"Booking", 'String'>
+    readonly qrCodeUrl: FieldRef<"Booking", 'String'>
     readonly createdAt: FieldRef<"Booking", 'DateTime'>
     readonly updatedAt: FieldRef<"Booking", 'DateTime'>
   }
@@ -10781,10 +10859,15 @@ export namespace Prisma {
     campName: 'campName',
     athleteName: 'athleteName',
     email: 'email',
+    phone: 'phone',
     status: 'status',
     paymentStatus: 'paymentStatus',
     rawData: 'rawData',
     acceptedTerms: 'acceptedTerms',
+    attended: 'attended',
+    qrCodeUsed: 'qrCodeUsed',
+    qrCodeData: 'qrCodeData',
+    qrCodeUrl: 'qrCodeUrl',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -10987,6 +11070,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'AttendanceStatus'
+   */
+  export type EnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'AttendanceStatus[]'
+   */
+  export type ListEnumAttendanceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AttendanceStatus[]'>
     
 
 
@@ -11321,10 +11418,15 @@ export namespace Prisma {
     campName?: StringFilter<"Booking"> | string
     athleteName?: StringFilter<"Booking"> | string
     email?: StringFilter<"Booking"> | string
+    phone?: StringNullableFilter<"Booking"> | string | null
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableFilter<"Booking"> | string | null
     acceptedTerms?: BoolFilter<"Booking"> | boolean
+    attended?: EnumAttendanceStatusFilter<"Booking"> | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFilter<"Booking"> | boolean
+    qrCodeData?: StringNullableFilter<"Booking"> | string | null
+    qrCodeUrl?: StringNullableFilter<"Booking"> | string | null
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
     session?: XOR<CampSessionScalarRelationFilter, CampSessionWhereInput>
@@ -11338,10 +11440,15 @@ export namespace Prisma {
     campName?: SortOrder
     athleteName?: SortOrder
     email?: SortOrder
+    phone?: SortOrderInput | SortOrder
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrderInput | SortOrder
     acceptedTerms?: SortOrder
+    attended?: SortOrder
+    qrCodeUsed?: SortOrder
+    qrCodeData?: SortOrderInput | SortOrder
+    qrCodeUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     session?: CampSessionOrderByWithRelationInput
@@ -11350,6 +11457,7 @@ export namespace Prisma {
   export type BookingWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     stripeId?: string
+    qrCodeData?: string
     AND?: BookingWhereInput | BookingWhereInput[]
     OR?: BookingWhereInput[]
     NOT?: BookingWhereInput | BookingWhereInput[]
@@ -11358,14 +11466,18 @@ export namespace Prisma {
     campName?: StringFilter<"Booking"> | string
     athleteName?: StringFilter<"Booking"> | string
     email?: StringFilter<"Booking"> | string
+    phone?: StringNullableFilter<"Booking"> | string | null
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableFilter<"Booking"> | string | null
     acceptedTerms?: BoolFilter<"Booking"> | boolean
+    attended?: EnumAttendanceStatusFilter<"Booking"> | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFilter<"Booking"> | boolean
+    qrCodeUrl?: StringNullableFilter<"Booking"> | string | null
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
     session?: XOR<CampSessionScalarRelationFilter, CampSessionWhereInput>
-  }, "id" | "stripeId">
+  }, "id" | "stripeId" | "qrCodeData">
 
   export type BookingOrderByWithAggregationInput = {
     id?: SortOrder
@@ -11375,10 +11487,15 @@ export namespace Prisma {
     campName?: SortOrder
     athleteName?: SortOrder
     email?: SortOrder
+    phone?: SortOrderInput | SortOrder
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrderInput | SortOrder
     acceptedTerms?: SortOrder
+    attended?: SortOrder
+    qrCodeUsed?: SortOrder
+    qrCodeData?: SortOrderInput | SortOrder
+    qrCodeUrl?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: BookingCountOrderByAggregateInput
@@ -11399,10 +11516,15 @@ export namespace Prisma {
     campName?: StringWithAggregatesFilter<"Booking"> | string
     athleteName?: StringWithAggregatesFilter<"Booking"> | string
     email?: StringWithAggregatesFilter<"Booking"> | string
+    phone?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     status?: EnumBookingStatusWithAggregatesFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusWithAggregatesFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     acceptedTerms?: BoolWithAggregatesFilter<"Booking"> | boolean
+    attended?: EnumAttendanceStatusWithAggregatesFilter<"Booking"> | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolWithAggregatesFilter<"Booking"> | boolean
+    qrCodeData?: StringNullableWithAggregatesFilter<"Booking"> | string | null
+    qrCodeUrl?: StringNullableWithAggregatesFilter<"Booking"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Booking"> | Date | string
   }
@@ -11992,10 +12114,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone?: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed?: boolean
+    qrCodeData?: string | null
+    qrCodeUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
     session: CampSessionCreateNestedOneWithoutBookingsInput
@@ -12009,10 +12136,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone?: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed?: boolean
+    qrCodeData?: string | null
+    qrCodeUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12024,10 +12156,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     session?: CampSessionUpdateOneRequiredWithoutBookingsNestedInput
@@ -12041,10 +12178,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12057,10 +12199,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone?: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed?: boolean
+    qrCodeData?: string | null
+    qrCodeUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12072,10 +12219,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12088,10 +12240,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12786,6 +12943,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumAttendanceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AttendanceStatus | EnumAttendanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAttendanceStatusFilter<$PrismaModel> | $Enums.AttendanceStatus
+  }
+
   export type CampSessionScalarRelationFilter = {
     is?: CampSessionWhereInput
     isNot?: CampSessionWhereInput
@@ -12799,10 +12963,15 @@ export namespace Prisma {
     campName?: SortOrder
     athleteName?: SortOrder
     email?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrder
     acceptedTerms?: SortOrder
+    attended?: SortOrder
+    qrCodeUsed?: SortOrder
+    qrCodeData?: SortOrder
+    qrCodeUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12819,10 +12988,15 @@ export namespace Prisma {
     campName?: SortOrder
     athleteName?: SortOrder
     email?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrder
     acceptedTerms?: SortOrder
+    attended?: SortOrder
+    qrCodeUsed?: SortOrder
+    qrCodeData?: SortOrder
+    qrCodeUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12835,10 +13009,15 @@ export namespace Prisma {
     campName?: SortOrder
     athleteName?: SortOrder
     email?: SortOrder
+    phone?: SortOrder
     status?: SortOrder
     paymentStatus?: SortOrder
     rawData?: SortOrder
     acceptedTerms?: SortOrder
+    attended?: SortOrder
+    qrCodeUsed?: SortOrder
+    qrCodeData?: SortOrder
+    qrCodeUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -12873,6 +13052,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumAttendanceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AttendanceStatus | EnumAttendanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAttendanceStatusWithAggregatesFilter<$PrismaModel> | $Enums.AttendanceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAttendanceStatusFilter<$PrismaModel>
+    _max?: NestedEnumAttendanceStatusFilter<$PrismaModel>
   }
 
   export type EnumUserRolesFilter<$PrismaModel = never> = {
@@ -13289,6 +13478,10 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type EnumAttendanceStatusFieldUpdateOperationsInput = {
+    set?: $Enums.AttendanceStatus
+  }
+
   export type CampSessionUpdateOneRequiredWithoutBookingsNestedInput = {
     create?: XOR<CampSessionCreateWithoutBookingsInput, CampSessionUncheckedCreateWithoutBookingsInput>
     connectOrCreate?: CampSessionCreateOrConnectWithoutBookingsInput
@@ -13506,6 +13699,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumAttendanceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.AttendanceStatus | EnumAttendanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAttendanceStatusFilter<$PrismaModel> | $Enums.AttendanceStatus
+  }
+
   export type NestedEnumBookingStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.BookingStatus | EnumBookingStatusFieldRefInput<$PrismaModel>
     in?: $Enums.BookingStatus[] | ListEnumBookingStatusFieldRefInput<$PrismaModel>
@@ -13532,6 +13732,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumAttendanceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.AttendanceStatus | EnumAttendanceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.AttendanceStatus[] | ListEnumAttendanceStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumAttendanceStatusWithAggregatesFilter<$PrismaModel> | $Enums.AttendanceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumAttendanceStatusFilter<$PrismaModel>
+    _max?: NestedEnumAttendanceStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumUserRolesFilter<$PrismaModel = never> = {
@@ -13718,10 +13928,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone?: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed?: boolean
+    qrCodeData?: string | null
+    qrCodeUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13733,10 +13948,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone?: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed?: boolean
+    qrCodeData?: string | null
+    qrCodeUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -13819,10 +14039,15 @@ export namespace Prisma {
     campName?: StringFilter<"Booking"> | string
     athleteName?: StringFilter<"Booking"> | string
     email?: StringFilter<"Booking"> | string
+    phone?: StringNullableFilter<"Booking"> | string | null
     status?: EnumBookingStatusFilter<"Booking"> | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFilter<"Booking"> | $Enums.PaymentStatus
     rawData?: StringNullableFilter<"Booking"> | string | null
     acceptedTerms?: BoolFilter<"Booking"> | boolean
+    attended?: EnumAttendanceStatusFilter<"Booking"> | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFilter<"Booking"> | boolean
+    qrCodeData?: StringNullableFilter<"Booking"> | string | null
+    qrCodeUrl?: StringNullableFilter<"Booking"> | string | null
     createdAt?: DateTimeFilter<"Booking"> | Date | string
     updatedAt?: DateTimeFilter<"Booking"> | Date | string
   }
@@ -14168,10 +14393,15 @@ export namespace Prisma {
     campName: string
     athleteName: string
     email: string
+    phone?: string | null
     status: $Enums.BookingStatus
     paymentStatus: $Enums.PaymentStatus
     rawData?: string | null
     acceptedTerms: boolean
+    attended: $Enums.AttendanceStatus
+    qrCodeUsed?: boolean
+    qrCodeData?: string | null
+    qrCodeUrl?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -14183,10 +14413,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14198,10 +14433,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -14213,10 +14453,15 @@ export namespace Prisma {
     campName?: StringFieldUpdateOperationsInput | string
     athleteName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: EnumBookingStatusFieldUpdateOperationsInput | $Enums.BookingStatus
     paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
     rawData?: NullableStringFieldUpdateOperationsInput | string | null
     acceptedTerms?: BoolFieldUpdateOperationsInput | boolean
+    attended?: EnumAttendanceStatusFieldUpdateOperationsInput | $Enums.AttendanceStatus
+    qrCodeUsed?: BoolFieldUpdateOperationsInput | boolean
+    qrCodeData?: NullableStringFieldUpdateOperationsInput | string | null
+    qrCodeUrl?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

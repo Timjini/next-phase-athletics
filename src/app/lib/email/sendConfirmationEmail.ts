@@ -10,6 +10,7 @@ interface ConfirmationEmailParams {
   startDate: string;
   endDate: string;
   period: string;
+  qrCodeUrl: string;
   // amount: number;
 }
 
@@ -21,6 +22,7 @@ export const sendConfirmationEmail = async ({
   startDate,
   endDate,
   period,
+  qrCodeUrl
   // amount,
 }: ConfirmationEmailParams) => {
   const msg = {
@@ -39,6 +41,12 @@ export const sendConfirmationEmail = async ({
           <p><strong>🕐 Time Period:</strong> ${period}</p>
           <p><strong>🎫 Booking ID:</strong> ${id}</p>
         </div>
+        <p>Attached is your QR code for easy check-in at the camp. Please keep this email as your voucher.</p>
+        <p style="text-align: center;">
+          <img src="${qrCodeUrl}" alt="QR Code" style="width: 200px; height: auto; border-radius: 8px;" />
+        </p>
+        <p style="margin-top: 32px;">If you have any questions or need assistance, feel free to reach out to us.</p>
+        <p style="margin-top: 32px;">We look forward to seeing you at the camp!</p>
 
         <p>We're excited to have you with us. Please keep this email as your voucher and feel free to contact us with any questions.</p>
 

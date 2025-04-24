@@ -171,10 +171,15 @@ exports.Prisma.BookingScalarFieldEnum = {
   campName: 'campName',
   athleteName: 'athleteName',
   email: 'email',
+  phone: 'phone',
   status: 'status',
   paymentStatus: 'paymentStatus',
   rawData: 'rawData',
   acceptedTerms: 'acceptedTerms',
+  attended: 'attended',
+  qrCodeUsed: 'qrCodeUsed',
+  qrCodeData: 'qrCodeData',
+  qrCodeUrl: 'qrCodeUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -257,6 +262,12 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   UNPAID: 'UNPAID',
   PAID: 'PAID',
   REFUNDED: 'REFUNDED'
+};
+
+exports.AttendanceStatus = exports.$Enums.AttendanceStatus = {
+  PENDING: 'PENDING',
+  ATTENDED: 'ATTENDED',
+  NO_SHOW: 'NO_SHOW'
 };
 
 exports.UserRoles = exports.$Enums.UserRoles = {

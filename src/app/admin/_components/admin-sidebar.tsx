@@ -15,6 +15,8 @@ export default function SideBar() {
     { name: 'Camps', icon: '⛺', slug: '/admin/camps' },
     { name: 'Users', icon: '👥', slug: '/admin/users' },
     { name: 'Bookings', icon: '📊', slug: '/admin/bookings' },
+    { name: 'Attendance QR', icon: '📱', slug: '/admin/qr-reader' },
+    { name: 'Logout', icon: '🚪', slug: '/logout' },
   ];
 
   const toggleMenu = () => {
