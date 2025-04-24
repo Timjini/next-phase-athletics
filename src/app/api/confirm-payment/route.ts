@@ -26,8 +26,6 @@ export async function POST(request: NextRequest) {
 
     let booking;
     try {
-      await updateBookingStatus(body.sessionId, "CONFIRMED", "PAID");
-      console.log("Booking status updated successfully");
 
       booking = await getBookingBySessionId(body.sessionId);
 
@@ -38,6 +36,8 @@ export async function POST(request: NextRequest) {
           { status: 201 }
         );
       }
+      await updateBookingStatus(body.sessionId, "CONFIRMED", "PAID");
+      console.log("Booking status updated successfully");
 
       // Decrease availableSlots by 1
       if (booking?.sessionId) {
@@ -91,6 +91,8 @@ export async function POST(request: NextRequest) {
         // amount: totalAmount ?? 0,
         period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
         qrCodeUrl: booking?.qrCodeUrl ?? "Unknown QR Code URL",
+        location: booking?.session?.campProgram?.location ?? "Unknown Location",
+        
       });
       console.log("Email sent successfully");
     } catch (error) {
@@ -156,7 +158,11 @@ async function getBookingBySessionId(stripeId: string): Promise<any> {
     const booking = await prisma.booking.findUnique({
       where: { stripeId },
       include: {
-        session: true,
+        session: {
+          include: {
+            campProgram: true
+          }
+        }
       },
     });
 

@@ -9,8 +9,13 @@ const s3 = new S3({
 });
 
 export async function GET(req: NextRequest, { params }: { params: { imageName: string } }) {
-  const { imageName } = params;
+  console.log('Fetching image from S3', process.env.AWS_BUCKET_SECRET_KEY);
+  const { imageName } = await params;
+  console.log('Image name:', imageName);
+  console.log('AWS Bucket Access Key:', process.env.AWS_BUCKET_ACCESS_KEY);
 
+  console.log('Fetching image:', imageName);
+  console.log('Bucket name:', process.env.NEW_BUCKET_NAME);
   const s3Params = {
     Bucket: process.env.NEW_BUCKET_NAME as string,
     Key: imageName,

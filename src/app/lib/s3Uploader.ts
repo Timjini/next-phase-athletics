@@ -54,3 +54,19 @@ export const uploadBufferToS3 = async (
     url: result.Location,
   };
 };
+
+// read image from s3
+export const getImageFromS3 = async (imageName: string) => {
+  const params = {
+    Bucket: process.env.NEW_BUCKET_NAME as string,
+    Key: imageName,
+  };
+
+  try {
+    const s3Object = await s3.getObject(params).promise();
+    return s3Object.Body;
+  } catch (error) {
+    console.error('Error fetching from S3:', error);
+    throw new Error('Image not found');
+  }
+};
