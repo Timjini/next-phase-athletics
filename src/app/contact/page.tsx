@@ -111,15 +111,6 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Map Component */}
-            <div className=" p-1 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 px-5 pt-5">
-                Our Location
-              </h2>
-              <div className="h-96 w-full rounded-md overflow-hidden">
-                  <MapDisplay lat={location.lat} lng={location.lng} />
-              </div>
-            </div>
           </div>
 
           {/* Right Column - Contact Form */}

@@ -225,6 +225,16 @@ exports.Prisma.CompanyScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ContactScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  message: 'message',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -283,7 +293,8 @@ exports.Prisma.ModelName = {
   Booking: 'Booking',
   User: 'User',
   Post: 'Post',
-  Company: 'Company'
+  Company: 'Company',
+  Contact: 'Contact'
 };
 
 /**
