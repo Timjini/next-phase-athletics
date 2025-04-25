@@ -150,9 +150,7 @@ const DwainChambersBio = () => {
                 </p>
                 <ul className="my-4 space-y-2">
                   {[
-                    "Dan Pfaff (9-time Olympic coach)",
-                    "John Smith (Maurice Greene's coach)",
-                    "Loren Seagrave (speed mechanics pioneer)",
+                    "Dan Pfaff",
                     "UK Athletics national coaching team",
                   ].map((coach, index) => (
                     <li key={index} className="flex">
