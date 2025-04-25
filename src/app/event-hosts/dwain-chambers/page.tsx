@@ -196,11 +196,9 @@ const DwainChambersBio = () => {
                 {[
                   { year: "1997", event: "World Junior Record (10.06s)" },
                   { year: "2002", event: "European Champion (9.96s)" },
-                  { year: "2003", event: "World Indoor Silver Medal" },
-                  { year: "2008", event: "Olympic Games (Beijing)" },
                   { year: "2012", event: "Olympic Games (London)" },
                   { year: "2018", event: "World Masters Record (6.81s)" },
-                  { year: "2025", event: "Participation in XLR8 Training" },
+                  { year: "2025", event: "Participation in XLR8 Training Camp" },
                 ].map((item, index) => (
                   <div key={index} className="flex">
                     <div className="font-bold text-yellow-600 w-12">
