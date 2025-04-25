@@ -10,13 +10,13 @@ import TeamSupportSection from './elements/TeamSupportSection';
 export default function Page() {
     return (
         <section>
-        <HeroSection />
-        <DwainChambersSection />
-        <AboutCampSection />
-        <LearningOutcomesSection />
-        <MediaSection />
-        <TeamSupportSection />
-        <CTASection />
+            <HeroSection />
+            <DwainChambersSection />
+            <AboutCampSection />
+            <LearningOutcomesSection />
+            <MediaSection />
+            <TeamSupportSection />
+            <CTASection />
         </section>
     );
 }
