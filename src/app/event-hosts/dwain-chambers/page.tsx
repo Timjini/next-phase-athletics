@@ -92,7 +92,7 @@ const DwainChambersBio = () => {
                     class: "font-bold text-gray-800",
                   },
                   {
-                    text: "7 x 100m British Champion.",
+                    text: "7 times 100m British Champion.",
                     class: "italic",
                   },
                   {
