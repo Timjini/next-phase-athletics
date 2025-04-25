@@ -1,7 +1,6 @@
 import { createStripeCheckoutSession } from "@/app/lib/stripe/createCheckoutSession";
 import {
   createBooking,
-  updateBookingStatus,
 } from "@/app/services/bookingService";
 
 export const initiateCheckoutWithBooking = async (
@@ -36,6 +35,10 @@ export const initiateCheckoutWithBooking = async (
       status: "PENDING",
       paymentStatus: "UNPAID",
       stripeId: session?.id,
+      attended: "PENDING",
+      qrCodeUsed: false,
+      qrCodeData: "",
+      qrCodeUrl: "",
     });
   } catch (error) {
     console.error("⚠️ Failed to create booking after Stripe session.", error);

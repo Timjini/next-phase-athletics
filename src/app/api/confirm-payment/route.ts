@@ -3,6 +3,7 @@
 import { sendAdminNotificationEmail } from "@/app/lib/email/sendAdminEmail";
 import { sendConfirmationEmail } from "@/app/lib/email/sendConfirmationEmail";
 import { prisma } from "@/app/lib/prisma";
+import { generateAndUploadQRCode } from "@/app/lib/qrCode";
 import { updateBookingStatus } from "@/app/services/bookingService";
 import { formatDate, sessionPeriod } from "@/app/utils/dateUtils";
 import { NextRequest, NextResponse } from "next/server";
@@ -25,10 +26,18 @@ export async function POST(request: NextRequest) {
 
     let booking;
     try {
-      await updateBookingStatus(body.sessionId, "CONFIRMED", "PAID");
-      console.log("Booking status updated successfully");
 
       booking = await getBookingBySessionId(body.sessionId);
+
+      if (booking.status === "CONFIRMED") {
+        console.log("Booking is already confirmed");
+        return NextResponse.json(
+          { error: "Booking is already confirmed" },
+          { status: 201 }
+        );
+      }
+      await updateBookingStatus(body.sessionId, "CONFIRMED", "PAID");
+      console.log("Booking status updated successfully");
 
       // Decrease availableSlots by 1
       if (booking?.sessionId) {
@@ -41,6 +50,24 @@ export async function POST(request: NextRequest) {
           },
         });
         console.log("Session slot decremented successfully");
+      }
+
+      if (booking) {
+        const qrData = `booking:${booking.id}:${Date.now()}`;
+        
+        const { qrCodeData, qrCodeUrl } = await generateAndUploadQRCode(qrData);
+        console.log("QR code generated successfully");
+        
+        // Update booking with QR code info
+        await prisma.booking.update({
+          where: { id: booking.id },
+          data: {
+            qrCodeData,
+            qrCodeUrl
+          }
+        });
+    
+        console.log("QR code generated and stored successfully");
       }
     } catch (error) {
       console.error("Failed to update booking status:", error);
@@ -63,6 +90,9 @@ export async function POST(request: NextRequest) {
         endDate: booking?.session?.endDateString ?? "Unknown End Date",
         // amount: totalAmount ?? 0,
         period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
+        qrCodeUrl: booking?.qrCodeUrl ?? "Unknown QR Code URL",
+        location: booking?.session?.campProgram?.location ?? "Unknown Location",
+        
       });
       console.log("Email sent successfully");
     } catch (error) {
@@ -86,26 +116,29 @@ export async function POST(request: NextRequest) {
       console.error("Failed to send admin notification email:", error);
     }
 
-    try {
-      window.gtag("event", "conversion", {
-        transaction_id: body.sessionId ?? "Unknown ID",
-        value: booking?.amount ?? 0,
-        currency: 'USD',
-        items: [
-          {
-            item_name: booking?.session?.label ?? "XLR8 Camp",
-            item_id: booking?.sessionId ?? "Unknown Session ID",
-            price: booking?.amount ?? 0,
-            quantity: 1,
-          },
-        ],
-        event_callback: function () {
-          console.log("Conversion event sent successfully");
-        }
-      });
-    } catch (error) {
-      console.error("Failed to send conversion event:", error);
-    }
+    // Google Analytics event tracking
+    // try {
+    //   window.gtag("event", "conversion", {
+    //     transaction_id: body.sessionId ?? "Unknown ID",
+    //     value: booking?.amount ?? 0,
+    //     currency: 'USD',
+    //     items: [
+    //       {
+    //         item_name: booking?.session?.label ?? "XLR8 Camp",
+    //         item_id: booking?.sessionId ?? "Unknown Session ID",
+    //         price: booking?.amount ?? 0,
+    //         quantity: 1,
+    //       },
+    //     ],
+    //     event_callback: function () {
+    //       console.log("Conversion event sent successfully");
+    //     }
+    //   });
+    // } catch (error) {
+    //   console.error("Failed to send conversion event:", error);
+    // }
+
+
 
     // Return success response
     return NextResponse.json({
@@ -125,7 +158,11 @@ async function getBookingBySessionId(stripeId: string): Promise<any> {
     const booking = await prisma.booking.findUnique({
       where: { stripeId },
       include: {
-        session: true,
+        session: {
+          include: {
+            campProgram: true
+          }
+        }
       },
     });
 

@@ -50,6 +50,10 @@ export type CampSession = {
     paymentStatus: 'UNPAID' | 'PAID' | 'REFUNDED';
     rawData?: string | null;
     acceptedTerms: boolean;
+    attended: 'PENDING' | 'ATTENDED' | 'NO_SHOW';
+    qrCodeUsed: boolean;
+    qrCodeData: string;
+    qrCodeUrl: string;
   
     createdAt: Date;
     updatedAt: Date;

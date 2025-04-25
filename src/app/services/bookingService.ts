@@ -15,6 +15,10 @@ export const createBooking = async (data: {
   acceptedTerms: boolean;
   status: string;
   paymentStatus: string;
+  attended: string;
+  qrCodeUsed: boolean;
+  qrCodeData: string;
+  qrCodeUrl: string;
 }) => {
   return bookingRepository.create(data);
 };
