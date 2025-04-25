@@ -29,10 +29,10 @@ const DwainChambersSection: React.FC = () => {
           </h3>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              One of the fastest sprinters in history (9.87s PB, sub-10 over 50 times).
+              One of the fastest sprinters in history (9.97s PB).
             </li>
             <li>
-              Competed against legends like Usain Bolt in iconic races (2008 London GP).
+              Competed against legends like Usain Bolt in iconic races.
             </li>
             <li>
               Reigning World Masters Champion & record holder—proving longevity in speed.
