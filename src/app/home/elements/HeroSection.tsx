@@ -69,18 +69,18 @@ const HeroSection: React.FC = () => {
 
       {/* Shadcn Modal for Video */}
       <Dialog open={isVideoPlaying} onOpenChange={setIsVideoPlaying}>
-        <DialogContent className="p-0 bg-transparent border-none w-screen h-screen max-w-none max-h-none flex items-center justify-center">
-          <video
-            autoPlay
-            controls
-            className="w-full h-full object-cover"
-            onEnded={() => setIsVideoPlaying(false)}
-          >
-            <source src="/videos/herovideo.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </DialogContent>
-      </Dialog>
+      <DialogContent className="fixed bg-black/90 z-50 flex items-center justify-center p-4 w-[90vw] h-[90vh] max-w-[1200px] max-h-[800px]">
+  <video
+    autoPlay
+    controls
+    className="w-full h-full rounded-lg object-contain"
+    onEnded={() => setIsVideoPlaying(false)}
+  >
+    <source src="/videos/dwain-sprint2.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</DialogContent>
+</Dialog>
     </>
   );
 };

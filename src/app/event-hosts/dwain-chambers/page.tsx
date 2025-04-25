@@ -23,13 +23,13 @@ const DwainChambersBio = () => {
             sizes="100vw"
           />
           <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center">
-            <Image
-              src="/images/dwain-profile.jpg"
+            {/* <Image
+              src="/team/coach-Dwain-Chambers.jpg"
               alt="Dwain Chambers portrait"
               className="rounded-lg shadow-2xl w-full max-w-md mx-auto mb-6"
               width={400}
               height={400}
-            />
+            /> */}
             <h1 className="text-4xl md:text-6xl font-bold mb-4 uppercase">
               <span className="text-yellow-400">Dwain</span> Chambers
             </h1>
@@ -38,7 +38,7 @@ const DwainChambersBio = () => {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {[
-                "9.97s 100m PB",
+                "9.87s 100m PB",
                 "50+ sub-10s races",
                 "European Record Holder",
                 "World Masters Champion",
@@ -60,7 +60,7 @@ const DwainChambersBio = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {[
-              { value: "9.97s", label: "100m Personal Best" },
+              { value: "9.87s", label: "100m Personal Best" },
               { value: "6.42s", label: "60m World Medalist" },
               { value: "20+", label: "Years Elite Experience" },
               { value: "13", label: "World-Class Coaches Trained Under" },
@@ -87,14 +87,15 @@ const DwainChambersBio = () => {
               </h2>
               <ul className="space-y-4 text-gray-700">
                 {[
-                  "Youngest British athlete to break 10 seconds in the 100m (age 20)",
-                  "European 100m Record Holder (9.97s held for 8 years)",
-                  "World Junior 100m Record Holder (10.06s in 1997)",
-                  "Competed in 3 Olympic Games (2000, 2008, 2012)",
-                  "World Indoor 60m Silver Medalist (2003)",
+                  "Youngest British athlete to break 10 seconds in the 100m",
+                  "European 100m Record Holder (9.87s held for 8 years)",
+                  "World Junior 100m Record Holder (10.06s)",
+                  "Competed in 2 Olympic Games (2000, 2012)",
+                  "World Indoor 60m Silver Medalist (2010)",
                   "European 100m Champion (2002)",
-                  "World Masters 60m Record Holder (6.81s age 40)",
+                  "World Masters 60m Record Holder (6.81s age 46)",
                   "Only sprinter to race both Usain Bolt and Asafa Powell in their prime",
+                  "Only athlete to break 10 seconds in the 100m in 3 separate decades",
                 ].map((highlight, index) => (
                   <li key={index} className="flex">
                     <span className="text-yellow-500 mr-2">•</span>
@@ -171,7 +172,7 @@ const DwainChambersBio = () => {
                   { year: "2008", event: "Olympic Games (Beijing)" },
                   { year: "2012", event: "Olympic Games (London)" },
                   { year: "2018", event: "World Masters Record (6.81s)" },
-                  { year: "2020", event: "Founded XLR8 Training" },
+                  { year: "2025", event: "Participation in XLR8 Training" },
                 ].map((item, index) => (
                   <div key={index} className="flex">
                     <div className="font-bold text-yellow-600 w-12">
@@ -193,11 +194,11 @@ const DwainChambersBio = () => {
               </h3>
               <ul className="space-y-2">
                 {[
-                  "UK Athletics Level 4 Performance Coach",
-                  "IAAF Elite Sprint Certification",
-                  "NASM Performance Enhancement Specialist",
-                  "Precision Nutrition Level 1",
-                  "World Athletics Level 5 (pending)",
+                  "England Athletics speed coach",
+                  "First Aid qualified",
+                  "Safe guarding qualified",
+                  "Level 3 Personal training qualification ",
+                  "DBS qualified",
                 ].map((cert, index) => (
                   <li key={index} className="flex">
                     <span className="text-yellow-500 mr-2">•</span>

@@ -54,7 +54,7 @@ const Navigation = () => {
       name: "About",
       href: "/about",
       subItems: [
-        { name: "Dwain Chambers", href: "/event-host/dwain-chambers" },
+        { name: "Dwain Chambers", href: "/event-hosts/dwain-chambers" },
         { name: "Our Team", href: "/about#team" }
       ]
     },

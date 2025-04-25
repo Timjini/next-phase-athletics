@@ -10,14 +10,14 @@ const Contact = () => {
     lng: 2.3522,
   };
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#09131D] to-[#0046CC] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-b from-black to-blue-900 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto pt-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+          <h1 className="text-3xl font-extrabold text-gray-300 sm:text-4xl">
             Contact Us
           </h1>
-          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-400 sm:mt-4">
             We&apos;d love to hear from you! Get in touch with our team.
           </p>
         </div>
@@ -27,7 +27,7 @@ const Contact = () => {
           <div className="space-y-8">
             {/* Contact Information */}
             <div className=" p-6 rounded-lg shadow-md">
-              <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              <h2 className="text-2xl font-bold text-gray-300 mb-6">
                 Our Information
               </h2>
 
@@ -55,7 +55,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-lg font-medium text-gray-900">Address</p>
+                    <p className="text-lg font-bold text-gray-400 uppercase">Address</p>
                     <p className="text-base text-gray-500">
                       3500 Martens Street
                     </p>
@@ -82,7 +82,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-lg font-medium text-gray-900">Phone</p>
+                    <p className="text-lg font-bold text-gray-300 uppercase">Phone</p>
                     <p className="text-base text-gray-500">(815) 556-8037</p>
                   </div>
                 </div>
@@ -104,7 +104,7 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div className="ml-3">
-                    <p className="text-lg font-medium text-gray-900">Email</p>
+                    <p className="text-lg font-bold text-gray-400">Email</p>
                     <p className="text-base text-gray-500">info@nxtphs.com</p>
                   </div>
                 </div>
@@ -115,7 +115,7 @@ const Contact = () => {
 
           {/* Right Column - Contact Form */}
           <div className=" p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+            <h2 className="text-2xl font-bold text-gray-300 mb-6">
               Send Us a Message
             </h2>
             <ContactForm />

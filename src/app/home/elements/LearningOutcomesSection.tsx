@@ -27,8 +27,8 @@ const LearningOutcomesSection: React.FC = () => {
     },
     {
       icon: <ChartBarIcon className="h-8 w-8 text-yellow-500" />,
-      title: "Performance Nutrition",
-      description: "Fueling strategies for training and competition from sports dietitians"
+      title: "Elite Guidance",
+      description: "Personalized Guidance to help athletes achieve their ultimate GOAL."
     },
     {
       icon: <QuestionMarkCircleIcon className="h-8 w-8 text-yellow-500" />,
@@ -82,9 +82,9 @@ const LearningOutcomesSection: React.FC = () => {
           </h4>
           <div className="flex flex-wrap justify-center gap-4">
             <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">Custom Training Plan</span>
-            <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">Video Analysis Report</span>
-            <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">Nutrition Guide</span>
-            <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">XLR8 Training Kit</span>
+            <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">Professional Training</span>
+            <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">Elite Guidance</span>
+            <span className="bg-white px-4 py-2 rounded-full shadow-sm font-medium">XLR8 Care Kit</span>
           </div>
         </div>
       </div>
