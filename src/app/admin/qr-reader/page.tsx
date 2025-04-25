@@ -67,15 +67,33 @@ export default function QRScannerPage() {
     }
   };
 
+
   // Clear all timeouts on unmount
   useEffect(() => {
     return () => {
-      const timeoutId = errorTimeoutRef.current;
-      if (timeoutId) clearTimeout(timeoutId);
+      const localTimeoutId = errorTimeoutRef.current;
+      if (localTimeoutId) {
+        clearTimeout(localTimeoutId);
+      }
       if (scannerRef.current) {
         scannerRef.current.clear().catch(console.error);
       }
     };
+  }, []);
+
+  const requestCameraPermission = async () => {
+    try {
+      await navigator.mediaDevices.getUserMedia({ video: true });
+      console.log('Camera permission granted');
+      startScanner();
+    } catch (err) {
+      console.error('Camera permission denied or error:', err);
+      toast.error('Camera permission is required to scan QR codes.');
+    }
+  };
+  
+  useEffect(() => {
+    requestCameraPermission();
   }, []);
 
   const startScanner = async () => {
