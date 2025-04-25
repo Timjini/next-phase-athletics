@@ -71,6 +71,7 @@ export default function QRScannerPage() {
   // Clear all timeouts on unmount
   useEffect(() => {
     return () => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       const localTimeoutId = errorTimeoutRef.current;
       if (localTimeoutId) {
         clearTimeout(localTimeoutId);

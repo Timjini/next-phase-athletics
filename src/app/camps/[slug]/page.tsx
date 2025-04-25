@@ -35,8 +35,8 @@ export default function Page() {
   }
 
   return (
-    <section className="bg-gradient-to-t  from-[#0046CC] to-[#09131D] min-h-[75vh] pb-12 appHero m-0 p-0">
-      <div className="pt-4 lg:mt-8 relative items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid xl:grid-cols-2 sm:py-8 lg:px-6 rounded-lg ">
+    <section className="bg-gradient-to-b from-black to-blue-900 min-h-[75vh] pb-12 appHero m-0 p-0">
+      <div className="campSection lg:mt-8 relative items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid xl:grid-cols-2 sm:py-8 lg:px-6 rounded-lg ">
         <div className="fixed bottom-0 right-0 p-4 z-50">
           <CampDetailsModal description={campProgram?.description || ""} />
         </div>

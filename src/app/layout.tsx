@@ -36,6 +36,7 @@ const openSans = Open_Sans({
   display: "swap",
 });
 
+
 export default function RootLayout({
   children,
 }: {
