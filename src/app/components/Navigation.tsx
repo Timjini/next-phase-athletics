@@ -1,45 +1,198 @@
-// components/Navbar.tsx
+// glassMorphicNAvigation
 "use client";
 
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
-import {
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
+  const dropdownRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const toggleMenu = () => setMenuOpen((prev) => !prev);
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenDropdown(null);
+  }, [pathname]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const clickedInside = Object.values(dropdownRefs.current).some((ref) =>
+        ref?.contains(event.target as Node)
+      );
+      if (!clickedInside) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDropdown = (e: React.MouseEvent, itemName: string) => {
+    e.stopPropagation();
+    setOpenDropdown(openDropdown === itemName ? null : itemName);
+  };
+
+  const navItems = [
+    {
+      id: "camps",
+      name: "Camps",
+      href: "/camps",
+      subItems: [
+        { name: "XLR8 with Dwain", href: "/camps/xlr8" },
+        // { name: "All Camp Hosts", href: "/camps/hosts" }
+      ]
+    },
+    {
+      id: "about",
+      name: "About",
+      href: "/about",
+      subItems: [
+        { name: "Dwain Chambers", href: "/event-host/dwain-chambers" },
+        { name: "Our Team", href: "/about#team" }
+      ]
+    },
+    { id: "contact", name: "Contact", href: "/contact" }
+  ];
 
   return (
-    <nav className="bg-gradient-to-t from-[#09131D] to-[#00215f] text-white px-6 md:px-8 py-4 flex items-center justify-between relative z-30 glassMorphicNAvigation">
-      {/* App name */}
-      <div className="text-xl font-bold">
-        <Link href="/" className="hover:text-gray-300 transition">NextPhase</Link>
+    <nav className="w-full glassMorphicNAvigation text-white px-6 md:px-8 py-4 flex items-center justify-between z-50 fixed top-0 shadow-lg">
+      {/* Logo */}
+      <Link href="/" className="text-xl font-bold hover:text-yellow-400 transition-colors">
+        NextPhase
+      </Link>
+
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center space-x-8">
+        {navItems.map((item) => (
+          <div
+            key={item.id}
+            className="relative"
+            ref={(el) => {
+              dropdownRefs.current[item.id] = el;
+            }}
+          >
+            {item.subItems ? (
+              <>
+                <button
+                  onClick={(e) => toggleDropdown(e, item.id)}
+                  className="flex items-center hover:text-yellow-400 transition-colors"
+                >
+                  {item.name}
+                  {openDropdown === item.id ? (
+                    <ChevronUp className="ml-1 h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="ml-1 h-4 w-4" />
+                  )}
+                </button>
+                {openDropdown === item.id && (
+                  <div className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg py-1 z-50">
+                    {item.subItems.map((subItem) => (
+                      <Link
+                        key={subItem.name}
+                        href={subItem.href}
+                        className={`block px-4 py-2 hover:bg-gray-700 ${
+                          pathname === subItem.href ? "text-yellow-400" : ""
+                        }`}
+                      >
+                        {subItem.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </>
+            ) : (
+              <Link
+                href={item.href}
+                className={`hover:text-yellow-400 transition-colors ${
+                  pathname === item.href ? "text-yellow-400" : ""
+                }`}
+              >
+                {item.name}
+              </Link>
+            )}
+          </div>
+        ))}
+
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
+        <SignedOut>
+          <div className="flex space-x-3">
+            <SignInButton mode="modal">
+              <button className="px-4 py-1 border border-white rounded hover:bg-white hover:text-black transition">
+                Sign In
+              </button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <button className="px-4 py-1 border border-white rounded hover:bg-yellow-400 hover:text-black transition">
+                Sign Up
+              </button>
+            </SignUpButton>
+          </div>
+        </SignedOut>
       </div>
 
-      {/* Desktop menu */}
-      <div className="hidden md:flex space-x-6">
-        <Link href="/camps/xlr8" className="hover:text-gray-300 transition" prefetch={false}>Camp</Link>
-        <Link href="/contact" className="hover:text-gray-300 transition">Contact</Link>
+      {/* Mobile Menu */}
+      <div className="flex md:hidden items-center space-x-4">
+        <UserButton afterSignOutUrl="/" />
+        <button onClick={() => setMenuOpen(!menuOpen)} className="text-white focus:outline-none">
+          {menuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
 
-      {/* Burger icon */}
-      <button className="md:hidden" onClick={toggleMenu}>
-        {menuOpen ? <X size={28} /> : <Menu size={28} />}
-      </button>
-
-      {/* Mobile menu overlay */}
       {menuOpen && (
-        <div className="min-h-screen fixed inset-0 bg-gray-900 text-white flex flex-col items-center justify-center space-y-8 text-2xl z-40">
-          <Link href="/camps/xlr8" onClick={() => setMenuOpen(false)}>Camps</Link>
-          <Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link>
+        <div className="md:hidden fixed inset-0 bg-gray-900 text-white flex flex-col items-center justify-center space-y-8 text-2xl z-40 pt-20 min-h-screen">
+          {navItems.map((item) => (
+            <div key={item.id} className="text-center">
+              {item.subItems ? (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setOpenDropdown(openDropdown === item.id ? null : item.id);
+                    }}
+                    className="flex items-center mx-auto"
+                  >
+                    {item.name}
+                    {openDropdown === item.id ? (
+                      <ChevronUp className="ml-1 h-5 w-5" />
+                    ) : (
+                      <ChevronDown className="ml-1 h-5 w-5" />
+                    )}
+                  </button>
+                  {openDropdown === item.id && (
+                    <div className="mt-2 space-y-4 text-xl">
+                      {item.subItems.map((subItem) => (
+                        <Link
+                          key={subItem.name}
+                          href={subItem.href}
+                          className={`block py-2 ${
+                            pathname === subItem.href ? "text-yellow-400" : ""
+                          }`}
+                        >
+                          {subItem.name}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href={item.href}
+                  className={`hover:text-yellow-400 ${pathname === item.href ? "text-yellow-400" : ""}`}
+                >
+                  {item.name}
+                </Link>
+              )}
+            </div>
+          ))}
         </div>
       )}
     </nav>

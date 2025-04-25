@@ -72,19 +72,19 @@ h1 {
 h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  color: var(--text);
+  /* color: var(--text); */
 }
 
 h3 {
   font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  color: var(--accent);
+  /* font-weight: 600; */
+  /* color: var(--accent); */
 }
 
 p {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
-  color: var(--paragraph);
+  /* color: var(--paragraph); */
 }
 
 .appHero {
@@ -120,6 +120,7 @@ p {
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  padding-top: 150px;
 }
 
 @media screen and (max-width: 1100px) {
@@ -202,4 +203,8 @@ nextjs-portal {
 /* Form */
 .text-destructive {
   color: red !important;
+}
+
+.campSection{
+  padding-top: 100px;
 }

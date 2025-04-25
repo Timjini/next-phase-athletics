@@ -53,7 +53,7 @@ const NextPhaseAthletics = () => {
           </div>
         </div>
         <div className="">
-          <h2 className="mb-6 text-4xl mt-2  text-center uppercase">
+          <h2 className="mb-6 text-4xl mt-2  text-center uppercase text-gray-100">
             Speed. Power. Mindset.
           </h2>
           <CarouselOrientation data={paragraphs} />
