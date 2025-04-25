@@ -15,25 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 export default function TermsModal() {
-  const [hasScrolledToEnd, setHasScrolledToEnd] = useState(false);
-  const [hasAccepted, setHasAccepted] = useState(false);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const handleScroll = () => {
-      if (el.scrollHeight - el.scrollTop === el.clientHeight) {
-        setHasScrolledToEnd(true);
-      }
-    };
-
-    el.addEventListener("scroll", handleScroll);
-    return () => el.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const canClose = hasScrolledToEnd && hasAccepted;
 
   return (
     <Dialog>
@@ -44,12 +26,6 @@ export default function TermsModal() {
       </DialogTrigger>
       <DialogContent
         className="max-w-2xl bg-gradient-to-t from-[#09131D] to-[#00215f] text-gray-50"
-        onInteractOutside={(e) => {
-          if (!canClose) e.preventDefault();
-        }}
-        onEscapeKeyDown={(e) => {
-          if (!canClose) e.preventDefault();
-        }}
       >
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">
@@ -158,23 +134,6 @@ export default function TermsModal() {
             </div>
           </div>
         </ScrollArea>
-
-        <div className="flex items-center space-x-2 pt-4">
-          <Checkbox
-            id="accept"
-            checked={hasAccepted}
-            onCheckedChange={(val) => setHasAccepted(!!val)}
-          />
-          <Label htmlFor="accept" className="text-sm">
-            I have read and agree to the terms and conditions
-          </Label>
-        </div>
-
-        <DialogClose asChild disabled={!canClose}>
-          <Button className="mt-4" disabled={!canClose}>
-            Close
-          </Button>
-        </DialogClose>
       </DialogContent>
     </Dialog>
   );

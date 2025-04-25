@@ -25,6 +25,8 @@ import { formatAddress } from "../lib/formatAddress";
 import TermsModal from "../components/modals/TermsModal";
 import PhoneInput from "../components/inputs/PhoneInput";
 import { createCheckoutSession } from "../services/paymentClientService";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import SizeChartModal from "../components/modals/SizeChartModal";
 
 interface CampFormProps {
   campProgram: CampProgram;
@@ -33,6 +35,7 @@ interface CampFormProps {
 export function CampForm({ campProgram }: CampFormProps) {
   const [selectedCampPrice, setSelectedCampPrice] = useState(0);
   const [selectedCampId, setSelectedCampId] = useState("");
+  const [isSizeChartOpen, setIsSizeChartOpen] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -46,9 +49,18 @@ export function CampForm({ campProgram }: CampFormProps) {
         lat: null,
         lng: null,
       },
-      // acceptedTerms: false,
+      tShirtSize: undefined,
+      subscribeToProgram: false,
     },
   });
+
+  const tShirtSizes = [
+    "S",
+    "M",
+    "L",
+    "XL",
+    "XXL",
+  ];
 
   const onSubmit = async (data: FormValues) => {
     console.log("form data", {
@@ -113,7 +125,8 @@ export function CampForm({ campProgram }: CampFormProps) {
                         <RadioGroupItem value={camp.label} />
                       </FormControl>
                       <FormLabel className="font-normal">
-                        {camp.label } - {camp.startDateString} - {camp.endDateString} - ({sessionPeriod(camp.period)})
+                        {camp.label} - {camp.startDateString} -{" "}
+                        {camp.endDateString} - ({sessionPeriod(camp.period)})
                       </FormLabel>
                     </FormItem>
                   ))}
@@ -206,7 +219,42 @@ export function CampForm({ campProgram }: CampFormProps) {
             </FormItem>
           )}
         />
-
+        <FormField
+          control={form.control}
+          name="tShirtSize"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>T-Shirt Size</FormLabel>
+              <div className="flex items-center gap-2">
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select size" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white text-gray-900">
+                    {tShirtSizes.map((size) => (
+                      <SelectItem key={size} value={size} className="hover:bg-gray-200">
+                        {size}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <button
+                  type="button"
+                  onClick={() => setIsSizeChartOpen(true)}
+                  className="text-sm text-blue-400 hover:underline"
+                >
+                  View Size Chart
+                </button>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="acceptedTerms"
@@ -230,6 +278,30 @@ export function CampForm({ campProgram }: CampFormProps) {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="subscribeToProgram"
+          render={({ field }) => (
+            <FormItem className="flex items-center space-x-2">
+              <FormControl>
+                <input
+                  type="checkbox"
+                  checked={field.value}
+                  onChange={(e) => field.onChange(e.target.checked)}
+                  onBlur={field.onBlur}
+                  name={field.name}
+                  ref={field.ref}
+                  className="w-4 h-4"
+                />
+              </FormControl>
+              <FormLabel className="text-sm">
+                Sign me up for the free 12 week program to maximize what I have
+                learned in the Camp
+              </FormLabel>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         <div className="text-lg font-semibold"></div>
         <p className="text-sm text-muted-foreground"></p>
@@ -245,6 +317,10 @@ export function CampForm({ campProgram }: CampFormProps) {
               : "Submit Registration"}
           </span>
         </button>
+        <SizeChartModal 
+          isOpen={isSizeChartOpen}
+          onClose={() => setIsSizeChartOpen(false)}
+        />
       </form>
     </Form>
   );

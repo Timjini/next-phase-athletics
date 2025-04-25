@@ -11,7 +11,9 @@ export const formSchema = z.object({
     lat: z.number().nullable().optional(),
     lng: z.number().nullable().optional(),
   }),
-  acceptedTerms: z.literal(true)
+  acceptedTerms: z.literal(true),
+  tShirtSize: z.enum(["S", "M", "L", "XL", "XXL"]),
+  subscribeToProgram: z.boolean().optional(),
 });
 
 export type FormValues = z.infer<typeof formSchema>;

@@ -3,6 +3,7 @@ import { bookingRepository } from '@/app/repositories/bookingRepository';
 import { NextResponse } from 'next/server';
 
 export const POST = async (request: Request) => {
+  console.log('POST /api/admin/attendance');
   return handleAdminRoute(async (user) => {
     try {
       const body = await request.json();
@@ -10,10 +11,16 @@ export const POST = async (request: Request) => {
       if (!scanData) {
         return NextResponse.json({ message: 'No scan data provided' }, { status: 400 });
       }
+      const booking = await bookingRepository.findByQrCode(scanData);
+      
+      await bookingRepository.updateByQrCode(scanData);
+      
+      if (!booking) {
+        return NextResponse.json({ message: 'No booking found' }, { status: 400 });
+      }
 
-      const booking = await bookingRepository.updateByQrCode(scanData);
-      if (!booking || booking.count === 0) {
-        return NextResponse.json({ message: 'No booking found' }, { status: 404 });
+      if (booking?.qrCodeUsed === true) {
+        return NextResponse.json({ message: 'QR code already used' }, { status: 400 });
       }
 
       return NextResponse.json(booking);
