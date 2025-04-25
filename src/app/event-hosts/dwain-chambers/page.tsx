@@ -151,6 +151,9 @@ const DwainChambersBio = () => {
                 <ul className="my-4 space-y-2">
                   {[
                     "Dan Pfaff",
+                    "Stephen Francis ",
+                    "Glen Mills",
+                    "Stuart McMillan",
                     "UK Athletics national coaching team",
                   ].map((coach, index) => (
                     <li key={index} className="flex">
