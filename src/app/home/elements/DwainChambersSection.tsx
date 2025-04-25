@@ -46,7 +46,7 @@ const DwainChambersSection: React.FC = () => {
         {/* Why He's the Perfect Mentor */}
         <div>
           <h3 className="text-2xl font-bold text-yellow-400 mb-3">
-            Why He&apos;s the Perfect Mentor
+            The Perfect Mentor
           </h3>
           <p className="text-lg">
             Dwain doesn&apos;t just teach speed—he transforms how athletes move, think, and compete. 

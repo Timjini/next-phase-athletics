@@ -5,6 +5,7 @@ import {
   PhoneIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline';
+import { Link } from 'lucide-react';
 
 const TeamSupportSection: React.FC = () => {
   const faqs = [
@@ -141,12 +142,12 @@ const TeamSupportSection: React.FC = () => {
                 ))}
 
                 <div className="pt-4 mt-4 border-t border-gray-200">
-                  <a
-                    href="/faqs"
+                  <Link
+                    href="/contact"
                     className="text-yellow-600 hover:text-yellow-700 font-medium"
                   >
-                    View all FAQs →
-                  </a>
+                    Contact us with any questions →
+                  </Link>
                 </div>
               </div>
             </div>

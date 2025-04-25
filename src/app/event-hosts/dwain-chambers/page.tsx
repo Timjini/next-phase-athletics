@@ -38,7 +38,7 @@ const DwainChambersBio = () => {
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               {[
-                "9.87s 100m PB",
+                "9.97s 100m PB",
                 "50+ sub-10s races",
                 "European Record Holder",
                 "World Masters Champion",
@@ -60,7 +60,7 @@ const DwainChambersBio = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             {[
-              { value: "9.87s", label: "100m Personal Best" },
+              { value: "9.97s", label: "100m Personal Best" },
               { value: "6.42s", label: "60m World Medalist" },
               { value: "20+", label: "Years Elite Experience" },
               { value: "13", label: "World-Class Coaches Trained Under" },
@@ -87,19 +87,46 @@ const DwainChambersBio = () => {
               </h2>
               <ul className="space-y-4 text-gray-700">
                 {[
-                  "Youngest British athlete to break 10 seconds in the 100m",
-                  "European 100m Record Holder (9.87s held for 8 years)",
-                  "World Junior 100m Record Holder (10.06s)",
-                  "Competed in 2 Olympic Games (2000, 2012)",
-                  "World Indoor 60m Silver Medalist (2010)",
-                  "European 100m Champion (2002)",
-                  "World Masters 60m Record Holder (6.81s age 46)",
-                  "Only sprinter to race both Usain Bolt and Asafa Powell in their prime",
-                  "Only athlete to break 10 seconds in the 100m in 3 separate decades",
-                ].map((highlight, index) => (
-                  <li key={index} className="flex">
+                  {
+                    text: "Youngest British athlete to break 10 seconds in the 100m",
+                    class: "font-bold text-gray-800",
+                  },
+                  {
+                    text: "European 100m Record Holder (9.97s held for 8 years)",
+                    class: "italic",
+                  },
+                  {
+                    text: "World Junior 100m Record Holder (10.06s)",
+                    class: "",
+                  },
+                  {
+                    text: "Competed in 2 Olympic Games (2000, 2012)",
+                    class: "underline decoration-yellow-400",
+                  },
+                  {
+                    text: "World Indoor 60m Silver Medalist (2010)",
+                    class: "text-sm text-red-600",
+                  },
+                  {
+                    text: "European 100m Champion (2002)",
+                    class: "font-medium",
+                  },
+                  {
+                    text: "World Masters 60m Record Holder (6.81s age 46)",
+                    class: "text-purple-600",
+                  },
+                  {
+                    text: "Only sprinter to race both Usain Bolt and Asafa Powell in their prime",
+                    class: "border-l-4 border-yellow-500 pl-2",
+                  },
+                  {
+                    text: "Only athlete to break 10 seconds in the 100m in 3 separate decades",
+                    class: "bg-yellow-50 px-2 py-1 rounded",
+                  },
+                ].map((item, index) => (
+                  <li key={index} className={`flex ${item.class}`}>
                     <span className="text-yellow-500 mr-2">•</span>
-                    {highlight}
+                    {item.text}
                   </li>
                 ))}
               </ul>
@@ -219,7 +246,8 @@ const DwainChambersBio = () => {
                     src: "/logos/bbc-sport.png",
                     alt: "BBC Sport",
                     link: "https://www.bbc.com/sport/athletics/47141466",
-                    title: "BBC: Dwain Chambers to race at British Indoor Championships at age 40",
+                    title:
+                      "BBC: Dwain Chambers to race at British Indoor Championships at age 40",
                   },
                   {
                     src: "/logos/espn-logo.webp",
@@ -231,15 +259,16 @@ const DwainChambersBio = () => {
                     src: "/logos/the-guardian-logo.jpeg",
                     alt: "The Guardian",
                     link: "https://www.theguardian.com/sport/2014/jun/29/dwain-chambers-athletics-british-championships",
-                    title: "The Guardian: Dwain Chambers wins a fifth straight British 100m crown at the age of 36",
+                    title:
+                      "The Guardian: Dwain Chambers wins a fifth straight British 100m crown at the age of 36",
                   },
                   {
                     src: "/logos/the-telegraph.png",
                     alt: "The Telegraph",
                     link: "https://www.telegraph.co.uk/usain-bolt-worlds-fastest-man/0/a-tangible-sense-of-excitement-dwain-chambers-on-what-its-like-t/",
-                    title: "Telegraph: Dwain Chambers on what it's like to race Usain Bolt",
+                    title:
+                      "Telegraph: Dwain Chambers on what it's like to race Usain Bolt",
                   },
-
                 ].map((media, index) => (
                   <a
                     key={index}

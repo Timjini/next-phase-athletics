@@ -92,7 +92,7 @@ const MediaSection: React.FC = () => {
                 src={galleryImages[currentImageIndex].src}
                 alt={galleryImages[currentImageIndex].alt}
                 fill
-                className="object-cover"
+                className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, 80vw"
               />
             </div>

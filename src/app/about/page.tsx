@@ -6,6 +6,7 @@ import {
   CalendarIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import SlideInParagraphs from "../components/SlideInParagraphs";
 
 const AboutPage = () => {
   return (
@@ -39,16 +40,7 @@ const AboutPage = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
               Who We Are
             </h2>
-            <p className="text-lg text-gray-700 mb-6">
-              Founded in 2015 by former Olympians, NextPhase Athletics is a
-              premier training organization specializing in speed development
-              and athletic performance.
-            </p>
-            <p className="text-lg text-gray-700 mb-6">
-              Our team comprises world-class coaches, sports scientists, and
-              rehabilitation specialists united by one goal: helping athletes
-              achieve their next-level potential.
-            </p>
+            <SlideInParagraphs />
             <div className="flex flex-wrap gap-4 hidden">
               {[
                 "5 Olympic medalists",
@@ -65,13 +57,13 @@ const AboutPage = () => {
               ))}
             </div>
           </div>
-          <div className="relative h-full rounded-xl overflow-hidden shadow-xl">
+          <div className="relative aspect-square w-full rounded-xl overflow-hidden shadow-xl bg-gradient-to-l from-gray-900 to-black">
             <Image
-              className="w-full h-full object-cover"
+              className="object-contain p-4"
               src="/images/nextPhase-logo-white2.png"
               alt="NextPhase coaching team"
-              layout="fill"
-              objectFit="cover"
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>
