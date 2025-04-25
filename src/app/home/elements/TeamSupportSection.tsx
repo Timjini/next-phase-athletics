@@ -5,6 +5,7 @@ import {
   PhoneIcon,
   QuestionMarkCircleIcon,
 } from '@heroicons/react/24/outline';
+import Link from "next/link";
 
 const TeamSupportSection: React.FC = () => {
   const faqs = [
@@ -53,9 +54,9 @@ const TeamSupportSection: React.FC = () => {
                 <h3 className="text-2xl font-bold text-gray-900">NextPhase</h3>
               </div>
               <p className="text-gray-700">
-                Founded by former Olympians, we&apos;ve trained 150+ elite athletes since 2015.
-                Our sports science approach combines cutting-edge research with proven
-                championship techniques.
+              NextPhase transforms athletes through world-class training camps in speed, agility, and strength—led by elite competitors turned mentors. 
+              Whether you&apos;re a track sprinter, football player, or soccer star, our programs sharpen skills, build explosive power, and forge mental toughness. 
+              We don’t just train bodies; we develop champions’ mindsets. This is where your next level begins.
               </p>
             </div>
 
@@ -141,12 +142,12 @@ const TeamSupportSection: React.FC = () => {
                 ))}
 
                 <div className="pt-4 mt-4 border-t border-gray-200">
-                  <a
-                    href="/faqs"
+                  <Link
+                    href="/contact"
                     className="text-yellow-600 hover:text-yellow-700 font-medium"
                   >
-                    View all FAQs →
-                  </a>
+                    Contact us with any questions →
+                  </Link>
                 </div>
               </div>
             </div>

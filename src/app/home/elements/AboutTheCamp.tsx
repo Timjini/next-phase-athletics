@@ -109,7 +109,7 @@ const AboutCampSection: React.FC = () => {
                 <li className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <span className="text-lg text-gray-500">
-                    <strong>Professional Coaching:</strong> Session with Dwain Chambers, ex-NFL athlete and experienced coaches.
+                    <strong>Professional Coaching:</strong> Hands on with Dwain Chambers, and an ex-NFL athlete, as well as highly experienced coaches.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -133,7 +133,7 @@ const AboutCampSection: React.FC = () => {
         <div className="mt-20 bg-yellow-50 p-8 rounded-xl border-l-4 border-yellow-400">
           <blockquote className="text-center max-w-4xl mx-auto">
             <p className="text-xl md:text-2xl italic text-gray-800 mb-4">
-              &quot;This isn&apos;t just about running faster—it&apos;s about understanding your body&apos;s potential. 
+              &quot;This isn&apos;t just about running faster—it&apos;s about understanding your potential. 
               We&apos;ll break down every element of sprinting and rebuild you as a complete athlete.&quot;
             </p>
             <footer className="font-bold text-gray-500 uppercase text-2xl">— Dwain Chambers</footer>

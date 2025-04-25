@@ -6,6 +6,7 @@ import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Image from "next/image";
 
 const Navigation = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -65,7 +66,17 @@ const Navigation = () => {
     <nav className="w-full glassMorphicNAvigation text-white px-6 md:px-8 py-4 flex items-center justify-between z-50 fixed top-0 shadow-lg">
       {/* Logo */}
       <Link href="/" className="text-xl font-bold hover:text-yellow-400 transition-colors">
-        NextPhase
+      <div className="flex items-center">
+      <Image
+        src="/images/nextPhase-logo-white2.png"
+        alt="Logo"
+        width={50}
+        height={50}
+        className="h-12 w-12 rounded-lg mr-2"
+      />
+      <span className="hidden md:block">NextPhase</span>
+      </div>
+
       </Link>
 
       {/* Desktop Navigation */}
