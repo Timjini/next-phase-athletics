@@ -111,6 +111,8 @@ model Booking {
   qrCodeUsed   Boolean @default(false)
   qrCodeData String? @unique
   qrCodeUrl  String?
+  tShirtSize String?
+  subscribeToProgram Boolean?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

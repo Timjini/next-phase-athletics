@@ -47,6 +47,10 @@ export const sendConfirmationEmail = async ({
         <p style="text-align: center;">
           <img src="${qrCodeUrl}" alt="QR Code" style="width: 200px; height: auto; border-radius: 8px;" />
         </p>
+        <p style="text-align: center; font-size: 14px; color: #777;">
+          If you can’t see the QR code, please click “Load images” or
+          <a href="${qrCodeUrl}" target="_blank">view it here</a>.
+        </p>
         <p style="margin-top: 32px;">If you have any questions or need assistance, feel free to reach out to us.</p>
         <p style="margin-top: 32px;">We look forward to seeing you at the camp!</p>
 

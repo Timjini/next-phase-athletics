@@ -13,9 +13,11 @@
   font-weight: 400;
   src: url(https://fonts.googleapis.com/css2?family=Open+Sans) format('woff2');
 }
+
 /* 
 ---break--- */
 @custom-variant dark (&:is(.dark *));
+
 :root {
   --text: #f5f5f5;
   --paragraph: #c2d2e0;
@@ -57,55 +59,35 @@ html,
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
   overflow-x: hidden;
 }
-/* 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
 h1 {
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
   color: var(--text);
 }
+
 h2 {
   font-family: "Montserrat", sans-serif;
   font-weight: 700;
   color: var(--text);
 }
+
 h3 {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   color: var(--accent);
 }
+
 p {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
   color: var(--paragraph);
 }
 
-.appHero{
+.appHero {
   border-radius: 0px;
   margin-top: -50px;
 }
@@ -119,7 +101,7 @@ p {
   margin-top: -50px;
 }
 
-.glassMorphicSocialMedia{
+.glassMorphicSocialMedia {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   background-color: rgba(9, 19, 29, 0.75);
@@ -127,23 +109,31 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-.glassMorphicNAvigation{
+.glassMorphicNAvigation {
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
   /* border: 1px solid rgba(255, 255, 255, 0.125); */
 }
 
-.heroContent{
+.heroContent {
   display: flex;
   flex-direction: column;
-  gap:20px;
+  gap: 20px;
   align-items: center;
 }
 
 @media screen and (max-width: 1100px) {
-  .glassMorphic {margin-top: 0px;}
-  .heroContent{padding-top: 50px;}
-  .appHero{margin-top: 0px;}
+  .glassMorphic {
+    margin-top: 0px;
+  }
+
+  .heroContent {
+    padding-top: 50px;
+  }
+
+  .appHero {
+    margin-top: 0px;
+  }
 }
 
 /* Button css */
@@ -170,6 +160,7 @@ p {
   transform: translateY(5px);
   transition: 200ms;
 }
+
 /* END BUTTON ============================= */
 
 /* MOTION  ================================ */
@@ -178,6 +169,7 @@ p {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(100%);
   }
@@ -189,9 +181,13 @@ p {
 
 /* END  ================================= */
 
-.promoSection{margin-top: 0%;}
+.promoSection {
+  margin-top: 0%;
+}
 
-.divider{margin-top: -25px;}
+.divider {
+  margin-top: -25px;
+}
 
 nextjs-portal {
   display: none;
@@ -199,11 +195,11 @@ nextjs-portal {
 
 
 /* icons */
-.firstIcons{
+.firstIcons {
   margin-top: -50px;
 }
 
 /* Form */
-.text-destructive{
-  color: red!important;
+.text-destructive {
+  color: red !important;
 }

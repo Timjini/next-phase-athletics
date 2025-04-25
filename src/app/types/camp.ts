@@ -39,13 +39,17 @@ export type CampSession = {
   
   export type Booking = {
     id: string;
+    session: {
+      connect: { id: string };
+    };
     sessionId: string;
-    session: CampSession;
+    stripeId?: string;
   
     amount: number;
     campName: string;
     athleteName: string;
     email: string;
+    phone: string;
     status: 'PENDING' | 'CONFIRMED' | 'CANCELLED';
     paymentStatus: 'UNPAID' | 'PAID' | 'REFUNDED';
     rawData?: string | null;
@@ -54,6 +58,8 @@ export type CampSession = {
     qrCodeUsed: boolean;
     qrCodeData: string;
     qrCodeUrl: string;
+    tShirtSize: string;
+    subscribeToProgram: boolean;
   
     createdAt: Date;
     updatedAt: Date;
@@ -94,6 +100,8 @@ export type CampSession = {
     location: string;
     lat: number;
     lng: number;
+    tShirtSizes: string[];
+    subscribeToProgram: boolean;
     createdAt: Date;
     updatedAt: Date;
   

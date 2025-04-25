@@ -19,9 +19,8 @@ export async function generateAndUploadQRCode(data: string) {
     const s3Key = await uploadBufferToS3(qrBuffer, 'qr-codes');
     
     return {
-      qrCodeData: qrBuffer.toString('base64'),
-      // qrCodeUrl: `/api/qr-code/${encodeURIComponent(s3Key.file_name)}`
-      qrCodeUrl: `https://${process.env.NEW_BUCKET_NAME}.s3.amazonaws.com/${s3Key.file_name}`,
+      qrCodeData: data,
+      qrCodeUrl: `https://${process.env.NEW_BUCKET_NAME}.s3.${process.env.AWS_BUCKET_REGION}.amazonaws.com/${s3Key.file_name}`,
     };
   } catch (error) {
     console.error('Error generating QR code:', error);

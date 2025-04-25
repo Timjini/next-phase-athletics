@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
 
       booking = await getBookingBySessionId(body.sessionId);
 
-      if (booking.status === "CONFIRMED") {
+      if (booking.status === "CONFIRMED" && booking.paymentStatus === "PAID") {
         console.log("Booking is already confirmed");
         return NextResponse.json(
           { error: "Booking is already confirmed" },
@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
         const qrData = `booking:${booking.id}:${Date.now()}`;
         
         const { qrCodeData, qrCodeUrl } = await generateAndUploadQRCode(qrData);
+        console.log("qrcodeurl ------------>", qrCodeUrl);
         console.log("QR code generated successfully");
         
         // Update booking with QR code info
@@ -80,6 +81,8 @@ export async function POST(request: NextRequest) {
     // );
     // const totalAmount = campPriceInCents + stripeFee;
 
+    booking = await getBookingBySessionId(body.sessionId);
+    console.log("Booking details: fetched again", booking);
     try {
       await sendConfirmationEmail({
         id: booking?.id ?? "Unknown ID",

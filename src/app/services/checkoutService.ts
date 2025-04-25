@@ -39,9 +39,11 @@ export const initiateCheckoutWithBooking = async (
       qrCodeUsed: false,
       qrCodeData: "",
       qrCodeUrl: "",
+      tShirtSize: formData.tShirtSize,
+      subscribeToProgram: formData.subscribeToProgram,
     });
   } catch (error) {
-    console.error("⚠️ Failed to create booking after Stripe session.", error);
+    console.error("Failed to create booking after Stripe session.", error);
   }
 
   return session;
