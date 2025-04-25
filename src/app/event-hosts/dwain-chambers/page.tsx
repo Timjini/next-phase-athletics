@@ -92,7 +92,7 @@ const DwainChambersBio = () => {
                     class: "font-bold text-gray-800",
                   },
                   {
-                    text: "European 100m Record Holder (9.97s held for 8 years)",
+                    text: "7 x 100m British Champion.",
                     class: "italic",
                   },
                   {
@@ -104,7 +104,7 @@ const DwainChambersBio = () => {
                     class: "underline decoration-yellow-400",
                   },
                   {
-                    text: "World Indoor 60m Silver Medalist (2010)",
+                    text: "60m World indoor Champion and gold medalist 2010",
                     class: "text-sm text-red-600",
                   },
                   {

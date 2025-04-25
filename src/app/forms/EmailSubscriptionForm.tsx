@@ -59,12 +59,12 @@ export function EmailSubscriptionForm() {
                   <Input
                     type="email"
                     placeholder="Your email"
-                    className="rounded-r-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                    className="rounded-r-none focus-visible:ring-2 focus-visible:ring-yellow-500"
                     {...field}
                   />
                   <Button
                     type="submit"
-                    className="rounded-l-none bg-indigo-600 hover:bg-indigo-700 transition-colors"
+                    className="rounded-l-none bg-yellow-600 hover:bg-yellow-700 transition-colors"
                     disabled={form.formState.isSubmitting}
                   >
                     {form.formState.isSubmitting ? "Subscribing..." : "Subscribe"}
