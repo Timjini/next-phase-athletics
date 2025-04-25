@@ -23,7 +23,7 @@ const AboutPage = () => {
         </div>
         <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            About <span className="text-yellow-400">NextPhase</span> Athletics
+            About <span className="text-yellow-400">NextPhase</span>
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto">
             Elevating athletes through science-backed training and championship
@@ -49,7 +49,7 @@ const AboutPage = () => {
               rehabilitation specialists united by one goal: helping athletes
               achieve their next-level potential.
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 hidden">
               {[
                 "5 Olympic medalists",
                 "12 Certified coaches",
@@ -162,23 +162,23 @@ const AboutPage = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
-              title: "Elite Speed Camp",
+              title: "XLR8 Performance Camp June",
               date: "2025",
-              description: "XLR8 training camp for elite athletes",
+              description: "Summer Camp: XLR8 training camp for elite athletes",
               image: "/images/xlr8.png",
             },
             {
-              title: "NextGen Academy",
-              date: "2022-Present",
+              title: "XLR8 Performance Camp October",
+              date: "2025",
               description: "Year-round development program for youth athletes",
-              image: "/events/nextgen.jpg",
+              image: "/images/xlr8.png",
             },
-            {
-              title: "Champion's Workshop",
-              date: "2021",
-              description: "Mental performance training for competitors",
-              image: "/events/workshop.jpg",
-            },
+            // {
+            //   title: "Champion's Workshop",
+            //   date: "2021",
+            //   description: "Mental performance training for competitors",
+            //   image: "/events/workshop.jpg",
+            // },
           ].map((event, index) => (
             <div key={index} className="rounded-xl overflow-hidden shadow-lg">
               <div className="relative h-48">
@@ -241,22 +241,22 @@ const AboutPage = () => {
           </div>
 
           {/* Partner Logos */}
-          <div className="mt-16">
+          <div className="mt-16 hidden">
             <h3 className="text-xl font-medium text-center mb-8 text-gray-300">
               Trusted by leading organizations
             </h3>
             <div className="flex flex-wrap justify-center gap-8 items-center">
               {[
-                {
-                  partner: "Chambers For Sport",
-                  logo: "/logos/chambers-for-sport.png",
-                },
-                { partner: "Nike", logo: "/logos/nike.png" },
-                { partner: "BBC Sport", logo: "/logos/bbc-sport.png" },
-                {
-                  partner: "Olympic Channel",
-                  logo: "/logos/olympic-channel.png",
-                },
+                // {
+                //   partner: "Chambers For Sport",
+                //   logo: "/logos/chambers-for-sport.png",
+                // },
+                // { partner: "Nike", logo: "/logos/nike.png" },
+                // { partner: "BBC Sport", logo: "/logos/bbc-sport.png" },
+                // {
+                //   partner: "Olympic Channel",
+                //   logo: "/logos/olympic-channel.png",
+                // },
               ].map(({ partner, logo }) => (
                 <div
                   key={partner}

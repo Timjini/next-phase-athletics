@@ -8,11 +8,8 @@ const MediaSection: React.FC = () => {
 
   // Sample media assets
   const galleryImages = [
-    { src: '/media/camp-drills.jpg', alt: 'Athletes practicing sprint drills' },
-    { src: '/media/dwain-coaching.jpg', alt: 'Dwain Chambers providing one-on-one coaching' },
-    { src: '/media/group-training.jpg', alt: 'Group training session at XLR8 camp' },
-    { src: '/media/classroom.jpg', alt: 'Classroom session on sports psychology' },
-    { src: '/media/finish-line.jpg', alt: 'Athletes crossing finish line during time trials' }
+    { src: '/images/training1.webp', alt: 'Athletes practicing sprint drills' },
+    { src: '/images/training2.webp', alt: 'Dwain Chambers providing one-on-one coaching' },
   ];
 
   const nextImage = () => {
@@ -29,32 +26,32 @@ const MediaSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="text-yellow-400">Behind</span> the Scenes
+            <span className="text-yellow-400">XLR8</span> Camp Head Coach
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Get an inside look at the XLR8 training experience
+            Get an inside look at the XLR8 Elite Trainer
           </p>
         </div>
 
         {/* Video Teaser */}
         <div className="mb-20">
           <div 
-            className="relative h-96 rounded-xl overflow-hidden cursor-pointer group"
+            className="relative h-[65vh] rounded-xl overflow-hidden cursor-pointer group"
             onClick={() => setIsVideoPlaying(true)}
           >
             {/* Thumbnail overlay */}
             <Image
-              src="/media/teaser-thumbnail.jpg"
+              src="/images/dwain2.jpg"
               alt="XLR8 Camp teaser video"
               fill
-              className="object-cover"
+              className="object-cover object-top"
             />
             <div className="absolute inset-0 bg-black/40 flex items-center justify-center transition-all group-hover:bg-black/30">
               <div className="bg-yellow-400 p-4 rounded-full">
                 <PlayIcon className="h-12 w-12 text-black" />
               </div>
             </div>
-            <p className="absolute bottom-6 left-6 text-xl font-medium">Watch the Camp Teaser</p>
+            <p className="absolute bottom-6 left-6 text-xl font-medium">Watch Dwain Chambers in ACTION!</p>
           </div>
 
           {/* Video Modal */}
@@ -76,7 +73,7 @@ const MediaSection: React.FC = () => {
                   className="w-full rounded-lg"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <source src="/media/xlr8-teaser.mp4" type="video/mp4" />
+                  <source src="/videos/dwain-sprint.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -86,7 +83,7 @@ const MediaSection: React.FC = () => {
 
         {/* Photo Gallery */}
         <div>
-          <h3 className="text-2xl font-bold mb-8 text-center">Gallery: Past Camp Moments</h3>
+          <h3 className="text-2xl font-bold mb-8 text-center">Gallery: Camp Moments</h3>
           
           <div className="relative">
             {/* Main Image */}

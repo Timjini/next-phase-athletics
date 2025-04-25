@@ -46,19 +46,19 @@ const AboutCampSection: React.FC = () => {
                 <div className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <p className="text-lg text-gray-400">
-                    <strong>Competitive Athletes:</strong> Sprinters, footballers, rugby players looking to shave tenths off their times
+                    <strong>Competitive Athletes:</strong> Track, football, hockey, rugby, basketball, lacrosse, tennis athletes looking to enhance their speed
                   </p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <p className="text-lg text-gray-400">
-                    <strong>Young Sprinters:</strong> Ages 14+ with competitive aspirations
+                    <strong>Athletes:</strong> Middle school, high school , and college.
                   </p>
                 </div>
                 <div className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <p className="text-lg text-gray-400">
-                    <strong>Serious Enthusiasts:</strong> Adults committed to performance transformation
+                    <strong>Professional Athletes.</strong>
                   </p>
                 </div>
               </div>
@@ -83,16 +83,16 @@ const AboutCampSection: React.FC = () => {
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Location:</div>
                   <a className='text-blue-800' href="https://www.google.com/maps?q=Lake+Forest+Academy,+Lake+Forest,+IL" target="_blank" rel="noopener noreferrer">
-                  Lake Forest Academy Track, Illinois, USA
+                  Lake Forest Academy Track, Illinois
                   </a>
                 </div>
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Duration:</div>
-                  <div>5-Day Intensive (8am-4pm daily)</div>
+                  <div>4-Day Intensive</div>
                 </div>
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Capacity:</div>
-                  <div>Limited to 25 athletes per session</div>
+                  <div>Limited</div>
                 </div>
               </div>
             </div>
@@ -109,25 +109,19 @@ const AboutCampSection: React.FC = () => {
                 <li className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <span className="text-lg text-gray-500">
-                    <strong>Personalized Coaching:</strong> Video analysis with Dwain and team
+                    <strong>Professional Coaching:</strong> Session with Dwain Chambers, ex-NFL athlete and experienced coaches.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <span className="text-lg text-gray-500">
-                    <strong>Training Kit:</strong> XLR8 performance shirt, training journal, resistance bands
+                    <strong>Care Kit:</strong> XLR8 performance T-shirt, XLR8 water bottler, XLR8 backpack.
                   </span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <span className="text-lg text-gray-500">
-                    <strong>Nutrition Plan:</strong> Customized fueling strategies
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
-                  <span className="text-lg text-gray-500">
-                    <strong>Post-Camp Support:</strong> 3-month follow-up program
+                    <strong>Post-Camp Support:</strong> 12 weeks follow-up program.
                   </span>
                 </li>
               </ul>

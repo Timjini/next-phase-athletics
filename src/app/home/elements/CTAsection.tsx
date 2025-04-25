@@ -81,9 +81,9 @@ const CTASection: React.FC = () => {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-yellow-500 to-yellow-400">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">
-            Ready to Transform Your Speed?
+            Ready to Elevate Your Game?
           </h2>
-          <div className='mb-4'>
+          <div className='mb-8'>
           <span className="text-xl text-black mb-8 max-w-3xl mx-auto">
             Limited spots available for the next XLR8 training camp
           </span>
@@ -98,9 +98,9 @@ const CTASection: React.FC = () => {
       <div className={`fixed bottom-0 left-0 right-0 bg-black py-4 px-4 shadow-lg transition-transform duration-300 z-50 ${isStickyVisible ? 'translate-y-0' : 'translate-y-full'} md:hidden`}>
         <div className="flex justify-between items-center max-w-7xl mx-auto">
           <p className="text-white font-medium text-sm md:text-base">Limited spots remaining</p>
-          <button className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-6 rounded-full text-sm whitespace-nowrap">
+          <Link href="/camps/xlr8" className="bg-yellow-400 hover:bg-yellow-300 text-black font-bold py-2 px-6 rounded-full text-sm whitespace-nowrap">
             Join Now
-          </button>
+          </Link>
         </div>
       </div>
     </>

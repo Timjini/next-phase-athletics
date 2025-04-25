@@ -9,18 +9,18 @@ import {
 const TeamSupportSection: React.FC = () => {
   const faqs = [
     {
-      question: "What's the athlete-to-coach ratio?",
-      answer: 'We maintain a 5:1 ratio maximum to ensure personalized attention.',
+      question: "Will I be able to aks the Coach questions related to my sport?",
+      answer: 'Yes, you can ask questions while training and during Q&A sessions.',
     },
     {
-      question: 'Is accommodation provided?',
+      question: 'How intense will the training be?',
       answer:
-        'Yes, we partner with nearby athlete-friendly hotels (optional add-on).',
+        'The goal is to push you to your limits. Expect high-intensity sessions with a focus on sprinting techniques, and explosive strength.',
     },
     {
       question: 'Can parents observe sessions?',
       answer:
-        'Morning sessions are open to observers, but training sessions are closed for focus.',
+        'Yes, parents are welcome to observe training sessions.',
     },
   ];
 
@@ -45,12 +45,12 @@ const TeamSupportSection: React.FC = () => {
               <div className="flex items-center gap-4 mb-4">
                 <Image
                   src="/images/nextPhase-logo-white2.png"
-                  alt="NextPhase Athletics"
+                  alt="NextPhase"
                   width={64}
                   height={64}
                   className="object-contain"
                 />
-                <h3 className="text-2xl font-bold text-gray-900">NextPhase Athletics</h3>
+                <h3 className="text-2xl font-bold text-gray-900">NextPhase</h3>
               </div>
               <p className="text-gray-700">
                 Founded by former Olympians, we&apos;ve trained 150+ elite athletes since 2015.
