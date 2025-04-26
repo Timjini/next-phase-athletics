@@ -24,7 +24,7 @@ const AboutCampSection: React.FC = () => {
                 <span className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-3">
                   <span className="text-black font-bold">1</span>
                 </span>
-                What It Is
+                What Will Athletes Do at XLR8?
               </h3>
               <p className="text-lg text-gray-400">
                 An intensive training program that combines elite sprint techniques with 
@@ -40,7 +40,7 @@ const AboutCampSection: React.FC = () => {
                 <span className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-3">
                   <span className="text-black font-bold">2</span>
                 </span>
-                Who It&apos;s For
+                All Athletes Are Welcome
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start">
@@ -78,7 +78,7 @@ const AboutCampSection: React.FC = () => {
               <div className="bg-gray-50 p-6 rounded-xl space-y-4">
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Dates:</div>
-                  <div>Starting on the June 30th, 2025 (Summer Session)</div>
+                  <div>Starting on the June 30th, 2025</div>
                 </div>
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Location:</div>
