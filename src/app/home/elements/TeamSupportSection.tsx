@@ -10,7 +10,7 @@ import Link from "next/link";
 const TeamSupportSection: React.FC = () => {
   const faqs = [
     {
-      question: "Will I be able to aks the Coach questions related to my sport?",
+      question: "Will I be able to ask the Coach questions related to my sport?",
       answer: 'Yes, you can ask questions while training and during Q&A sessions.',
     },
     {
@@ -72,7 +72,7 @@ const TeamSupportSection: React.FC = () => {
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-gray-900">NextPhase presents Dwain Chambers</h3>
-                  <p className="text-yellow-600 font-medium">Head Performance Coach</p>
+                  <p className="text-yellow-600 font-medium"></p>
                 </div>
               </div>
               <p className="text-gray-700">
