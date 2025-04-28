@@ -9,9 +9,9 @@ interface SizeChartModalProps {
 export default function SizeChartModal({ isOpen, onClose }: SizeChartModalProps) {
   return (
     <Dialog open={isOpen} onOpenChange={onClose} >
-      <DialogContent  className="bg-gradient-to-b from-[#0046CC] to-[#09131D]">
+      <DialogContent  className="bg-gradient-to-b from-black to-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-gray-600">T-Shirt Size Chart</DialogTitle>
+          <DialogTitle className="text-gray-50">T-Shirt Size Chart</DialogTitle>
         </DialogHeader>
         <div className="py-4">
           {/* Replace with your actual size chart image */}

@@ -27,18 +27,21 @@ const HeroSection: React.FC = () => {
         {/* Content */}
         <div className="relative z-10 text-center px-6 max-w-6xl mx-auto text-white">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            <span className="text-yellow-400">NextPhase</span> Presents<br/>
+            <span className="text-yellow-400">NextPhase</span> Presents
+            <br />
           </h1>
           <h2 className="text-2xl md:text-4xl font-bold mb-4">
-          Train with <span className="text-yellow-400">Olympic Legend</span>
+            Train with <span className="text-yellow-400">Olympic Legend</span>
             <br />
-            <span className="text-yellow-400 mb-4 text-4xl md:text-6xl font-extrabold leading-tight uppercase">Dwain Chambers</span>
+            <span className="text-yellow-400 mb-4 text-4xl md:text-6xl font-extrabold leading-tight uppercase">
+              Dwain Chambers
+            </span>
           </h2>
-          
+
           <p className="text-xl md:text-xl mb-10 max-w-2xl mx-auto">
-            A once-in-a-lifetime camp designed<br/> 
-            to elevate your speed, strength,
-            and mindset.
+            A once-in-a-lifetime camp designed
+            <br />
+            to elevate your speed, strength, and mindset.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -69,18 +72,18 @@ const HeroSection: React.FC = () => {
 
       {/* Shadcn Modal for Video */}
       <Dialog open={isVideoPlaying} onOpenChange={setIsVideoPlaying}>
-      <DialogContent className="fixed bg-black/90 z-50 flex items-center justify-center p-4 w-[90vw] h-[90vh] max-w-[1200px] max-h-[800px]">
-  <video
-    autoPlay
-    controls
-    className="w-full h-full rounded-lg object-contain"
-    onEnded={() => setIsVideoPlaying(false)}
-  >
-    <source src="/videos/dwain-sprint2.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</DialogContent>
-</Dialog>
+        <DialogContent className="fixed bg-black/90 z-50 flex items-center justify-center p-4 w-[90vw] h-[90vh] max-w-[1200px] max-h-[800px]">
+          <video
+            autoPlay
+            controls
+            className="w-full h-full rounded-lg object-contain"
+            onEnded={() => setIsVideoPlaying(false)}
+          >
+            <source src="/videos/dwain-sprint2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

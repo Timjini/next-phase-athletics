@@ -75,7 +75,7 @@ const ContactForm = () => {
                 <Input 
                   placeholder="Your name" 
                   {...field} 
-                  className="bg-gray-200 text-gray-900"
+                  className="bg-gray-100 text-gray-800 border-none"
                 />
               </FormControl>
               <FormMessage />
@@ -94,7 +94,7 @@ const ContactForm = () => {
                   type="email"
                   placeholder="your@email.com"
                   {...field}
-                  className="bg-gray-200 text-gray-900"
+                  className="bg-gray-100 text-gray-800 border-none"
                 />
               </FormControl>
               <FormMessage />
@@ -109,7 +109,7 @@ const ContactForm = () => {
             <FormItem>
               <FormLabel>Phone</FormLabel>
               <FormControl>
-                <PhoneInput {...field} className="bg-gray-200 text-gray-900" />
+                <PhoneInput {...field} className="bg-gray-100 text-gray-800 border-none" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -126,7 +126,7 @@ const ContactForm = () => {
                 <Textarea
                   placeholder="Your message..."
                   {...field}
-                  className="bg-gray-200 text-gray-900 min-h-[120px]"
+                  className=" min-h-[120px] bg-gray-100 text-gray-800 border-none"
                 />
               </FormControl>
               <FormMessage />

@@ -109,7 +109,7 @@ model Booking {
   acceptedTerms Boolean
   attended AttendanceStatus
   qrCodeUsed   Boolean @default(false)
-  qrCodeData String? @unique
+  qrCodeData String?
   qrCodeUrl  String?
   tShirtSize String?
   subscribeToProgram Boolean?

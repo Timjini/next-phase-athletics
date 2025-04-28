@@ -81,3 +81,47 @@ export const paragraphs = [
   "But our mission is bigger than just physical performance. We believe that mental strength, confidence, and consistency are just as vital as the reps you grind through. That’s why we bring a champion’s mindset into every drill, every session, every day.",
   "At NextPhase, you’re not just working out — you’re leveling up. This is where your next chapter begins. This is where champions start.",
 ];
+
+
+
+export const ContactFaqs = [
+  {
+    question: "How soon can I expect a response?",
+    answer:
+      "We typically respond to all inquiries within 24-48 hours during business days (Monday to Friday).",
+  },
+  {
+    question: "What's the best way to reach customer support?",
+    answer:
+      "For urgent matters, please call our support line at +1 (555) 123-4567. For non-urgent inquiries, the contact form is the most efficient method.",
+  },
+  {
+    question: "Do you have a physical location I can visit?",
+    answer:
+      "Yes! Our headquarters are located at 123 Business Avenue, San Francisco, CA 94107. We're open Monday-Friday from 9AM to 5PM.",
+  },
+  {
+    question: "Can I change or cancel my order after submission?",
+    answer:
+      "Order changes or cancellations must be requested within 1 hour of placement. Please contact us immediately with your order number.",
+  }
+];
+
+export const BookingFAQ  = [
+  {
+    question: "What should I bring?",
+    answer: "Please bring athletic clothing, running shoes, a water bottle, and any personal items you may need. We'll provide all training equipment."
+  },
+  {
+    question: "Is this suitable for beginners?",
+    answer: "Yes! The camp is designed for all fitness levels. Dwain and his team will tailor exercises to each participant's ability."
+  },
+  {
+    question: "Can parents watch?",
+    answer: "Absolutely. We have a designated viewing area for parents and spectators."
+  },
+  {
+    question: "What's the cancellation policy?",
+    answer: "You can cancel up to 14 days before the camp for a full refund. After that, cancellations receive a 50% refund."
+  }
+];

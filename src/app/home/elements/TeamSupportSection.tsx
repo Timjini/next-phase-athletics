@@ -71,7 +71,7 @@ const TeamSupportSection: React.FC = () => {
                   className="rounded-full object-cover"
                 />
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">NextPhase presents Dwain Chambers</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">NextPhase presents <br/> <span className='text-yellow-400'>Dwain Chambers</span></h3>
                   <p className="text-yellow-600 font-medium"></p>
                 </div>
               </div>
