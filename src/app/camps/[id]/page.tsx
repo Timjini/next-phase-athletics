@@ -1,27 +1,20 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
-import { BookingForm } from "../forms/BookingForm";
-import { Grantee } from "../components/booking/Grantee";
-import { Testimonials } from "../components/booking/Testimonials";
-import { ContactCta } from "../components/booking/ContactCta";
-import { CampHeroSection } from "../components/booking/CampHeroSection";
-import { CampDescription } from "../components/booking/CampDescription";
-import { CampForm } from "../forms/CampForm";
-import { usePathname } from "next/navigation";
-import useFetchCampProgram from "../hooks/useFetchCampProgram";
-import Loader from "../components/Loader";
+'use client';
+import React from "react";
 import Link from "next/link";
-import { FAQ } from "../components/common/FAQ";
-import { BookingFAQ } from "../lib/constants";
-import { MapSection } from "../components/contact/MapSection";
+import useFetchCampProgram from "@/app/hooks/useFetchCampProgram";
+import Loader from "@/app/components/Loader";
+import { CampHeroSection } from "@/app/components/booking/CampHeroSection";
+import { Grantee } from "@/app/components/booking/Grantee";
+import { MapSection } from "@/app/components/contact/MapSection";
+import { CampForm } from "@/app/forms/CampForm";
+import { FAQ } from "@/app/components/common/FAQ";
+import { BookingFAQ } from "@/app/lib/constants";
+import { ContactCta } from "@/app/components/booking/ContactCta";
+import { usePathname } from "next/navigation";
 
-const CampBookingPage = () => {
+export default function BookingPage() {
   const pathname = usePathname();
-  //   const slug = pathname?.split("/").pop() || "xlr8";
-  const slug = "xlr8";
-
-  //   const router = useRouter();
+  const slug = pathname?.split("/").pop() || "xlr8";
   const { loading, campProgram } = useFetchCampProgram(slug);
 
   if (loading) {
@@ -61,5 +54,3 @@ const CampBookingPage = () => {
     </div>
   );
 };
-
-export default CampBookingPage;
