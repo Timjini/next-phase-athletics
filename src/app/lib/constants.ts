@@ -89,22 +89,22 @@ export const ContactFaqs = [
     question: "How soon can I expect a response?",
     answer:
       "We typically respond to all inquiries within 24-48 hours during business days (Monday to Friday).",
-  },
-  {
-    question: "What's the best way to reach customer support?",
-    answer:
-      "For urgent matters, please call our support line at +1 (555) 123-4567. For non-urgent inquiries, the contact form is the most efficient method.",
-  },
-  {
-    question: "Do you have a physical location I can visit?",
-    answer:
-      "Yes! Our headquarters are located at 123 Business Avenue, San Francisco, CA 94107. We're open Monday-Friday from 9AM to 5PM.",
-  },
-  {
-    question: "Can I change or cancel my order after submission?",
-    answer:
-      "Order changes or cancellations must be requested within 1 hour of placement. Please contact us immediately with your order number.",
   }
+  // {
+  //   question: "What's the best way to reach customer support?",
+  //   answer:
+  //     "For urgent matters, please call our support line at +1 (555) 123-4567. For non-urgent inquiries, the contact form is the most efficient method.",
+  // },
+  // {
+  //   question: "Do you have a physical location I can visit?",
+  //   answer:
+  //     "Yes! Our headquarters are located at 123 Business Avenue, San Francisco, CA 94107. We're open Monday-Friday from 9AM to 5PM.",
+  // },
+  // {
+  //   question: "Can I change or cancel my order after submission?",
+  //   answer:
+  //     "Order changes or cancellations must be requested within 1 hour of placement. Please contact us immediately with your order number.",
+  // }
 ];
 
 export const BookingFAQ  = [
