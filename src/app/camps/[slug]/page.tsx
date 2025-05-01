@@ -7,6 +7,12 @@ import useFetchCampProgram from "@/app/hooks/useFetchCampProgram";
 import MainButton from "@/app/components/MainButton";
 import { usePathname, useRouter } from "next/navigation";
 import CampDetailsModal from "@/app/components/modals/CampDetailsModal";
+import { CampHeroSection } from "@/app/components/booking/CampHeroSection";
+import { Grantee } from "@/app/components/booking/Grantee";
+import { MapSection } from "@/app/components/contact/MapSection";
+import { FAQ } from "@/app/components/common/FAQ";
+import { BookingFAQ } from "@/app/lib/constants";
+import { ContactCta } from "@/app/components/booking/ContactCta";
 
 export default function Page() {
   const pathname = usePathname();
@@ -35,48 +41,20 @@ export default function Page() {
   }
 
   return (
-    <section className="bg-gradient-to-b from-black to-blue-900 min-h-[75vh] pb-12 appHero m-0 p-0">
-      <div className="campSection lg:mt-8 relative items-center py-8 px-8 mx-auto max-w-screen-xl xl:gap-16 md:grid xl:grid-cols-2 sm:py-8 lg:px-6 rounded-lg ">
-        <div className="fixed bottom-0 right-0 p-4 z-50">
-          <CampDetailsModal description={campProgram?.description || ""} />
-        </div>
-        <div className="pb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">
-            {campProgram.title}
-          </h1>
-          <CampForm campProgram={campProgram} />
-        </div>
-        <div className="flex flex-col items-center justify-center gap-4 px-4">
-          <div className="w-full max-w-[590px]">
-            <Image
-              src={campProgram.imageUrl || "/images/xlr8.png"}
-              alt="XLR8 camp"
-              width={590}
-              height={590}
-              className="w-full h-auto rounded-[10px] mt-4"
-              style={{ border: 0 }}
-            />
-          </div>
-
-          <div className="w-full max-w-[590px]">
-            <div className="mb-4">
-              <span className="text-xl font-semibold text-white">
-                Location : Lake Forest Academy Track
-              </span>
-            </div>
-            <div className="w-full">
-              <iframe
-                className="w-full h-[350px] rounded-[10px]"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                src={`https://www.google.com/maps?q=${campProgram.lat},${campProgram.lng}&z=15&output=embed`}
-              ></iframe>
+    <div className="bg-gray-50 min-h-screen">
+          <CampHeroSection />
+          <Grantee />
+          {/* <CampDescription /> */}
+          <MapSection />
+          <div className= "bg-gradient-to-b from-black to-gray-800 py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+              <CampForm campProgram={campProgram} />
             </div>
           </div>
+          {/* <BookingForm /> */}
+          {/* <Testimonials /> */}
+          <FAQ items={BookingFAQ} />
+          <ContactCta />
         </div>
-      </div>
-    </section>
   );
 }

@@ -46,7 +46,7 @@ const AboutCampSection: React.FC = () => {
                 <div className="flex items-start">
                   <CheckCircleIcon className="h-6 w-6 text-yellow-500 mt-1 mr-3 flex-shrink-0" />
                   <p className="text-lg text-gray-400">
-                    <strong>Competitive Athletes:</strong> Track, football, hockey, rugby, basketball, lacrosse, tennis athletes looking to enhance their speed
+                    <strong>Competitive Athletes:</strong> Track, football, hockey, soccer, rugby, basketball, lacrosse, tennis athletes looking to enhance their speed
                   </p>
                 </div>
                 <div className="flex items-start">

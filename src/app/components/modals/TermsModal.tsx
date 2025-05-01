@@ -15,21 +15,17 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
 export default function TermsModal() {
-
-
   return (
     <Dialog>
       <DialogTrigger asChild>
         <button className="text-sm underline text-yellow-400 hover:text-yellow-500 cursor-pointer">
-          terms and conditions
+          terms and conditions.
         </button>
       </DialogTrigger>
-      <DialogContent
-        className="max-w-2xl bg-gradient-to-t from-[#09131D] to-[#00215f] text-gray-50"
-      >
+      <DialogContent className="max-w-2xl bg-gradient-to-t from-[#09131D] to-[#00215f] text-gray-50">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">
-            NextPhase – Terms and Conditions
+            NextPhase – Terms and Conditions.
           </DialogTitle>
         </DialogHeader>
 
@@ -129,6 +125,16 @@ export default function TermsModal() {
                   By participating, you grant permission for photos or videos of
                   your athlete to be used for promotional purposes by NextPhase
                   unless otherwise stated in writing.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold">7. Camp Registration Form</h3>
+              <ul className="list-disc ml-6 mt-1 space-y-1">
+                <li>
+                  To complete your registration, you must fill out the official
+                  camp attendance form. A link to this form will be sent to your
+                  email after registration.
                 </li>
               </ul>
             </div>
