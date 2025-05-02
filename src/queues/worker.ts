@@ -1,9 +1,9 @@
 import { Worker } from 'bullmq';
 import { cronQueue, connection } from './queue';
-import { fetchPostsHandler, fetchPostsConfig } from '../jobs/fetchPostsJob';
+import { fetchPendingBookingsConfig, fetchPendingBookingsHandler } from '@/jobs/fetchPendingBooking';
 
 const handlerMap: Record<string, () => Promise<void>> = {
-  [fetchPostsConfig.name]: fetchPostsHandler,
+  [fetchPendingBookingsConfig.name]: fetchPendingBookingsHandler,
 };
 
 const worker = new Worker(

@@ -1,13 +1,13 @@
 import { cronQueue } from './queue';
-import { fetchPostsConfig } from '../jobs/fetchPostsJob';
+import { fetchPendingBookingsConfig } from '@/jobs/fetchPendingBooking';
 
 export const registerCronJobs = async () => {
     await cronQueue.add(
-      fetchPostsConfig.name,
+      fetchPendingBookingsConfig.name,
       {},
       {
         repeat: {
-            pattern: fetchPostsConfig.cron,
+          pattern: fetchPendingBookingsConfig.cron,
         },
         removeOnComplete: true,
       }

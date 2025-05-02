@@ -1,4 +1,5 @@
 import { prisma } from '../lib/prisma';
+import { BookingStatus } from '../types/camp';
 
 export const bookingRepository = {
   findById: async (id: string) => {
@@ -31,6 +32,11 @@ export const bookingRepository = {
       include: {
         session: true,
       },
+    });
+  },
+  findPendingPaymentBooking: async (status: BookingStatus) => {
+    return prisma.booking.findMany({
+      where: { status }
     });
   },
   updateByQrCode: async (qrCodeData: string) => {
