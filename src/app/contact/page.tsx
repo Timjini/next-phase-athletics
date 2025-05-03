@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { ContactHeader } from '../components/contact/ContactHeader';
 import { ContactInfo } from '../components/contact/ContactInfo';
