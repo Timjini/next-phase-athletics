@@ -1,25 +1,16 @@
+import { CampSession } from '@/app/types/camp'
 import { useState } from 'react'
 
-type CampSessions = {
-    id: string
-    label: string
-    startDate: string | Date
-    endDate: string | Date
-    availableSlots: number
-    price: number
-    status: 'ACTIVE' | 'INACTIVE' | 'FULL' | 'CANCELLED'
-    period: 'MORNING' | 'AFTERNOON' | 'EVENING'
-  }
 
 type CampSessionsProps = {
-  sessions: CampSessions[]
+  sessions: CampSession[]
 }
 
 const CampSessions = ({ sessions }: CampSessionsProps) => {
   const [editSessionId, setEditSessionId] = useState<string | null>(null)
-  const [editedSession, setEditedSession] = useState<CampSessions | null>(null)
+  const [editedSession, setEditedSession] = useState<CampSession | null>(null)
 
-  const handleEdit = (session: CampSessions) => {
+  const handleEdit = (session: CampSession) => {
     setEditSessionId(session.id)
     setEditedSession({ ...session })
   }
@@ -34,7 +25,7 @@ const CampSessions = ({ sessions }: CampSessionsProps) => {
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    field: keyof CampSessions
+    field: keyof CampSession
   ) => {
     if (editedSession) {
       setEditedSession({

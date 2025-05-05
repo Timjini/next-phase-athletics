@@ -1,15 +1,18 @@
 module.exports = {
     apps: [
       {
-        name: "web-app",
-        script: "node_modules/next/dist/bin/next",
-        args: "start",
+        name: 'next-phase',
+        script: 'npm',
+        args: 'start',
+        env: {
+          PORT: 3000,
+        },
       },
       {
-        name: "worker",
-        script: "worker.ts",
-        interpreter: "node",
-        interpreter_args: "-r tsx",
+        name: 'worker',
+        script: 'worker.ts',
+        interpreter: 'tsx',
+        watch: false, // Optional: disable file watch in prod
       },
     ],
   };
