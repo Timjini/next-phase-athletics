@@ -10,9 +10,8 @@ module.exports = {
       },
       {
         name: 'worker',
-        script: 'worker.ts',
-        interpreter: 'tsx',
-        watch: false, // Optional: disable file watch in prod
+        script: 'tsx worker.ts',
+        watch: false,
       },
     ],
   };
