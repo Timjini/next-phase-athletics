@@ -1,35 +1,26 @@
-// pages/api/athlete-registration.ts
-import { prisma } from "@/app/lib/prisma";
-import { athleteRegistrationSchema } from "@/app/types/athleteRegistrationForm";
-import { NextApiRequest, NextApiResponse } from "next";
+// app/api/athlete-registration/route.ts
+import { NextResponse } from 'next/server';
+import { prisma } from '@/app/lib/prisma';
+import { athleteRegistrationSchema } from '@/app/types/athleteRegistrationForm';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
+export async function POST(request: Request) {
   try {
-    // Validate the request body
-    const validatedData = athleteRegistrationSchema.parse(req.body);
-
-    // Convert date string to Date object
-    const dateOfBirth = new Date(validatedData.dateOfBirth);
-
-    // Create the athlete registration in the database
+    const body = await request.json();
+    console.log("body------>",body)
+    const validatedData = athleteRegistrationSchema.parse(body);
     const registration = await prisma.athleteRegistration.create({
       data: {
         ...validatedData,
-        dateOfBirth,
-        bookingId: req.body.bookingId,
+        bookingId: body.bookingId,
       },
     });
 
-    return res.status(201).json(registration);
+    return NextResponse.json(registration, { status: 201 });
   } catch (error) {
-    console.error("Registration error:", error);
-    return res.status(400).json({ message: "Invalid data", error });
+    console.error('Registration error:', error);
+    return NextResponse.json(
+      { message: 'Invalid data', error: error instanceof Error ? error.message : 'Unknown error' },
+      { status: 400 }
+    );
   }
 }

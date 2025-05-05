@@ -9,10 +9,9 @@ import { toast } from "sonner";
 
 type Props = {
   booking: Booking;
-  onSubmit: (data: AthleteRegistrationFormData) => Promise<void>;
 };
 
-export const AthleteRegistrationForm: React.FC<Props> = ({ booking, onSubmit }) => {
+export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
   const [step, setStep] = React.useState(1);
   
   const {
@@ -22,6 +21,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking, onSubmit }) 
     setValue,
     trigger,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<AthleteRegistrationFormData>({
     resolver: zodResolver(athleteRegistrationSchema),
     defaultValues: {
@@ -76,12 +76,29 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking, onSubmit }) 
 
   const onFormSubmit = async (data: AthleteRegistrationFormData) => {
     try {
-      console.log("submitted data:",data )
-      await onSubmit(data);
+      const updatedData = { 
+        ...data,
+        dateOfBirth: new Date(data.dateOfBirth),
+        bookingId: booking.id,
+      };
+      const response = await fetch('/api/athlete-registration', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send message');
+      }
+      toast.success("Message sent successfully!");
+      reset();
       setStep(prev => prev + 1);
     } catch (error) {
-      console.error("Submission error:", error);
-      toast.error("Someting went Wrong!");
+      console.error("Form submission error:", error);
+      toast.error("Failed to send message. Please try again.");
     }
   };
 

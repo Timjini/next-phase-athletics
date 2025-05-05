@@ -37,17 +37,7 @@ const Page = () => {
       </Head>
 
       {booking ? (
-        <AthleteRegistrationForm
-          booking={booking}
-          onSubmit={async (data) => {
-            try {
-              console.log("Form submitted with data:", data);
-              // Add your form submission logic here
-            } catch (error) {
-              console.error("Error submitting form:", error);
-            }
-          }}
-        />
+        <AthleteRegistrationForm booking={booking} />
       ) : (
         <div className="flex flex-col items-center justify-center h-[60vh] text-center text-gray-600">
           <h2 className="text-2xl font-semibold mb-2">Booking Not Found</h2>

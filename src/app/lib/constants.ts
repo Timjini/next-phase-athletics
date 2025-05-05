@@ -135,7 +135,7 @@ export const schoolYears = [
 ];
 
 export const popularSports = [
-  'Football', 'Basketball', 'Tennis', 'Swimming', 'Athletics',
+  'Football', 'Basketball', 'Tennis', 'soccer', 'Swimming', 'Athletics',
   'Cricket', 'Rugby', 'Hockey', 'Netball', 'Volleyball',
   'Gymnastics', 'Badminton', 'Table Tennis', 'Cycling', 'Other'
 ];
