@@ -2,10 +2,12 @@ import { Worker } from 'bullmq';
 import { cronQueue, connection } from './queue';
 import { fetchPendingBookingsConfig, pendingBookingsReminderHandler } from '@/jobs/pendingBookingReminder';
 import { fetchMissingTokenBookingsConfig, missingTokenBookingHandler } from '@/jobs/missingBookingToken';
+import { athleteRegistrationReminderHandler, fetchAthleteRegistrationConfig } from '@/jobs/athleteRegistrationReminder';
 
 const handlerMap: Record<string, () => Promise<void>> = {
   [fetchPendingBookingsConfig.name]: pendingBookingsReminderHandler,
   [fetchMissingTokenBookingsConfig.name] : missingTokenBookingHandler,
+  [fetchAthleteRegistrationConfig.name]: athleteRegistrationReminderHandler,
 };
 
 const worker = new Worker(

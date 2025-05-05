@@ -3,12 +3,16 @@ import { BookingStatus } from '../types/camp';
 
 export const bookingRepository = {
   findById: async (id: string) => {
-    return prisma.booking.findUnique({ where: { id } });
+    return prisma.booking.findUnique({ where: { id },include: {
+      session: true,
+      athlete_registrations: true,
+    }, });
   },
   findAll: async () => {
     return prisma.booking.findMany({
       include: {
         session: true,
+        athlete_registrations: true,
       },
     });
   },

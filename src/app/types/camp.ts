@@ -20,6 +20,7 @@ export type CampSession = {
 export type Booking = {
   id: string;
   session: CampSession;
+  athlete_registrations?: Partial<AthleteRegistration>[];
   sessionId: string;
   stripeId?: string;
 
@@ -37,6 +38,7 @@ export type Booking = {
   qrCodeUrl: string | null;
   tShirtSize: string | null;
   subscribeToProgram: boolean | null;
+  token: string | null;
 
   createdAt: Date;
   updatedAt: Date;
@@ -103,4 +105,45 @@ export type CampProgramHost = {
   campProgram: CampProgram;
   hostId: string;
   host: Host;
+};
+
+
+export type AthleteRegistration = {
+  id: string;
+  createdAt: Date;
+  updatedAt: Date;
+
+  name: string;
+  dateOfBirth: Date;
+  age: number;
+  gender: string;
+  schoolYear: string;
+  schoolName: string;
+
+  primarySport: string;
+  secondarySport: string | null;
+  athleticLevel: string;
+  goals: string;
+  preferredPosition?: string | null;
+
+  allergies: string;
+  medicalConditions: string;
+  medications?: string | null;
+  injuryHistory?: string | null;
+  emergencyContactName: string;
+  emergencyContactPhone: string;
+  familyDoctor?: string | null;
+  doctorContactInfo?: string | null;
+
+  dietaryRestrictions?: string | null;
+  photoPermission: boolean;
+  hearAboutUs: string;
+  additionalNotes?: string | null;
+
+  infoAccurate: boolean;
+  termsAgreed: boolean;
+  medicalConsent: boolean;
+
+  bookingId: string;
+  booking?: Booking;
 };

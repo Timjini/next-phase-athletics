@@ -1,8 +1,11 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Booking } from "../types/camp";
-import { AthleteRegistrationFormData, athleteRegistrationSchema } from "../types/athleteRegistrationForm";
+import {
+  AthleteRegistrationFormData,
+  athleteRegistrationSchema,
+} from "../types/athleteRegistrationForm";
 import { calculateAge } from "../utils/calculateAge";
 import { popularSports, schoolYears } from "../lib/constants";
 import { toast } from "sonner";
@@ -13,7 +16,7 @@ type Props = {
 
 export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
   const [step, setStep] = React.useState(1);
-  
+
   const {
     register,
     handleSubmit,
@@ -46,56 +49,68 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
   const nextStep = async () => {
     // Validate current step before proceeding
     let fieldsToValidate: (keyof AthleteRegistrationFormData)[] = [];
-    
+
     switch (step) {
       case 1:
-        fieldsToValidate = ['name', 'dateOfBirth', 'age', 'gender', 'schoolYear', 'schoolName'];
+        fieldsToValidate = [
+          "name",
+          "dateOfBirth",
+          "age",
+          "gender",
+          "schoolYear",
+          "schoolName",
+        ];
         break;
       case 2:
-        fieldsToValidate = ['primarySport', 'athleticLevel', 'goals'];
+        fieldsToValidate = ["primarySport", "athleticLevel", "goals"];
         break;
       case 3:
-        fieldsToValidate = ['allergies', 'medicalConditions', 'emergencyContactName', 'emergencyContactPhone'];
+        fieldsToValidate = [
+          "allergies",
+          "medicalConditions",
+          "emergencyContactName",
+          "emergencyContactPhone",
+        ];
         break;
       case 4:
-        fieldsToValidate = ['photoPermission', 'hearAboutUs'];
+        fieldsToValidate = ["photoPermission", "hearAboutUs"];
         break;
     }
 
     const isValid = await trigger(fieldsToValidate);
     if (isValid) {
-      setStep(prev => prev + 1);
+      setStep((prev) => prev + 1);
       window.scrollTo(0, 0);
     }
   };
 
   const prevStep = () => {
-    setStep(prev => prev - 1);
+    setStep((prev) => prev - 1);
     window.scrollTo(0, 0);
   };
 
   const onFormSubmit = async (data: AthleteRegistrationFormData) => {
     try {
-      const updatedData = { 
+      const updatedData = {
         ...data,
         dateOfBirth: new Date(data.dateOfBirth),
         bookingId: booking.id,
       };
-      const response = await fetch('/api/athlete-registration', {
-        method: 'POST',
+      const response = await fetch("/api/athlete-registration", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedData),
       });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to send message');
+        throw new Error(errorData.error || "Failed to send message");
       }
       toast.success("Message sent successfully!");
       reset();
-      setStep(prev => prev + 1);
+      setStep((prev) => prev + 1);
     } catch (error) {
       console.error("Form submission error:", error);
       toast.error("Failed to send message. Please try again.");
@@ -105,22 +120,30 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
       <div className="bg-gray-50 py-4 px-6">
-        <h1 className="text-2xl font-bold text-gray-900">Athlete Registration & Health Information Form</h1>
-        {step < 6 && (
-          <p className="text-yellow-500 mt-1">Step {step} of 5</p>
-        )}
+        <h1 className="text-2xl font-bold text-gray-900">
+          Athlete Registration & Health Information Form
+        </h1>
+        {step < 6 && <p className="text-yellow-500 mt-1">Step {step} of 5</p>}
       </div>
-      
+
       <div className="p-6">
         <form onSubmit={handleSubmit(onFormSubmit)}>
           {step === 1 && (
             <div>
-              <h2 className="text-xl font-semibold mb-4 text-gray-800">Personal Information</h2>
-              <p className="text-gray-600 mb-6">Welcome! Please fill out the form below to register an athlete for our program.</p>
-              
+              <h2 className="text-xl font-semibold mb-4 text-gray-800">
+                Personal Information
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Welcome! Please fill out the form below to register an athlete
+                for our program.
+              </p>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Full Name *
                   </label>
                   <input
@@ -128,11 +151,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     {...register("name")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
-                  {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>}
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.name.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="dateOfBirth" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="dateOfBirth"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Date of Birth *
                   </label>
                   <input
@@ -141,11 +171,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     {...register("dateOfBirth", { valueAsDate: true })}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
-                  {errors.dateOfBirth && <p className="mt-1 text-sm text-red-600">{errors.dateOfBirth.message}</p>}
+                  {errors.dateOfBirth && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.dateOfBirth.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div className="hidden">
-                  <label htmlFor="age" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="age"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Age *
                   </label>
                   <input
@@ -155,11 +192,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     readOnly
                   />
-                  {errors.age && <p className="mt-1 text-sm text-red-600">{errors.age.message}</p>}
+                  {errors.age && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.age.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="gender" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="gender"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Gender *
                   </label>
                   <select
@@ -174,11 +218,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     <option value="Prefer not to say">Prefer not to say</option>
                     <option value="Other">Other</option>
                   </select>
-                  {errors.gender && <p className="mt-1 text-sm text-red-600">{errors.gender.message}</p>}
+                  {errors.gender && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.gender.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="schoolYear" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="schoolYear"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     School Year *
                   </label>
                   <select
@@ -187,15 +238,24 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">Select School Year</option>
-                    {schoolYears.map(year => (
-                      <option key={year} value={year}>{year}</option>
+                    {schoolYears.map((year) => (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
                     ))}
                   </select>
-                  {errors.schoolYear && <p className="mt-1 text-sm text-red-600">{errors.schoolYear.message}</p>}
+                  {errors.schoolYear && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.schoolYear.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div className="md:col-span-2">
-                  <label htmlFor="schoolName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="schoolName"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     School Name *
                   </label>
                   <input
@@ -204,10 +264,14 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     {...register("schoolName")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
-                  {errors.schoolName && <p className="mt-1 text-sm text-red-600">{errors.schoolName.message}</p>}
+                  {errors.schoolName && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.schoolName.message}
+                    </p>
+                  )}
                 </div>
               </div>
-              
+
               <div className="mt-8 flex justify-end">
                 <button
                   type="button"
@@ -219,14 +283,19 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
               </div>
             </div>
           )}
-          
+
           {step === 2 && (
             <div>
-              <h2 className="text-xl font-semibold mb-6 text-gray-800">Sport & Athletic Profile</h2>
-              
+              <h2 className="text-xl font-semibold mb-6 text-gray-800">
+                Sport & Athletic Profile
+              </h2>
+
               <div className="grid grid-cols-1 gap-6">
                 <div>
-                  <label htmlFor="primarySport" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="primarySport"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Primary Sport *
                   </label>
                   <select
@@ -235,15 +304,24 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">Select Primary Sport</option>
-                    {popularSports.map(sport => (
-                      <option key={sport} value={sport}>{sport}</option>
+                    {popularSports.map((sport) => (
+                      <option key={sport} value={sport}>
+                        {sport}
+                      </option>
                     ))}
                   </select>
-                  {errors.primarySport && <p className="mt-1 text-sm text-red-600">{errors.primarySport.message}</p>}
+                  {errors.primarySport && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.primarySport.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="secondarySport" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="secondarySport"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Secondary Sport (if any)
                   </label>
                   <input
@@ -253,9 +331,12 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="athleticLevel" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="athleticLevel"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Athletic Level *
                   </label>
                   <select
@@ -268,11 +349,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
                   </select>
-                  {errors.athleticLevel && <p className="mt-1 text-sm text-red-600">{errors.athleticLevel.message}</p>}
+                  {errors.athleticLevel && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.athleticLevel.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="goals" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="goals"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Current Expectations / Goals *
                   </label>
                   <textarea
@@ -282,11 +370,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="e.g., Improve sprint speed, develop better stamina"
                   />
-                  {errors.goals && <p className="mt-1 text-sm text-red-600">{errors.goals.message}</p>}
+                  {errors.goals && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.goals.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="preferredPosition" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="preferredPosition"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Preferred Position or Role in Sport (if applicable)
                   </label>
                   <input
@@ -297,7 +392,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                   />
                 </div>
               </div>
-              
+
               <div className="mt-8 flex justify-between">
                 <button
                   type="button"
@@ -316,15 +411,23 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
               </div>
             </div>
           )}
-          
+
           {step === 3 && (
             <div>
-              <h2 className="text-xl font-semibold mb-6 text-gray-800">Health & Medical Information</h2>
-              <p className="text-gray-600 mb-6">All information is confidential and used only for program purposes.</p>
-              
+              <h2 className="text-xl font-semibold mb-6 text-gray-800">
+                Health & Medical Information
+              </h2>
+              <p className="text-gray-600 mb-6">
+                All information is confidential and used only for program
+                purposes.
+              </p>
+
               <div className="grid grid-cols-1 gap-6">
                 <div>
-                  <label htmlFor="allergies" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="allergies"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Allergies *
                   </label>
                   <textarea
@@ -334,11 +437,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="List any allergies or write 'None' if applicable"
                   />
-                  {errors.allergies && <p className="mt-1 text-sm text-red-600">{errors.allergies.message}</p>}
+                  {errors.allergies && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.allergies.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="medicalConditions" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="medicalConditions"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Medical Conditions / Health Issues *
                   </label>
                   <textarea
@@ -348,11 +458,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     placeholder="List any medical conditions or write 'None' if applicable"
                   />
-                  {errors.medicalConditions && <p className="mt-1 text-sm text-red-600">{errors.medicalConditions.message}</p>}
+                  {errors.medicalConditions && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.medicalConditions.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="medications" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="medications"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Medications Taken Regularly (if any)
                   </label>
                   <textarea
@@ -363,9 +480,12 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     placeholder="List any medications, dosage, and frequency"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="injuryHistory" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="injuryHistory"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Injury History (last 12 months, if any)
                   </label>
                   <textarea
@@ -376,10 +496,13 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     placeholder="Describe any recent injuries, treatments, and current status"
                   />
                 </div>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="emergencyContactName" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="emergencyContactName"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Emergency Contact Name *
                     </label>
                     <input
@@ -388,11 +511,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                       {...register("emergencyContactName")}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     />
-                    {errors.emergencyContactName && <p className="mt-1 text-sm text-red-600">{errors.emergencyContactName.message}</p>}
+                    {errors.emergencyContactName && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.emergencyContactName.message}
+                      </p>
+                    )}
                   </div>
-                  
+
                   <div>
-                    <label htmlFor="emergencyContactPhone" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="emergencyContactPhone"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Emergency Contact Phone *
                     </label>
                     <input
@@ -401,12 +531,19 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                       {...register("emergencyContactPhone")}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     />
-                    {errors.emergencyContactPhone && <p className="mt-1 text-sm text-red-600">{errors.emergencyContactPhone.message}</p>}
+                    {errors.emergencyContactPhone && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.emergencyContactPhone.message}
+                      </p>
+                    )}
                   </div>
                 </div>
-                
+
                 <div>
-                  <label htmlFor="familyDoctor" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="familyDoctor"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Family Doctor (optional)
                   </label>
                   <input
@@ -416,9 +553,12 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   />
                 </div>
-                
+
                 <div>
-                  <label htmlFor="doctorContactInfo" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="doctorContactInfo"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Doctor Contact Info (optional)
                   </label>
                   <input
@@ -430,7 +570,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                   />
                 </div>
               </div>
-              
+
               <div className="mt-8 flex justify-between">
                 <button
                   type="button"
@@ -449,14 +589,19 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
               </div>
             </div>
           )}
-          
+
           {step === 4 && (
             <div>
-              <h2 className="text-xl font-semibold mb-6 text-gray-800">Additional Information</h2>
-              
+              <h2 className="text-xl font-semibold mb-6 text-gray-800">
+                Additional Information
+              </h2>
+
               <div className="grid grid-cols-1 gap-6">
                 <div>
-                  <label htmlFor="dietaryRestrictions" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="dietaryRestrictions"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Dietary Restrictions (if any)
                   </label>
                   <textarea
@@ -467,32 +612,43 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     placeholder="e.g., Vegetarian, gluten-free, nut allergy, etc."
                   />
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Do you give permission for photos/videos to be taken for program use?
+                    Do you give permission for photos/videos to be taken for
+                    program use?
                   </label>
                   <div className="flex items-start">
-  <div className="flex items-center h-5">
-    <input
-      id="photoPermission"
-      type="checkbox"
-      {...register("photoPermission")}
-      className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-    />
-  </div>
-  <div className="ml-3 text-sm">
-    <label htmlFor="photoPermission" className="font-medium text-gray-700">
-      I give permission for photos/videos to be taken for program use
-    </label>
-  </div>
-</div>
-                {errors.photoPermission && <p className="mt-1 text-sm text-red-600">{errors.photoPermission.message}</p>}
-
+                    <div className="flex items-center h-5">
+                      <input
+                        id="photoPermission"
+                        type="checkbox"
+                        {...register("photoPermission")}
+                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
+                      />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label
+                        htmlFor="photoPermission"
+                        className="font-medium text-gray-700"
+                      >
+                        I give permission for photos/videos to be taken for
+                        program use
+                      </label>
+                    </div>
+                  </div>
+                  {errors.photoPermission && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.photoPermission.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="hearAboutUs" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="hearAboutUs"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     How did you hear about us? *
                   </label>
                   <select
@@ -506,11 +662,18 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     <option value="Referral">Referral</option>
                     <option value="Other">Other</option>
                   </select>
-                  {errors.hearAboutUs && <p className="mt-1 text-sm text-red-600">{errors.hearAboutUs.message}</p>}
+                  {errors.hearAboutUs && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.hearAboutUs.message}
+                    </p>
+                  )}
                 </div>
-                
+
                 <div>
-                  <label htmlFor="additionalNotes" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label
+                    htmlFor="additionalNotes"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
                     Anything else you&apos;d like us to know?
                   </label>
                   <textarea
@@ -522,7 +685,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                   />
                 </div>
               </div>
-              
+
               <div className="mt-8 flex justify-between">
                 <button
                   type="button"
@@ -541,11 +704,13 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
               </div>
             </div>
           )}
-          
+
           {step === 5 && (
             <div>
-              <h2 className="text-xl font-semibold mb-6 text-gray-800">Consent</h2>
-              
+              <h2 className="text-xl font-semibold mb-6 text-gray-800">
+                Consent
+              </h2>
+
               <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
@@ -557,13 +722,21 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label htmlFor="infoAccurate" className="font-medium text-gray-700">
-                      I confirm the above information is accurate and up to date. *
+                    <label
+                      htmlFor="infoAccurate"
+                      className="font-medium text-gray-700"
+                    >
+                      I confirm the above information is accurate and up to
+                      date. *
                     </label>
-                    {errors.infoAccurate && <p className="mt-1 text-sm text-red-600">{errors.infoAccurate.message}</p>}
+                    {errors.infoAccurate && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.infoAccurate.message}
+                      </p>
+                    )}
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -574,13 +747,21 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label htmlFor="termsAgreed" className="font-medium text-gray-700">
-                      I agree to the program&apos;s terms and conditions and liability waiver. *
+                    <label
+                      htmlFor="termsAgreed"
+                      className="font-medium text-gray-700"
+                    >
+                      I agree to the program&apos;s terms and conditions and
+                      liability waiver. *
                     </label>
-                    {errors.termsAgreed && <p className="mt-1 text-sm text-red-600">{errors.termsAgreed.message}</p>}
+                    {errors.termsAgreed && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.termsAgreed.message}
+                      </p>
+                    )}
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -591,14 +772,22 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     />
                   </div>
                   <div className="ml-3 text-sm">
-                    <label htmlFor="medicalConsent" className="font-medium text-gray-700">
-                      I give consent for emergency medical treatment if necessary. *
+                    <label
+                      htmlFor="medicalConsent"
+                      className="font-medium text-gray-700"
+                    >
+                      I give consent for emergency medical treatment if
+                      necessary. *
                     </label>
-                    {errors.medicalConsent && <p className="mt-1 text-sm text-red-600">{errors.medicalConsent.message}</p>}
+                    {errors.medicalConsent && (
+                      <p className="mt-1 text-sm text-red-600">
+                        {errors.medicalConsent.message}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-8 flex justify-between">
                 <button
                   type="button"
@@ -612,13 +801,13 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                   disabled={isSubmitting}
                   className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 disabled:opacity-50"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Submit Registration'}
+                  {isSubmitting ? "Submitting..." : "Submit Registration"}
                 </button>
               </div>
             </div>
           )}
         </form>
-        
+
         {step === 6 && (
           <div className="text-center py-8">
             <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
@@ -636,24 +825,31 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                 />
               </svg>
             </div>
-            <h2 className="mt-3 text-xl font-semibold text-gray-900">Thank you for registering!</h2>
+            <h2 className="mt-3 text-xl font-semibold text-gray-900">
+              Thank you for registering!
+            </h2>
             <p className="mt-2 text-gray-600">
-              You will receive a confirmation email shortly with further details.
+              You will receive a confirmation email shortly with further
+              details.
             </p>
             <p className="mt-2 text-gray-600">
-              If you have questions or need to make changes to your submission, please contact us at{' '}
-              <a href="mailto:info@athleteprogram.com" className="text-blue-600 hover:underline">
+              If you have questions or need to make changes to your submission,
+              please contact us at{" "}
+              <a
+                href="mailto:info@nxtphs.com"
+                className="text-blue-600 hover:underline"
+              >
                 info@athleteprogram.com
-              </a>{' '}
-              or call us at (123) 456-7890.
+              </a>{" "}
+              or call us at (815) 556-8037.
             </p>
-            <div className="mt-6">
+            <div className="mt-6 hidden">
               <button
                 type="button"
                 onClick={() => setStep(1)}
                 className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
-                Register Another Athlete
+                Go Back
               </button>
             </div>
           </div>

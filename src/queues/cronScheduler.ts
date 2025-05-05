@@ -1,6 +1,7 @@
 import { fetchMissingTokenBookingsConfig } from '@/jobs/missingBookingToken';
 import { cronQueue } from './queue';
 import { fetchPendingBookingsConfig } from '@/jobs/pendingBookingReminder';
+import { fetchAthleteRegistrationConfig } from '@/jobs/athleteRegistrationReminder';
 
 export const registerCronJobs = async () => {
     await cronQueue.add(
@@ -19,6 +20,16 @@ export const registerCronJobs = async () => {
       {
         repeat: {
           pattern: fetchMissingTokenBookingsConfig.cron,
+        },
+        removeOnComplete: true,
+      }
+    );
+    await cronQueue.add(
+      fetchAthleteRegistrationConfig.name,
+      {},
+      {
+        repeat: {
+          pattern: fetchAthleteRegistrationConfig.cron,
         },
         removeOnComplete: true,
       }

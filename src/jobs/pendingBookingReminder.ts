@@ -27,5 +27,5 @@ export const pendingBookingsReminderHandler = async () => {
 
 export const fetchPendingBookingsConfig = {
   name: "fetch-pending-bookings",
-  cron: "* * * * *",
+  cron: "0 0 * * *",
 };

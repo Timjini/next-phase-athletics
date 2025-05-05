@@ -12,6 +12,8 @@ const Page = () => {
   const token = pathname?.split("/").pop() || "xlr8";
   const { loading, error, booking } = useFetchBooking(token);
 
+  console.log("booking", booking);
+
   if (loading) {
     return <Loader />;
   }
@@ -26,6 +28,28 @@ const Page = () => {
         >
           Go Back Home
         </Link>
+      </div>
+    );
+  }
+
+  if (
+    booking &&
+    Array.isArray(booking.athlete_registrations) &&
+    booking.athlete_registrations.length > 0
+  ) {
+    return (
+      <div className="min-h-screen bg-gradient-to-b from-black to-gray-800  py-8 px-4 flex flex-col items-center justify-center pt-24">
+        <div className="flex flex-col items-center justify-center h-[60vh] text-center text-gray-50">
+          <h2 className="text-2xl font-semibold mb-2">
+            You Have already Registered 🎉 
+          </h2>
+          <Link
+            href="/"
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          >
+            Go Back Home
+          </Link>
+        </div>
       </div>
     );
   }
