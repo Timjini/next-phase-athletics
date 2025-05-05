@@ -125,3 +125,17 @@ export const BookingFAQ  = [
     answer: "You can cancel up to 14 days before the camp for a full refund. After that, cancellations receive a 50% refund."
   }
 ];
+
+export const schoolYears = [
+  'Year 5', 'Year 6', 'Year 7', 'Year 8', 'Year 9', 
+  'Year 10', 'Year 11', 'Year 12', 'Year 13',
+  'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5',
+  'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10',
+  'Grade 11', 'Grade 12'
+];
+
+export const popularSports = [
+  'Football', 'Basketball', 'Tennis', 'Swimming', 'Athletics',
+  'Cricket', 'Rugby', 'Hockey', 'Netball', 'Volleyball',
+  'Gymnastics', 'Badminton', 'Table Tennis', 'Cycling', 'Other'
+];

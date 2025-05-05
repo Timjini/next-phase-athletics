@@ -6,6 +6,7 @@ import { prisma } from "@/app/lib/prisma";
 import { generateAndUploadQRCode } from "@/app/lib/qrCode";
 import { updateBookingStatus } from "@/app/services/bookingService";
 import { formatDate, sessionPeriod } from "@/app/utils/dateUtils";
+import { generateBookingToken } from "@/app/utils/token";
 import { NextRequest, NextResponse } from "next/server";
 
 type RequestBody = {
@@ -56,15 +57,15 @@ export async function POST(request: NextRequest) {
         const qrData = `booking:${booking.id}:${Date.now()}`;
         
         const { qrCodeData, qrCodeUrl } = await generateAndUploadQRCode(qrData);
-        console.log("qrcodeurl ------------>", qrCodeUrl);
-        console.log("QR code generated successfully");
+        const token = generateBookingToken(booking.id);
         
         // Update booking with QR code info
         await prisma.booking.update({
           where: { id: booking.id },
           data: {
             qrCodeData,
-            qrCodeUrl
+            qrCodeUrl,
+            token,
           }
         });
     

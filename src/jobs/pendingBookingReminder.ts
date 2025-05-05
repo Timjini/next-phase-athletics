@@ -12,8 +12,8 @@ export const pendingBookingsReminderHandler = async () => {
     bookings.forEach((booking) => {
       if (booking.paymentStatus == "UNPAID" && booking.status == "PENDING") {
         try {
-          const extraBookingInfoEvent = new ExtraBookingInfoEvent();
-          extraBookingInfoEvent.notify(booking);
+          // const extraBookingInfoEvent = new ExtraBookingInfoEvent();
+          // extraBookingInfoEvent.notify(booking);
           console.log(`email sent ${booking.email} `);
         } catch (err) {
           console.error("mail not sent");

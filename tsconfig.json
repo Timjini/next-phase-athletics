@@ -35,9 +35,12 @@
     ".next/types/**/*.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
+, "scripts/backfillTokens.mts"  ],
   "exclude": [
     "node_modules",
     "src/generated"
-  ]
+  ],
+  "ts-node": {
+    "esm": true
+  }
 }

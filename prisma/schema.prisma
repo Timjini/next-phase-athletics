@@ -113,8 +113,10 @@ model Booking {
   qrCodeUrl  String?
   tShirtSize String?
   subscribeToProgram Boolean?
+  token       String?
 
   notifications    NotificationLog[]
+  athlete_registrations    AthleteRegistration[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -217,4 +219,46 @@ model NotificationLog {
   updatedAt  DateTime @updatedAt
 
   @@map("notification_logs")
+}
+
+model AthleteRegistration {
+  id                      String   @id @default(cuid())
+  createdAt               DateTime @default(now())
+  updatedAt               DateTime @updatedAt
+  
+  name                    String
+  dateOfBirth             DateTime
+  age                     Int
+  gender                  String
+  schoolYear              String
+  schoolName              String
+  
+  primarySport            String
+  secondarySport          String?
+  athleticLevel           String
+  goals                   String
+  preferredPosition       String?
+  
+  allergies               String
+  medicalConditions       String
+  medications             String?
+  injuryHistory           String?
+  emergencyContactName    String
+  emergencyContactPhone   String
+  familyDoctor            String?
+  doctorContactInfo       String?
+  
+  dietaryRestrictions     String?
+  photoPermission         Boolean
+  hearAboutUs            String
+  additionalNotes         String?
+  
+  infoAccurate            Boolean @default(false)
+  termsAgreed            Boolean @default(false)
+  medicalConsent         Boolean @default(false)
+
+  bookingId               String
+  booking                 Booking  @relation(fields: [bookingId], references: [id])
+  
+  @@map("athlete_registrations")
 }

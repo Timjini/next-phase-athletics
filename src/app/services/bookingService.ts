@@ -21,6 +21,7 @@ export const createBooking = async (data: {
   qrCodeUrl: string;
   tShirtSize: string;
   subscribeToProgram: boolean;
+  token: string;
 }) => {
   return bookingRepository.create(data);
 };
