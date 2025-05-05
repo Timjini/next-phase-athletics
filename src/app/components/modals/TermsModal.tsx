@@ -19,13 +19,13 @@ export default function TermsModal() {
     <Dialog>
       <DialogTrigger asChild>
         <button className="text-sm underline text-yellow-400 hover:text-yellow-500 cursor-pointer">
-          terms and conditions
+          <span>terms and conditions</span><span className="text-white">,</span>
         </button>
       </DialogTrigger>
       <DialogContent className="max-w-2xl bg-gradient-to-t from-[#09131D] to-[#00215f] text-gray-50">
         <DialogHeader>
           <DialogTitle className="text-xl font-bold">
-            NextPhase – Terms and Conditions
+            NextPhase – Terms and Conditions,
           </DialogTitle>
         </DialogHeader>
 

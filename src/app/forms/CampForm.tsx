@@ -272,7 +272,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                 />
               </FormControl>
               <FormLabel className="text-sm">
-                I accept the <TermsModal />, and I will complete the emailed post registration form.
+                I accept the <TermsModal />and I will complete the emailed post registration form.
               </FormLabel>
               <FormMessage />
             </FormItem>
