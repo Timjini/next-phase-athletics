@@ -29,7 +29,7 @@ const DwainChambersSection: React.FC = () => {
           </h3>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              One of the fastest sprinters in history (9.97s PB).
+              The only sprinter in history to run under 10 seconds over 3 decades.
             </li>
             <li>
               Competed against legends like Usain Bolt in iconic races.

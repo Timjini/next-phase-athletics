@@ -23,7 +23,7 @@ export const athleteInfoReminder = async (booking: Booking): Promise<void> => {
 
         <p><strong>✅ Step: Complete your personal details:</strong></p>
         <p style="text-align: center; margin: 32px 0;">
-          <a href="https://localhost:3000/athlete-form/${token}" style="background-color: #2E86AB; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold;">Fill Out the Form</a>
+          <a href="https://nxtphs.com/athlete-form/${token}" style="background-color: #2E86AB; color: white; padding: 12px 24px; text-decoration: none; border-radius: 4px; font-weight: bold;">Fill Out the Form</a>
         </p>
 
         <p>Your spot at the camp is reserved, but you won’t be able to attend until you complete this form with your personal information.</p>
