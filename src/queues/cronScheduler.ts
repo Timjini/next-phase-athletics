@@ -1,5 +1,5 @@
 import { cronQueue } from './queue';
-import { fetchPendingBookingsConfig } from '@/jobs/fetchPendingBooking';
+import { fetchPendingBookingsConfig } from '@/jobs/pendingBookingReminder';
 
 export const registerCronJobs = async () => {
     await cronQueue.add(

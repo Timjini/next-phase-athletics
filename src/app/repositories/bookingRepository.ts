@@ -6,7 +6,11 @@ export const bookingRepository = {
     return prisma.booking.findUnique({ where: { id } });
   },
   findAll: async () => {
-    return prisma.booking.findMany();
+    return prisma.booking.findMany({
+      include: {
+        session: true,
+      },
+    });
   },
   create: async (data: any) => {
     return prisma.booking.create({ data });
@@ -36,7 +40,10 @@ export const bookingRepository = {
   },
   findPendingPaymentBooking: async (status: BookingStatus) => {
     return prisma.booking.findMany({
-      where: { status }
+      where: { status },
+      include: {
+        session:true,
+      }
     });
   },
   updateByQrCode: async (qrCodeData: string) => {
