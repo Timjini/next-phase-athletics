@@ -114,6 +114,8 @@ model Booking {
   tShirtSize String?
   subscribeToProgram Boolean?
 
+  notifications    NotificationLog[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -201,4 +203,18 @@ model Contact {
   updatedAt DateTime @updatedAt
   
   @@map("contacts")
+}
+
+model NotificationLog {
+  id         String   @id @default(uuid())
+  booking    Booking  @relation(fields: [bookingId], references: [id])
+  bookingId  String
+  eventType  String
+  channel    String
+  toAdmin    Boolean  @default(false)
+  sentAt     DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("notification_logs")
 }

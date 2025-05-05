@@ -1,12 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { CampForm } from "../../forms/CampForm";
 import Loader from "../../components/Loader";
 import useFetchCampProgram from "@/app/hooks/useFetchCampProgram";
 import MainButton from "@/app/components/MainButton";
 import { usePathname, useRouter } from "next/navigation";
-import CampDetailsModal from "@/app/components/modals/CampDetailsModal";
 import { CampHeroSection } from "@/app/components/booking/CampHeroSection";
 import { Grantee } from "@/app/components/booking/Grantee";
 import { MapSection } from "@/app/components/contact/MapSection";
