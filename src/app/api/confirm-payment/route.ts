@@ -162,12 +162,14 @@ async function getBookingBySessionId(stripeId: string): Promise<any> {
     const booking = await prisma.booking.findUnique({
       where: { stripeId },
       include: {
-        session: {
+        campSessions: {
           include: {
-            campProgram: true
-          }
-        }
-      },
+            campProgram: true,
+          },
+        },
+        notifications: true,
+        athlete_registrations: true,
+      }
     });
 
     if (!booking) {
