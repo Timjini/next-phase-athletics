@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const formSchema = z.object({
-  camp: z.string(),
+  camp: z.array(z.string()).nonempty("Please select at least one camp"),
   athleteName: z.string().min(2, "Required"),
   guardianName: z.string().min(2, "Required"),
   email: z.string().email(),

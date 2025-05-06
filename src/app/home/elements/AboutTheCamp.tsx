@@ -78,7 +78,7 @@ const AboutCampSection: React.FC = () => {
               <div className="bg-gray-50 p-6 rounded-xl space-y-4">
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Dates:</div>
-                  <div>Starting on the June 30th, 2025</div>
+                  <div>June 30 - July 3 and July 7 - July 10, 2025</div>
                 </div>
                 <div className="flex">
                   <div className="font-bold w-28 text-gray-400">Location:</div>

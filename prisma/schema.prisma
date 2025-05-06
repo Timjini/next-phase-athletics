@@ -51,7 +51,7 @@ model CampSession {
   campProgram   CampProgram @relation(fields: [campProgramId], references: [id])
   campProgramId String
 
-  bookings Booking[]
+  bookings  Booking[]   @relation("BookingCampSessions")
 
   @@map("camp_sessions")
 }
@@ -94,9 +94,7 @@ enum CampStatus {
 
 model Booking {
   id        String      @id @default(cuid())
-  sessionId String
   stripeId  String  @unique
-  session   CampSession @relation(fields: [sessionId], references: [id])
 
   amount        Float
   campName      String
@@ -115,13 +113,13 @@ model Booking {
   subscribeToProgram Boolean?
   token       String?
 
+  campSessions   CampSession[]  @relation("BookingCampSessions")
   notifications    NotificationLog[]
   athlete_registrations    AthleteRegistration[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([sessionId])
   @@map("bookings")
 }
 

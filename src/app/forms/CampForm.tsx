@@ -25,7 +25,13 @@ import { formatAddress } from "../lib/formatAddress";
 import TermsModal from "../components/modals/TermsModal";
 import PhoneInput from "../components/inputs/PhoneInput";
 import { createCheckoutSession } from "../services/paymentClientService";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import SizeChartModal from "../components/modals/SizeChartModal";
 
 interface CampFormProps {
@@ -39,7 +45,7 @@ export function CampForm({ campProgram }: CampFormProps) {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      camp: "",
+      camp: [],
       athleteName: "",
       guardianName: "",
       email: "",
@@ -54,31 +60,29 @@ export function CampForm({ campProgram }: CampFormProps) {
     },
   });
 
-  const tShirtSizes = [
-    "S",
-    "M",
-    "L",
-    "XL",
-    "XXL",
-  ];
+  const tShirtSizes = ["S", "M", "L", "XL", "XXL"];
 
   const onSubmit = async (data: FormValues) => {
-    console.log("form data", {
-      ...data,
-      price: selectedCampPrice,
-      campId: selectedCampId,
-    });
     try {
+      const selectedSessions = campProgram.sessions.filter((s) =>
+        data.camp.includes(s.id)
+      );
+      const totalPrice = selectedSessions.reduce((acc, s) => acc + s.price, 0);
+
+      console.log("selectedSessions", selectedSessions);
+      console.log("totat price", totalPrice);
+
       const { sessionId } = await createCheckoutSession({
         ...data,
-        price: selectedCampPrice,
-        campId: selectedCampId,
+        campIds: data.camp,
+        campDetails: selectedSessions.map((s) => ({
+          name: s.label,
+          price: s.price,
+        })),
+        price: totalPrice,
       });
 
-      const stripe = await loadStripe(
-        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-      );
-
+      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
       if (!stripe) throw new Error("Stripe failed to load");
 
       await stripe.redirectToCheckout({ sessionId });
@@ -102,36 +106,44 @@ export function CampForm({ campProgram }: CampFormProps) {
               <FormLabel className="text-2xl mb-4 font-bold">
                 Available Dates:
               </FormLabel>
-              <FormControl>
-                <RadioGroup
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    const selectedCamp = campProgram.sessions.find(
-                      (session) => session.label === value
-                    );
-                    setSelectedCampPrice(selectedCamp?.price || 0);
-                    setSelectedCampId(selectedCamp?.id || "");
-                  }}
-                  defaultValue={field.value}
-                  autoFocus
-                  className="grid gap-2"
-                >
-                  {campProgram.sessions.map((camp) => (
-                    <FormItem
-                      key={camp.id}
-                      className="flex items-center space-x-3 space-y-0"
-                    >
-                      <FormControl>
-                        <RadioGroupItem value={camp.label} />
-                      </FormControl>
-                      <FormLabel className="font-normal">
-                        {camp.label} - {camp.startDateString} -{" "}
-                        {camp.endDateString} - ({sessionPeriod(camp.period)})
-                      </FormLabel>
-                    </FormItem>
-                  ))}
-                </RadioGroup>
-              </FormControl>
+              <div className="grid gap-2">
+                {campProgram.sessions.map((camp) => (
+                  <FormItem
+                    key={camp.id}
+                    className="flex items-center space-x-3 space-y-0"
+                  >
+                    <FormControl>
+                      <input
+                        type="checkbox"
+                        value={camp.id}
+                        checked={field.value?.includes(camp.id)}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const newValue = field.value?.includes(value)
+                            ? field.value.filter((v) => v !== value)
+                            : [...(field.value || []), value];
+                          field.onChange(newValue);
+
+                          // Update price
+                          const selectedSessions = campProgram.sessions.filter(
+                            (s) => newValue.includes(s.id)
+                          );
+                          const totalPrice = selectedSessions.reduce(
+                            (acc, s) => acc + s.price,
+                            0
+                          );
+                          setSelectedCampPrice(totalPrice);
+                        }}
+                        className="w-4 h-4"
+                      />
+                    </FormControl>
+                    <FormLabel className="font-normal">
+                      {camp.label} - {camp.startDateString} -{" "}
+                      {camp.endDateString} - ({sessionPeriod(camp.period)})
+                    </FormLabel>
+                  </FormItem>
+                ))}
+              </div>
               <FormMessage />
             </FormItem>
           )}
@@ -237,7 +249,11 @@ export function CampForm({ campProgram }: CampFormProps) {
                   </FormControl>
                   <SelectContent className="bg-white text-gray-900">
                     {tShirtSizes.map((size) => (
-                      <SelectItem key={size} value={size} className="hover:bg-gray-200">
+                      <SelectItem
+                        key={size}
+                        value={size}
+                        className="hover:bg-gray-200"
+                      >
                         {size}
                       </SelectItem>
                     ))}
@@ -272,7 +288,8 @@ export function CampForm({ campProgram }: CampFormProps) {
                 />
               </FormControl>
               <FormLabel className="text-sm">
-                I accept the <TermsModal />and I will complete the emailed post registration form.
+                I accept the <TermsModal />
+                and I will complete the emailed post registration form.
               </FormLabel>
               <FormMessage />
             </FormItem>
@@ -317,7 +334,7 @@ export function CampForm({ campProgram }: CampFormProps) {
               : "Submit Registration"}
           </span>
         </button>
-        <SizeChartModal 
+        <SizeChartModal
           isOpen={isSizeChartOpen}
           onClose={() => setIsSizeChartOpen(false)}
         />
