@@ -7,7 +7,6 @@ export const createBooking = async (data: {
   sessionId?: string;
   stripeId?: string;
   amount: number;
-  campName: string[];
   athleteName: string;
   email: string;
   phone: string;

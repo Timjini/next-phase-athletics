@@ -1,27 +1,8 @@
-"use client";
-
-// import Loader from "@/app/components/Loader";
-// import useFetchBookings from "../hooks/useFetchBookings";
-// import BookingTable from "../_components/ui/BookingTable";
-
-// export default function BookingsPage() {
-//   const { loading, error, bookings } = useFetchBookings();
-
-//   if (loading) return <Loader />;
-//   if (error) return <div>Error: {error}</div>;
-
-//   return (
-//     <div className="p-4">
-//       <h1 className="text-2xl font-bold mb-4">Bookings</h1>
-//       <BookingTable bookings={bookings} loading={loading} error={error} />
-//     </div>
-//   );
-// }
-
 'use client';
 import { AttendanceStatus, Booking, BookingStatus, PaymentStatus } from '@/app/types/camp';
 import { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiEdit, FiTrash2, FiCheck, FiX, FiRefreshCw, FiDownload, FiPrinter } from 'react-icons/fi';
+import useFetchBookings from '../hooks/useFetchBookings';
 
 
 type FilterOptions = {
@@ -34,99 +15,30 @@ type FilterOptions = {
 };
 
 export default function BookingsView() {
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { loading, error, bookings } = useFetchBookings();
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({});
   const [showFilters, setShowFilters] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editForm, setEditForm] = useState<Partial<Booking>>({});
+  const [localBookings, setBookings] = useState<Booking[]>([]);
 
-  // Fetch bookings (replace with actual API call)
-  useEffect(() => {
-    const fetchBookings = async () => {
-      setLoading(true);
-      try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 800));
-        const mockBookings: Booking[] = [
-          // Sample data - replace with real data
-          {
-            id: '1',
-            stripeId: 'pi_123',
-            amount: 199.99,
-            campName: ['Summer Basketball Camp'],
-            athleteName: 'Alex Johnson',
-            email: 'alex@example.com',
-            phone: '555-123-4567',
-            status: 'CONFIRMED',
-            paymentStatus: 'PAID',
-            attended: 'PENDING',
-            qrCodeUsed: true,
-            tShirtSize: 'M',
-            subscribeToProgram: true,
-            session: [
-              {
-                id: 's1',
-                label: 'Session 1',
-                priority: 1,
-                startDate: new Date('2023-06-10'),
-                startDateString: '2023-06-10',
-                endDate: new Date('2023-06-15'),
-                endDateString: '2023-06-15',
-                period: 'Morning',
-                availableSlots: 10,
-                price: 100,
-                status: 'AVAILABLE',
-                campProgramId: '',
-                createdAt: new Date('2025-02-05'),
-                updatedAt: new Date('2025-02-05'),
-              },
-              {
-                id: 's2',
-                label: 'Session 2',
-                priority: 2,
-                startDate: new Date('2023-06-16'),
-                startDateString: '2023-06-16',
-                endDate: new Date('2023-06-20'),
-                endDateString: '2023-06-20',
-                period: 'Afternoon',
-                availableSlots: 15,
-                price: 120,
-                status: 'AVAILABLE',
-                createdAt: new Date('2023-05-01'),
-                updatedAt: new Date('2023-05-15'),
-                campProgramId: 'cp2',
-              },
-            ],
-            createdAt: new Date('2023-06-01'),
-            acceptedTerms: false,
-            qrCodeData: null,
-            qrCodeUrl: null,
-            token: null,
-            updatedAt: new Date('2025-02-05'),
-          },
-          // Add more sample bookings...
-        ];
-        setBookings(mockBookings);
-      } catch (error) {
-        console.error('Failed to fetch bookings:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (!loading && bookings.length > 0 && localBookings.length === 0) {
+    setBookings(bookings);
+  }
 
-    fetchBookings();
-  }, []);
+  if (loading) return <div className='p-6 bg-gray-50 min-h-screen'>Loading...</div>;
+  if (error) return <div className='p-6 bg-gray-50 min-h-screen'>{error}</div>;
+  if (!bookings.length) return <div className='p-6 bg-gray-50 min-h-screen'>Bookings not found</div>;
 
-  // Apply filters
-  const filteredBookings = bookings.filter(booking => {
+  // ✅ Filter bookings
+  const filteredBookings = localBookings.filter((booking: Booking) => {
     if (filterOptions.campName && !booking.campName.includes(filterOptions.campName)) return false;
     if (filterOptions.status && booking.status !== filterOptions.status) return false;
     if (filterOptions.paymentStatus && booking.paymentStatus !== filterOptions.paymentStatus) return false;
     if (filterOptions.attended && booking.attended !== filterOptions.attended) return false;
     if (filterOptions.qrCodeUsed !== undefined && booking.qrCodeUsed !== filterOptions.qrCodeUsed) return false;
-    
+
     if (filterOptions.searchQuery) {
       const query = filterOptions.searchQuery.toLowerCase();
       return (
@@ -137,17 +49,18 @@ export default function BookingsView() {
         (booking.stripeId ?? '').toLowerCase().includes(query)
       );
     }
-    
+
     return true;
   });
-
+  
   const handleStatusUpdate = async (bookingId: string, newStatus: BookingStatus) => {
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 300));
-      setBookings(bookings.map(b => 
-        b.id === bookingId ? { ...b, status: newStatus } : b
-      ));
+      setBookings(prev =>
+        prev.map(b =>
+          b.id === bookingId ? { ...b, status: newStatus } : b
+        )
+      );
     } catch (error) {
       console.error('Failed to update status:', error);
     }
@@ -155,20 +68,20 @@ export default function BookingsView() {
 
   const handleEditSubmit = async () => {
     if (!selectedBooking) return;
-    
+
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 500));
-      setBookings(bookings.map(b => 
-        b.id === selectedBooking.id ? { ...b, ...editForm } : b
-      ));
+      setBookings(prev =>
+        prev.map(b =>
+          b.id === selectedBooking.id ? { ...b, ...editForm } : b
+        )
+      );
       setIsEditing(false);
       setSelectedBooking(null);
     } catch (error) {
       console.error('Failed to update booking:', error);
     }
   };
-
   const uniqueCampNames = [...new Set(bookings.flatMap(b => b.campName))];
 
   return (

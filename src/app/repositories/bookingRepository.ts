@@ -4,14 +4,20 @@ import { BookingStatus } from '../types/camp';
 export const bookingRepository = {
   findById: async (id: string) => {
     return prisma.booking.findUnique({ where: { id },include: {
-      session: true,
+      campSessions: {
+        include: {
+          campProgram: true,
+        },
+      },
+      notifications: true,
       athlete_registrations: true,
-    }, });
+    }, 
+  });
   },
   findAll: async () => {
     return prisma.booking.findMany({
       include: {
-        session: true,
+        campSessions: true,
         athlete_registrations: true,
       },
     });
@@ -24,7 +30,7 @@ export const bookingRepository = {
       where: { id },
       data,
       include: {
-        session: true,
+        campSessions: true,
       },
     });
   },
@@ -38,7 +44,7 @@ export const bookingRepository = {
     return prisma.booking.findFirst({
       where: { qrCodeData },
       include: {
-        session: true,
+        campSessions: true,
       },
     });
   },
@@ -46,7 +52,7 @@ export const bookingRepository = {
     return prisma.booking.findMany({
       where: { status },
       include: {
-        session:true,
+        campSessions: true,
       }
     });
   },

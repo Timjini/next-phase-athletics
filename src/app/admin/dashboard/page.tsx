@@ -3,7 +3,6 @@
 import { useAdminUser } from "@/app/context/AdminUserContext";
 import React from 'react';
 import { FiCalendar, FiDollarSign, FiUsers, FiStar, FiCheckCircle, FiClock, FiAlertCircle } from 'react-icons/fi';
-import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
 import { format, addDays } from 'date-fns';
 import StatCards from "../_components/dashboard/StatCards";
