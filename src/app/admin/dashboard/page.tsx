@@ -19,7 +19,7 @@ ChartJS.register(
 );
 
 // Types
-import { Booking } from "@/app/types/camp";
+import { AttendanceStatus, Booking, BookingStatus, PaymentStatus } from "@/app/types/camp";
 import ChartRow from "../_components/dashboard/ChartRow";
 
 type User = {
@@ -48,13 +48,13 @@ type Rating = {
 // Sample data
 const bookings: Booking[] = [
   {
-    id: '1', status: 'CANCELLED', campName: ['Summer Adventure'], createdAt: new Date(), amount: 120, paymentStatus: 'PAID',
+    id: '1', status: BookingStatus.CANCELLED, campName: ['Summer Adventure'], createdAt: new Date(), amount: 120, paymentStatus: PaymentStatus.PAID,
     session: [],
     athleteName: "",
     email: "",
     phone: null,
     acceptedTerms: false,
-    attended: "PENDING",
+    attended: AttendanceStatus.PENDING,
     qrCodeData: null,
     qrCodeUrl: null,
     tShirtSize: null,
@@ -63,13 +63,13 @@ const bookings: Booking[] = [
     updatedAt: new Date('2025-02-05')
   },
   {
-    id: '2', status: 'CONFIRMED', campName: ['Winter Sports'], createdAt: addDays(new Date(), -5), amount: 150, paymentStatus: 'PAID',
+    id: '2', status: BookingStatus.CONFIRMED, campName: ['Winter Sports'], createdAt: addDays(new Date(), -5), amount: 150, paymentStatus: PaymentStatus.PAID,
     session: [],
     athleteName: "",
     email: "",
     phone: null,
     acceptedTerms: false,
-    attended: "PENDING",
+    attended: AttendanceStatus.PENDING,
     qrCodeData: null,
     qrCodeUrl: null,
     tShirtSize: null,
@@ -78,13 +78,13 @@ const bookings: Booking[] = [
     updatedAt: new Date('2025-02-05')
   },
   {
-    id: '3', status: 'PENDING', campName: ['Spring Break'], createdAt: addDays(new Date(), 7), amount: 100, paymentStatus: 'UNPAID',
+    id: '3', status: BookingStatus.PENDING, campName: ['Spring Break'], createdAt: addDays(new Date(), 7), amount: 100,paymentStatus: PaymentStatus.UNPAID,
     session: [],
     athleteName: "",
     email: "",
     phone: null,
     acceptedTerms: false,
-    attended: "PENDING",
+    attended: AttendanceStatus.PENDING,
     qrCodeData: null,
     qrCodeUrl: null,
     tShirtSize: null,
@@ -93,35 +93,20 @@ const bookings: Booking[] = [
     updatedAt: new Date('2025-02-05')
   },
   {
-    id: '4', status: 'PENDING', campName: ['Summer Adventure'], createdAt: addDays(new Date(), 14), amount: 120, paymentStatus: 'UNPAID',
+    id: '4', status: BookingStatus.PENDING, campName: ['Summer Adventure'], createdAt: addDays(new Date(), 14), amount: 120, paymentStatus: PaymentStatus.UNPAID,
     session: [],
     athleteName: "",
     email: "",
     phone: null,
     acceptedTerms: false,
-    attended: "PENDING",
+    attended: AttendanceStatus.PENDING,
     qrCodeData: null,
     qrCodeUrl: null,
     tShirtSize: null,
     subscribeToProgram: null,
     token: null,
     updatedAt: new Date('2025-02-05')
-  },
-  {
-    id: '5', status: 'CANCELLED', campName: ['Fall Retreat'], createdAt: new Date(), amount: 90, paymentStatus: 'REFUNDED',
-    session: [],
-    athleteName: "",
-    email: "",
-    phone: null,
-    acceptedTerms: false,
-    attended: "PENDING",
-    qrCodeData: null,
-    qrCodeUrl: null,
-    tShirtSize: null,
-    subscribeToProgram: null,
-    token: null,
-    updatedAt: new Date('2025-02-05')
-  },
+  }
 ];
 
 const users: User[] = [
