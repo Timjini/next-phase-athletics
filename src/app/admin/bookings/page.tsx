@@ -169,7 +169,7 @@ export default function BookingsView() {
     }
   };
 
-  const uniqueCampNames = [...new Set(bookings.map(b => b.campName))];
+  const uniqueCampNames = [...new Set(bookings.flatMap(b => b.campName))];
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">

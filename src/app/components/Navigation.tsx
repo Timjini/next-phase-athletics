@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 
 const Navigation = () => {
+  
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
@@ -45,11 +46,11 @@ const Navigation = () => {
     setOpenDropdown(openDropdown === itemName ? null : itemName);
   };
 
-  // Check if the current pathname is within the /admin path
+  // remove navigation from admin panel
   const isAdminPage = pathname.startsWith('/admin');
 
   if (isAdminPage) {
-    return null; // If it's an admin page, return null and hide the navigation
+    return null;
   }
 
   const navItems = [

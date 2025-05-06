@@ -28,11 +28,11 @@ export type Booking = {
   athleteName: string;
   email: string;
   phone: string | null;
-  status: "PENDING" | "CONFIRMED" | "CANCELLED";
-  paymentStatus: "UNPAID" | "PAID" | "REFUNDED";
+  status: BookingStatus;
+  paymentStatus: PaymentStatus;
   rawData?: string | null;
   acceptedTerms: boolean;
-  attended: "PENDING" | "ATTENDED" | "NO_SHOW";
+  attended: AttendanceStatus;
   qrCodeData: string | null;
   qrCodeUrl: string | null;
   tShirtSize: string | null;
