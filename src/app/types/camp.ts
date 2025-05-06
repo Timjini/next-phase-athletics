@@ -38,6 +38,7 @@ export type Booking = {
   tShirtSize: string | null;
   subscribeToProgram: boolean | null;
   token: string | null;
+  qrCodeUsed?: boolean;
 
   createdAt: Date;
   updatedAt: Date;
@@ -165,3 +166,9 @@ export type CheckoutFormData = {
   price: number;
   stripeId: string;
 };
+
+export enum AttendanceStatus {
+  PENDING = "PENDING",
+  ATTENDED = "ATTENDED",
+  NO_SHOW = "NO_SHOW",
+}

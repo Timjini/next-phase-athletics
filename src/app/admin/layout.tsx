@@ -18,9 +18,9 @@ export default async function AdminLayout({
 
   return user ? (
     <AdminUserProvider user={user}>
-      <section className="mt-12 bg-gradient-to-b from-[#0046CC] to-[#09131D] min-h-screen grid grid-cols-6 ">
+      <section className="grid grid-cols-6 max-h-screen overflow-y-auto">
         <SideBar />
-        <main className="mt-12 col-span-6 lg:col-span-5">{children}</main>
+        <main className="my-18 md:my-1 col-span-6 lg:col-span-5">{children}</main>
       </section>
     </AdminUserProvider>
   ) : (

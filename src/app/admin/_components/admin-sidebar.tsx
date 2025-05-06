@@ -2,75 +2,206 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MenuItems } from "@/app/types/common";
+import { 
+  FiHome, 
+  FiCalendar, 
+  FiUsers, 
+  FiBookmark, 
+  FiCode, 
+  FiLogOut,
+  FiChevronLeft,
+  FiMenu
+} from "react-icons/fi";
+
+type MenuItem = {
+  name: string;
+  icon: React.ReactNode;
+  slug: string;
+  subItems?: MenuItem[];
+};
 
 export default function SideBar() {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen, setIsOpen] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const [activeItem, setActiveItem] = useState(pathname);
 
-  const menuItems: MenuItems[] = [
-    { name: 'Dashboard', icon: '🏠', slug: '/admin/dashboard' },
-    { name: 'Camps', icon: '⛺', slug: '/admin/camps' },
-    { name: 'Users', icon: '👥', slug: '/admin/users' },
-    { name: 'Bookings', icon: '📊', slug: '/admin/bookings' },
-    { name: 'Attendance QR', icon: '📱', slug: '/admin/qr-reader' },
-    { name: 'Logout', icon: '🚪', slug: '/logout' },
+  const menuItems: MenuItem[] = [
+    { 
+      name: 'Dashboard', 
+      icon: <FiHome className="w-5 h-5" />, 
+      slug: '/admin/dashboard' 
+    },
+    { 
+      name: 'Camps', 
+      icon: <FiCalendar className="w-5 h-5" />, 
+      slug: '/admin/camps',
+      subItems: [
+        { name: 'All Camps', icon: null, slug: '/admin/camps/all' },
+        { name: 'Create New', icon: null, slug: '/admin/camps/new' },
+        { name: 'Schedules', icon: null, slug: '/admin/camps/schedules' },
+      ]
+    },
+    { 
+      name: 'Users', 
+      icon: <FiUsers className="w-5 h-5" />, 
+      slug: '/admin/users' 
+    },
+    { 
+      name: 'Bookings', 
+      icon: <FiBookmark className="w-5 h-5" />, 
+      slug: '/admin/bookings',
+      subItems: [
+        { name: 'All Bookings', icon: null, slug: '/admin/bookings/all' },
+        { name: 'Reports', icon: null, slug: '/admin/bookings/reports' },
+      ]
+    },
+    { 
+      name: 'Attendance', 
+      icon: <FiCode className="w-5 h-5" />, 
+      slug: '/admin/qr-reader' 
+    },
   ];
 
-  const toggleMenu = () => {
-    setIsOpen((prev) => !prev);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   useEffect(() => {
     setActiveItem(pathname);
   }, [pathname]);
 
+  // Close mobile menu when clicking on a link
+  const handleLinkClick = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
-      {/* Toggle Button - only on mobile */}
-      <div className="absolute lg:hidden right-0 p-4 z-50 bottom-0 lg:top-12 ">
+      {/* Mobile menu button */}
+      <div className="lg:hidden fixed top-4 right-4 z-50">
         <button
-          className="relative group cursor-pointer"
-          onClick={toggleMenu}
-          aria-label="Toggle Sidebar"
+          onClick={toggleMobileMenu}
+          className="p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          aria-label="Toggle menu"
         >
-          <div className="relative flex items-center justify-center rounded-full w-[50px] h-[50px] transform transition-all bg-[#f5f5f5] ring-0 ring-gray-900 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
-            <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 group-focus:-rotate-[45deg] origin-center">
-              <div className="bg-gray-900 h-[2px] w-1/2 rounded transform transition-all duration-300 group-focus:-rotate-90 group-focus:h-[1px] origin-right delay-75 group-focus:-translate-y-[1px]"></div>
-              <div className="bg-gray-900 h-[1px] rounded"></div>
-              <div className="bg-gray-900 h-[2px] w-1/2 rounded self-end transform transition-all duration-300 group-focus:-rotate-90 group-focus:h-[1px] origin-left delay-75 group-focus:translate-y-[1px]"></div>
-            </div>
-          </div>
+          <FiMenu className="w-6 h-6" />
         </button>
       </div>
 
       {/* Sidebar */}
-      <div
-        className={`${
-          isOpen ? 'block' : 'hidden'
-        } lg:block fixed inset-0 w-full h-full lg:static lg:h-auto lg:w-auto col-span-1 bg-gradient-to-t from-[#09131D] to-[#00215f] text-gray-200 pt-12 px-4 z-40`}
-      >
-        <ul>
-          {menuItems.map((item) => (
-            <li key={item.name}>
-              <Link
-                href={item.slug}
-                onClick={() => setActiveItem(item.slug)}
-                passHref
-              >
-                <button
-                  className={`flex items-center w-full p-4 hover:bg-gray-700 transition-colors hover:cursor-pointer px-4 py-2 rounded-sm ${activeItem === item.slug ? 'bg-blue-800' : ''}`}
-                >
-                  <span className="text-xl mr-3">{item.icon}</span>
-                  <span className="text-gray-100">{item.name}</span>
-                </button>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className={`
+        fixed lg:sticky top-0 left-0 h-screen z-40
+        transition-all duration-300 ease-in-out
+        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+        ${isOpen ? 'w-64' : 'w-20'}
+        bg-gradient-to-b from-blue-900 to-blue-800
+        shadow-xl
+      `}>
+        {/* Sidebar header */}
+        <div className={`
+          flex items-center justify-between
+          p-4 border-b border-blue-700
+          ${!isOpen && 'flex-col justify-center gap-2'}
+        `}>
+          {isOpen ? (
+            <h1 className="text-xl font-bold text-white">CampManager</h1>
+          ) : (
+            <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+              CM
+            </div>
+          )}
+          
+          <button
+            onClick={toggleSidebar}
+            className={`
+              p-1 rounded-full hover:bg-blue-700 text-blue-200 hover:text-white
+              transition-colors duration-200
+              ${!isOpen && 'rotate-180'}
+            `}
+            aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
+          >
+            <FiChevronLeft className="w-5 h-5" />
+          </button>
+        </div>
+
+        {/* Menu items */}
+        <nav className="p-4">
+          <ul className="space-y-1">
+            {menuItems.map((item) => (
+              <li key={item.name}>
+                <Link href={item.slug} passHref>
+                  <div
+                    onClick={handleLinkClick}
+                    className={`
+                      flex items-center p-3 rounded-lg
+                      transition-colors duration-200
+                      ${activeItem === item.slug ? 'bg-blue-700 text-white' : 'text-blue-100 hover:bg-blue-700 hover:text-white'}
+                      ${!isOpen && 'justify-center'}
+                    `}
+                  >
+                    <span className={`${isOpen ? 'mr-3' : ''}`}>
+                      {item.icon}
+                    </span>
+                    {isOpen && (
+                      <span className="font-medium">{item.name}</span>
+                    )}
+                  </div>
+                </Link>
+
+                {/* Sub-items */}
+                {isOpen && item.subItems && (
+                  <ul className="ml-8 mt-1 space-y-1">
+                    {item.subItems.map((subItem) => (
+                      <li key={subItem.name}>
+                        <Link href={subItem.slug} passHref>
+                          <div
+                            onClick={handleLinkClick}
+                            className={`
+                              flex items-center p-2 text-sm rounded-lg
+                              transition-colors duration-200
+                              ${activeItem === subItem.slug ? 'bg-blue-600 text-white' : 'text-blue-200 hover:bg-blue-600 hover:text-white'}
+                            `}
+                          >
+                            {subItem.name}
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+
+          {/* Logout button */}
+          <div className="absolute bottom-4 left-0 right-0 px-4">
+            <button
+              className={`
+                flex items-center w-full p-3 rounded-lg
+                transition-colors duration-200
+                text-red-100 hover:bg-red-700 hover:text-white
+                ${!isOpen && 'justify-center'}
+              `}
+            >
+              <FiLogOut className={`w-5 h-5 ${isOpen ? 'mr-3' : ''}`} />
+              {isOpen && <span className="font-medium">Logout</span>}
+            </button>
+          </div>
+        </nav>
       </div>
+
+      {/* Overlay for mobile */}
+      {isMobileMenuOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-30 lg:hidden"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+      )}
     </>
   );
 }

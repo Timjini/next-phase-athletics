@@ -29,7 +29,7 @@ const BookingTable = ({ bookings, loading, error }: BookingTableProps) => {
         return (
           booking.athleteName.toLowerCase().includes(filter.toLowerCase()) ||
           booking.email.toLowerCase().includes(filter.toLowerCase()) ||
-          booking.campName.toLowerCase().includes(filter.toLowerCase()) ||
+          booking.campName.join(" ").toLowerCase().includes(filter.toLowerCase()) ||
           booking.paymentStatus.toLowerCase().includes(filter.toLowerCase())
         );
       });

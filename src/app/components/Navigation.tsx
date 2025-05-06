@@ -1,4 +1,3 @@
-// glassMorphicNAvigation
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -45,6 +44,13 @@ const Navigation = () => {
     e.stopPropagation();
     setOpenDropdown(openDropdown === itemName ? null : itemName);
   };
+
+  // Check if the current pathname is within the /admin path
+  const isAdminPage = pathname.startsWith('/admin');
+
+  if (isAdminPage) {
+    return null; // If it's an admin page, return null and hide the navigation
+  }
 
   const navItems = [
     {

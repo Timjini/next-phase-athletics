@@ -9,6 +9,7 @@ import { LoadingProvider } from "./context/LoadingContext";
 import { GoogleAnalytics } from '@next/third-parties/google'
 
 
+
 export const metadata: Metadata = {
   title: "NextPhase",
   description: "NextPhase",
