@@ -43,15 +43,15 @@ model CampSession {
   endDate        DateTime
   period         SessionPeriod
   availableSlots Int
-  price Float
+  price          Float
   status         CampStatus
   createdAt      DateTime      @default(now())
   updatedAt      DateTime      @updatedAt
 
+  bookings  Booking[]
+
   campProgram   CampProgram @relation(fields: [campProgramId], references: [id])
   campProgramId String
-
-  bookings  Booking[]   @relation("BookingCampSessions")
 
   @@map("camp_sessions")
 }
@@ -94,10 +94,9 @@ enum CampStatus {
 
 model Booking {
   id        String      @id @default(cuid())
-  stripeId  String  @unique
+  stripeId  String      @unique
 
   amount        Float
-  campName      String
   athleteName   String
   email         String
   phone         String?
@@ -105,17 +104,17 @@ model Booking {
   paymentStatus PaymentStatus
   rawData       String?
   acceptedTerms Boolean
-  attended AttendanceStatus
-  qrCodeUsed   Boolean @default(false)
-  qrCodeData String?
-  qrCodeUrl  String?
-  tShirtSize String?
+  attended      AttendanceStatus
+  qrCodeUsed    Boolean @default(false)
+  qrCodeData    String?
+  qrCodeUrl     String?
+  tShirtSize    String?
   subscribeToProgram Boolean?
-  token       String?
+  token String?
 
-  campSessions   CampSession[]  @relation("BookingCampSessions")
-  notifications    NotificationLog[]
-  athlete_registrations    AthleteRegistration[]
+  campSessions   CampSession[]
+  notifications  NotificationLog[]
+  athlete_registrations AthleteRegistration[] 
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

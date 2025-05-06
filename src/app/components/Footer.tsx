@@ -1,9 +1,18 @@
+'use client';
 import Image from 'next/image';
 import React from 'react';
 import { EmailSubscriptionForm } from '../forms/EmailSubscriptionForm';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+  const pathname = usePathname();
+  const isAdminPage = pathname.startsWith('/admin');
+
+  if (isAdminPage) {
+    return null;
+  }
+
   return (
     <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">

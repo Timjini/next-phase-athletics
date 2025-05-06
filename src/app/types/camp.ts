@@ -28,16 +28,17 @@ export type Booking = {
   athleteName: string;
   email: string;
   phone: string | null;
-  status: "PENDING" | "CONFIRMED" | "CANCELLED";
-  paymentStatus: "UNPAID" | "PAID" | "REFUNDED";
+  status: BookingStatus;
+  paymentStatus: PaymentStatus;
   rawData?: string | null;
   acceptedTerms: boolean;
-  attended: "PENDING" | "ATTENDED" | "NO_SHOW";
+  attended: AttendanceStatus;
   qrCodeData: string | null;
   qrCodeUrl: string | null;
   tShirtSize: string | null;
   subscribeToProgram: boolean | null;
   token: string | null;
+  qrCodeUsed?: boolean;
 
   createdAt: Date;
   updatedAt: Date;
@@ -165,3 +166,9 @@ export type CheckoutFormData = {
   price: number;
   stripeId: string;
 };
+
+export enum AttendanceStatus {
+  PENDING = "PENDING",
+  ATTENDED = "ATTENDED",
+  NO_SHOW = "NO_SHOW",
+}

@@ -1,3 +1,4 @@
+import { prisma } from '@/app/lib/prisma';
 import { campProgramRepository } from '@/app/repositories/campProgramRepository';
 import { NextResponse } from 'next/server';
 
@@ -25,7 +26,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'Missing slug' }, { status: 400 });
     }
 
+  
     const campProgram = await campProgramRepository.findBySlug(slug);
+    const test = await prisma.campProgram.findMany({
+      include: {
+        sessions: true,
+      },
+    });
+    console.log(JSON.stringify(test, null, 2));
 
     if (!campProgram) {
       return NextResponse.json({ message: 'Camp program not found' }, { status: 404 });

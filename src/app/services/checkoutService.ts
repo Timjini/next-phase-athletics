@@ -25,7 +25,6 @@ export const initiateCheckoutWithBooking = async (
         connect: formData.campIds.map((id) => ({ id })),
       },
       amount: formData.price,
-      campName: formData.camp,
       athleteName: formData.athleteName,
       email: formData.email,
       phone: formData.phone,

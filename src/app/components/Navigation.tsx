@@ -1,4 +1,3 @@
-// glassMorphicNAvigation
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -15,6 +14,7 @@ import {
 import Image from "next/image";
 
 const Navigation = () => {
+  
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
@@ -45,6 +45,13 @@ const Navigation = () => {
     e.stopPropagation();
     setOpenDropdown(openDropdown === itemName ? null : itemName);
   };
+
+  // remove navigation from admin panel
+  const isAdminPage = pathname.startsWith('/admin');
+
+  if (isAdminPage) {
+    return null;
+  }
 
   const navItems = [
     {
