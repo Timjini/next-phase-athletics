@@ -2,17 +2,16 @@ import { createStripeCheckoutSession } from "@/app/lib/stripe/createCheckoutSess
 import {
   createBooking,
 } from "@/app/services/bookingService";
+import { CheckoutFormData } from "../types/camp";
 
 export const initiateCheckoutWithBooking = async (
-  formData: any,
+  formData: CheckoutFormData,
   origin: string
 ) => {
   let session;
 
   try {
-    // First, create the Stripe Checkout session
     session = await createStripeCheckoutSession(formData, origin);
-
     if (!session) {
       console.error("Failed to create Stripe Checkout Session");
     }
@@ -22,8 +21,8 @@ export const initiateCheckoutWithBooking = async (
 
   try {
     await createBooking({
-      session: {
-        connect: { id: formData.campId },
+      campSessions: {
+        connect: formData.campIds.map((id) => ({ id })),
       },
       amount: formData.price,
       campName: formData.camp,
@@ -34,14 +33,14 @@ export const initiateCheckoutWithBooking = async (
       acceptedTerms: formData.acceptedTerms,
       status: "PENDING",
       paymentStatus: "UNPAID",
-      stripeId: session?.id,
+      stripeId: session?.id ?? undefined,
       attended: "PENDING",
       qrCodeUsed: false,
       qrCodeData: "",
       qrCodeUrl: "",
-      tShirtSize: formData.tShirtSize,
-      subscribeToProgram: formData.subscribeToProgram,
-      token:'',
+      tShirtSize: formData.tShirtSize ?? null,
+      subscribeToProgram: formData.subscribeToProgram ?? null,
+      token: "",
     });
   } catch (error) {
     console.error("Failed to create booking after Stripe session.", error);
@@ -49,3 +48,4 @@ export const initiateCheckoutWithBooking = async (
 
   return session;
 };
+

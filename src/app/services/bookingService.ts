@@ -1,13 +1,13 @@
 import { bookingRepository } from "@/app/repositories/bookingRepository";
 
 export const createBooking = async (data: {
-  session: {
-    connect: { id: string };
-  },
+  campSessions: {
+    connect: { id: string }[];
+  };
   sessionId?: string;
   stripeId?: string;
   amount: number;
-  campName: string;
+  campName: string[];
   athleteName: string;
   email: string;
   phone: string;

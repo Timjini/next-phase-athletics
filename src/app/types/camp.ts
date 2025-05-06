@@ -19,13 +19,12 @@ export type CampSession = {
 
 export type Booking = {
   id: string;
-  session: CampSession;
+  session: CampSession[];
   athlete_registrations?: Partial<AthleteRegistration>[];
-  sessionId: string;
   stripeId?: string;
 
   amount: number;
-  campName: string;
+  campName: string[];
   athleteName: string;
   email: string;
   phone: string | null;
@@ -146,4 +145,23 @@ export type AthleteRegistration = {
 
   bookingId: string;
   booking?: Booking;
+};
+
+export type CheckoutFormData = {
+  campIds: string[];
+  camp: string[];
+  athleteName: string;
+  guardianName: string;
+  email: string;
+  phone: string;
+  address: {
+    address: string;
+    lat: number;
+    lng: number;
+  };
+  acceptedTerms: boolean;
+  tShirtSize: string;
+  subscribeToProgram: boolean;
+  price: number;
+  stripeId: string;
 };
