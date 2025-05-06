@@ -36,11 +36,11 @@ export default function SideBar() {
       name: 'Camps', 
       icon: <FiCalendar className="w-5 h-5" />, 
       slug: '/admin/camps',
-      subItems: [
-        { name: 'All Camps', icon: null, slug: '/admin/camps/all' },
-        { name: 'Create New', icon: null, slug: '/admin/camps/new' },
-        { name: 'Schedules', icon: null, slug: '/admin/camps/schedules' },
-      ]
+      // subItems: [
+      //   { name: 'All Camps', icon: null, slug: '/admin/camps/all' },
+      //   { name: 'Create New', icon: null, slug: '/admin/camps/new' },
+      //   { name: 'Schedules', icon: null, slug: '/admin/camps/schedules' },
+      // ]
     },
     { 
       name: 'Users', 
@@ -51,10 +51,10 @@ export default function SideBar() {
       name: 'Bookings', 
       icon: <FiBookmark className="w-5 h-5" />, 
       slug: '/admin/bookings',
-      subItems: [
-        { name: 'All Bookings', icon: null, slug: '/admin/bookings/all' },
-        { name: 'Reports', icon: null, slug: '/admin/bookings/reports' },
-      ]
+      // subItems: [
+      //   { name: 'All Bookings', icon: null, slug: '/admin/bookings/all' },
+      //   { name: 'Reports', icon: null, slug: '/admin/bookings/reports' },
+      // ]
     },
     { 
       name: 'Attendance', 

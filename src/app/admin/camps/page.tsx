@@ -1,5 +1,6 @@
 'use client';
-import { AttendanceStatus, BookingStatus, CampProgram, CampSession, CampStatus, PaymentStatus, SessionPeriod } from '@/app/types/camp';
+import { CampProgram, CampSession, CampStatus, SessionPeriod } from '@/app/types/camp';
+import { AttendanceStatus, BookingStatus, PaymentStatus } from '@/generated/prisma';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiEdit, FiTrash2, FiPlus, FiCalendar, FiMapPin, FiUser, FiRefreshCw, FiDownload, FiPrinter, FiCheck } from 'react-icons/fi';
@@ -89,9 +90,8 @@ export default function CampsView() {
                 status: 'ACTIVE',
                 bookings: [{
                   id: 'b1',
-                  session: [],
+                  campSessions: [],
                   amount: 0,
-                  campName: [],
                   athleteName: '',
                   email: '',
                   phone: null,
@@ -108,9 +108,8 @@ export default function CampsView() {
                   updatedAt: new Date('2025-02-20')
                 }, {
                   id: 'b2',
-                  session: [],
+                  campSessions: [],
                   amount: 0,
-                  campName: [],
                   athleteName: '',
                   email: '',
                   phone: null,

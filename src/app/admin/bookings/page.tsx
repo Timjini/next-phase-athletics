@@ -1,8 +1,9 @@
 'use client';
-import { AttendanceStatus, Booking, BookingStatus, PaymentStatus } from '@/app/types/camp';
+import { Booking } from '@/app/types/camp';
 import { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiEdit, FiTrash2, FiCheck, FiX, FiRefreshCw, FiDownload, FiPrinter } from 'react-icons/fi';
 import useFetchBookings from '../hooks/useFetchBookings';
+import { AttendanceStatus, BookingStatus, PaymentStatus } from '@/generated/prisma';
 
 
 type FilterOptions = {
@@ -16,6 +17,7 @@ type FilterOptions = {
 
 export default function BookingsView() {
   const { loading, error, bookings } = useFetchBookings();
+  console.log("bookings----->",bookings[0])
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({});
   const [showFilters, setShowFilters] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
@@ -33,7 +35,7 @@ export default function BookingsView() {
 
   // ✅ Filter bookings
   const filteredBookings = localBookings.filter((booking: Booking) => {
-    if (filterOptions.campName && !booking.campName.includes(filterOptions.campName)) return false;
+    // if (filterOptions.campName && !booking.campName.includes(filterOptions.campName)) return false;
     if (filterOptions.status && booking.status !== filterOptions.status) return false;
     if (filterOptions.paymentStatus && booking.paymentStatus !== filterOptions.paymentStatus) return false;
     if (filterOptions.attended && booking.attended !== filterOptions.attended) return false;
@@ -69,20 +71,20 @@ export default function BookingsView() {
   const handleEditSubmit = async () => {
     if (!selectedBooking) return;
 
-    try {
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setBookings(prev =>
-        prev.map(b =>
-          b.id === selectedBooking.id ? { ...b, ...editForm } : b
-        )
-      );
-      setIsEditing(false);
-      setSelectedBooking(null);
-    } catch (error) {
-      console.error('Failed to update booking:', error);
-    }
+    // try {
+    //   await new Promise(resolve => setTimeout(resolve, 500));
+    //   setBookings(prev =>
+    //     prev.map(b =>
+    //       b.id === selectedBooking.id ? { ...b, ...editForm } : b
+    //     )
+    //   );
+    //   setIsEditing(false);
+    //   setSelectedBooking(null);
+    // } catch (error) {
+    //   console.error('Failed to update booking:', error);
+    // }
   };
-  const uniqueCampNames = [...new Set(bookings.flatMap(b => b.campName))];
+  // const uniqueCampNames = [...new Set(bookings.flatMap(b => b.campName))];
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -126,7 +128,7 @@ export default function BookingsView() {
           {showFilters && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div>
+                {/* <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Camp Name</label>
                   <select
                     className="block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
@@ -138,7 +140,7 @@ export default function BookingsView() {
                       <option key={name} value={name}>{name}</option>
                     ))}
                   </select>
-                </div>
+                </div> */}
                 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Booking Status</label>
@@ -242,9 +244,9 @@ export default function BookingsView() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900 font-medium">{booking.campName}</div>
+                        {/* <div className="text-sm text-gray-900 font-medium">{booking.campName}</div> */}
                         <div className="text-sm text-gray-500">
-                          {booking.session.map(s => s.label).join(', ')}
+                          {booking.campSessions.map(s => s.label).join(', ')}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

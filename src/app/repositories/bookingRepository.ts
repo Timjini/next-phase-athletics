@@ -1,5 +1,5 @@
+import { BookingStatus } from '@/generated/prisma';
 import { prisma } from '../lib/prisma';
-import { BookingStatus } from '../types/camp';
 
 export const bookingRepository = {
   findById: async (id: string) => {

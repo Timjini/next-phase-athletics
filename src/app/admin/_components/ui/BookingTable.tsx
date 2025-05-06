@@ -29,7 +29,7 @@ const BookingTable = ({ bookings, loading, error }: BookingTableProps) => {
         return (
           booking.athleteName.toLowerCase().includes(filter.toLowerCase()) ||
           booking.email.toLowerCase().includes(filter.toLowerCase()) ||
-          booking.campName.join(" ").toLowerCase().includes(filter.toLowerCase()) ||
+          // booking.campName.join(" ").toLowerCase().includes(filter.toLowerCase()) ||
           booking.paymentStatus.toLowerCase().includes(filter.toLowerCase())
         );
       });
@@ -110,12 +110,12 @@ const BookingTable = ({ bookings, loading, error }: BookingTableProps) => {
               >
                 Athlete Name {getSortIndicator("athleteName")}
               </th>
-              <th
+              {/* <th
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => requestSort("campName")}
               >
                 Camp {getSortIndicator("campName")}
-              </th>
+              </th> */}
               <th
                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
                 onClick={() => requestSort("email")}
@@ -155,9 +155,9 @@ const BookingTable = ({ bookings, loading, error }: BookingTableProps) => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {booking.athleteName}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  {/* <td className="px-6 py-4 whitespace-nowrap">
                     {booking.campName}
-                  </td>
+                  </td> */}
                   <td className="px-6 py-4 whitespace-nowrap">
                     {booking.email}
                   </td>

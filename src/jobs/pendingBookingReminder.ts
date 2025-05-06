@@ -1,6 +1,6 @@
 import { ExtraBookingInfoEvent } from "@/app/notifications/events/ExtraBookingInfoEvent";
 import { bookingRepository } from "@/app/repositories/bookingRepository";
-import { BookingStatus } from "@/app/types/camp";
+import { BookingStatus } from "@/generated/prisma";
 
 const pendingStatus: BookingStatus = BookingStatus.PENDING;
 

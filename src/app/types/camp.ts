@@ -1,3 +1,5 @@
+import { AttendanceStatus, BookingStatus, PaymentStatus } from "@/generated/prisma";
+
 export type CampSession = {
   id: string;
   label: string;
@@ -19,12 +21,12 @@ export type CampSession = {
 
 export type Booking = {
   id: string;
-  session: CampSession[];
+  campSessions: CampSession[];
   athlete_registrations?: Partial<AthleteRegistration>[];
   stripeId?: string;
 
   amount: number;
-  campName: string[];
+  // campName: string[];
   athleteName: string;
   email: string;
   phone: string | null;
@@ -57,17 +59,6 @@ export enum CampStatus {
   CANCELLED = "CANCELLED",
 }
 
-export enum BookingStatus {
-  PENDING = "PENDING",
-  CONFIRMED = "CONFIRMED",
-  CANCELLED = "CANCELLED",
-}
-
-export enum PaymentStatus {
-  UNPAID = "UNPAID",
-  PAID = "PAID",
-  REFUNDED = "REFUNDED",
-}
 
 export type CampProgram = {
   id: string;
@@ -166,9 +157,3 @@ export type CheckoutFormData = {
   price: number;
   stripeId: string;
 };
-
-export enum AttendanceStatus {
-  PENDING = "PENDING",
-  ATTENDED = "ATTENDED",
-  NO_SHOW = "NO_SHOW",
-}

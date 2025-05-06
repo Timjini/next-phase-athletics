@@ -5,17 +5,17 @@ import { Booking } from "@/app/types/camp";
 sgMail.setApiKey(process.env.NEXT_SENDGRID_KEY!);
 
 export const athleteInfoReminder = async (booking: Booking): Promise<void> => {
-  const { id, email, athleteName: name, campName: camp, token: token} = booking;
+  const { id, email, athleteName: name, token: token} = booking;
 
   const msg = {
     to: email,
     from: process.env.SENDGRID_FROM_EMAIL!,
-    subject: `⏰ Reminder: Complete Your Information for ${camp} Camp`,
+    subject: `⏰ Reminder: Complete Your Information for Camp`,
     html: `
       <div style="max-width: 600px; margin: auto; font-family: sans-serif; background: #ffffff; border: 1px solid #eee; padding: 24px; border-radius: 12px;">
-        <h2 style="text-align: center; color: #2E86AB;">⏰ Complete Your Information for ${camp}</h2>
+        <h2 style="text-align: center; color: #2E86AB;">⏰ Complete Your Information for Joining the Camp</h2>
         <p>Hi <strong>${name}</strong>,</p>
-        <p>We noticed that you haven’t filled out the required information for your <strong>${camp}</strong> booking. In order to attend the camp, please complete the following form:</p>
+        <p>We noticed that you haven’t filled out the required information for your <strong>XLR8 Camp</strong> booking. In order to attend the camp, please complete the following form:</p>
 
         <div style="background: #f8f8f8; padding: 16px; border-radius: 8px; margin: 20px 0;">
           <p><strong>🎫 Booking ID:</strong> ${id}</p>
