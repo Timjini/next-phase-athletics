@@ -244,9 +244,10 @@ model AthleteRegistration {
   emergencyContactPhone   String
   familyDoctor            String?
   doctorContactInfo       String?
+  insuranceNumber         String?
+  insuranceHolder         String?
   
   dietaryRestrictions     String?
-  photoPermission         Boolean
   hearAboutUs            String
   additionalNotes         String?
   

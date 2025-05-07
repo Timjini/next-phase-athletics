@@ -9,6 +9,7 @@ import {
 import { calculateAge } from "../utils/calculateAge";
 import { popularSports, schoolYears } from "../lib/constants";
 import { toast } from "sonner";
+import RegisterPhoneInput from "../components/inputs/RegisterPhoneInput";
 
 type Props = {
   booking: Booking;
@@ -29,7 +30,6 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
     resolver: zodResolver(athleteRegistrationSchema),
     defaultValues: {
       name: booking.athleteName,
-      photoPermission: false,
       infoAccurate: false,
       termsAgreed: false,
       medicalConsent: false,
@@ -73,7 +73,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
         ];
         break;
       case 4:
-        fieldsToValidate = ["photoPermission", "hearAboutUs"];
+        fieldsToValidate = ["hearAboutUs"];
         break;
     }
 
@@ -214,9 +214,6 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
-                    <option value="Non-binary">Non-binary</option>
-                    <option value="Prefer not to say">Prefer not to say</option>
-                    <option value="Other">Other</option>
                   </select>
                   {errors.gender && (
                     <p className="mt-1 text-sm text-red-600">
@@ -237,7 +234,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     {...register("schoolYear")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   >
-                    <option value="">Select School Year</option>
+                    <option value="">Select School Year 2025/2026</option>
                     {schoolYears.map((year) => (
                       <option key={year} value={year}>
                         {year}
@@ -345,9 +342,10 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">Select Level</option>
-                    <option value="Development">Development</option>
+                    <option value="Beginner">Beginner</option>
                     <option value="Intermediate">Intermediate</option>
                     <option value="Advanced">Advanced</option>
+                    <option value="Professional">Professional</option>
                   </select>
                   {errors.athleticLevel && (
                     <p className="mt-1 text-sm text-red-600">
@@ -496,7 +494,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     placeholder="Describe any recent injuries, treatments, and current status"
                   />
                 </div>
-
+                {/* Emergency Contact Info */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
@@ -525,10 +523,19 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     >
                       Emergency Contact Phone *
                     </label>
-                    <input
+                    <RegisterPhoneInput
                       type="tel"
                       id="emergencyContactPhone"
-                      {...register("emergencyContactPhone")}
+                      {...register("emergencyContactPhone", {
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^\(\d{3}\)\s\d{3}-\d{4}$/,
+                          message:
+                            "Phone number must be in the format (555) 123-4567",
+                        },
+                      })}
+                      maxLength={14}
+                      placeholder="(555) 123-4567"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     />
                     {errors.emergencyContactPhone && (
@@ -538,37 +545,76 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     )}
                   </div>
                 </div>
-
-                {/* <div>
-                  <label
-                    htmlFor="familyDoctor"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Family Doctor (optional)
-                  </label>
-                  <input
-                    type="text"
-                    id="familyDoctor"
-                    {...register("familyDoctor")}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div> */}
-
-                {/* <div>
-                  <label
-                    htmlFor="doctorContactInfo"
-                    className="block text-sm font-medium text-gray-700 mb-1"
-                  >
-                    Doctor Contact Info (optional)
-                  </label>
-                  <input
-                    type="text"
-                    id="doctorContactInfo"
-                    {...register("doctorContactInfo")}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="Phone number and/or clinic name"
-                  />
-                </div> */}
+                {/* Doctor contact info */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      htmlFor="familyDoctor"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Family Doctor (optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="familyDoctor"
+                      {...register("familyDoctor")}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="doctorContactInfo"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Doctor Contact Info (optional)
+                    </label>
+                    <RegisterPhoneInput
+                      id="doctorContactInfo"
+                      {...register("doctorContactInfo", {
+                        required: "Phone number is required",
+                        pattern: {
+                          value: /^\(\d{3}\)\s\d{3}-\d{4}$/,
+                          message:
+                            "Phone number must be in the format (555) 123-4567",
+                        },
+                      })}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="(555) 123-4567"
+                    />
+                  </div>
+                </div>
+                {/* Insurance info */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label
+                      htmlFor="insuranceNumber"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Insurance Number
+                    </label>
+                    <input
+                      type="text"
+                      id="insuranceNumber"
+                      {...register("insuranceNumber")}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="insuranceHolder"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Insurance Holder Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="insuranceHolder"
+                      {...register("insuranceHolder")}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Phone number and/or clinic name"
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="mt-8 flex justify-between">
@@ -612,38 +658,6 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                     placeholder="e.g., Vegetarian, gluten-free, nut allergy, etc."
                   />
                 </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Do you give permission for photos/videos to be taken for
-                    program use?
-                  </label>
-                  <div className="flex items-start">
-                    <div className="flex items-center h-5">
-                      <input
-                        id="photoPermission"
-                        type="checkbox"
-                        {...register("photoPermission")}
-                        className="focus:ring-blue-500 h-4 w-4 text-blue-600 border-gray-300 rounded"
-                      />
-                    </div>
-                    <div className="ml-3 text-sm">
-                      <label
-                        htmlFor="photoPermission"
-                        className="font-medium text-gray-700"
-                      >
-                        I give permission for photos/videos to be taken for
-                        program use
-                      </label>
-                    </div>
-                  </div>
-                  {errors.photoPermission && (
-                    <p className="mt-1 text-sm text-red-600">
-                      {errors.photoPermission.message}
-                    </p>
-                  )}
-                </div>
-
                 <div>
                   <label
                     htmlFor="hearAboutUs"
@@ -839,7 +853,7 @@ export const AthleteRegistrationForm: React.FC<Props> = ({ booking }) => {
                 href="mailto:info@nxtphs.com"
                 className="text-blue-600 hover:underline"
               >
-                info@athleteprogram.com
+                info@nxtphs.com
               </a>{" "}
               or call us at (815) 556-8037.
             </p>

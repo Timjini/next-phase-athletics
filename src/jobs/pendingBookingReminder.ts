@@ -14,7 +14,7 @@ export const pendingBookingsReminderHandler = async () => {
         try {
           // const extraBookingInfoEvent = new ExtraBookingInfoEvent();
           // extraBookingInfoEvent.notify(booking);
-          console.log(`email sent ${booking.email} `);
+          console.log(`reminder email sent ${booking.email} `);
         } catch (err) {
           console.error("mail not sent");
         }
