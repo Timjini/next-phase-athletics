@@ -16,10 +16,15 @@ export const bookingRepository = {
   },
   findAll: async () => {
     return prisma.booking.findMany({
-      include: {
-        campSessions: true,
-        athlete_registrations: true,
+     include: {
+      campSessions: {
+        include: {
+          campProgram: true,
+        },
       },
+      notifications: true,
+      athlete_registrations: true,
+    }, 
     });
   },
   create: async (data: any) => {

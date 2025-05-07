@@ -26,7 +26,7 @@ export type Booking = {
   stripeId?: string;
 
   amount: number;
-  // campName: string[];
+  campName: string[];
   athleteName: string;
   email: string;
   phone: string | null;

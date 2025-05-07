@@ -42,7 +42,12 @@ export const campProgramRepository = {
             priority: "desc",
           },
         },
+        hosts: {
+          include: {
+            host: true,
+          },
+        },
       },
     });
-  },
+  }
 };

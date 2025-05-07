@@ -226,7 +226,7 @@ export default function QRScannerPage() {
             <div className="space-y-3">
               <div>
                 <p className="text-sm font-medium text-gray-500">Camp</p>
-                <p className="text-gray-800">{apiResponse?.campName}</p>
+                {/* <p className="text-gray-800">{apiResponse?.campName}</p> */}
                 <p className="text-sm text-gray-500">
                   {formatDate(apiResponse?.session.startDate || "")} -{" "}
                   {formatDate(apiResponse?.session.endDate || "")}

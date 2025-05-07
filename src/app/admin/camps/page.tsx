@@ -4,6 +4,7 @@ import { AttendanceStatus, BookingStatus, PaymentStatus } from '@/generated/pris
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { FiSearch, FiFilter, FiEdit, FiTrash2, FiPlus, FiCalendar, FiMapPin, FiUser, FiRefreshCw, FiDownload, FiPrinter, FiCheck } from 'react-icons/fi';
+import useFetchCamps from '../hooks/useFetchCamps';
 
 type FilterOptions = {
   searchQuery?: string;
@@ -13,8 +14,10 @@ type FilterOptions = {
 };
 
 export default function CampsView() {
+  const {loading, error, camps} = useFetchCamps();
+  console.log("camps ----->",camps)
   const [campPrograms, setCampPrograms] = useState<CampProgram[]>([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({});
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCamp, setSelectedCamp] = useState<CampProgram | null>(null);
@@ -23,132 +26,8 @@ export default function CampsView() {
   const [editForm, setEditForm] = useState<Partial<CampProgram & CampSession>>({});
   const [activeTab, setActiveTab] = useState<'programs' | 'sessions'>('programs');
 
-  // Fetch camp programs (replace with actual API call)
-  useEffect(() => {
-    const fetchCampPrograms = async () => {
-      setLoading(true);
-      try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 800));
-        const mockCampPrograms: CampProgram[] = [
-          {
-            id: '1',
-            title: 'Summer Basketball Camp',
-            description: 'A fun summer program for young basketball enthusiasts',
-            imageUrl: '/images/basketball.jpg',
-            slug: 'summer-basketball',
-            location: 'Downtown Sports Center',
-            lat: 40.7128,
-            lng: -74.0060,
-            createdAt: new Date('2023-01-15'),
-            updatedAt: new Date('2023-06-01'),
-            hosts: [
-              {
-                host: {
-                  id: 'h1',
-                  name: 'Coach Johnson',
-                  bio: 'Former NBA player with 10 years coaching experience',
-                  imageUrl: '/images/coach-johnson.jpg',
-                  createdAt: new Date('2025-02-20'),
-                  updatedAt: new Date('2025-02-20'),
-                  campPrograms: []
-                },
-                id: '',
-                campProgramId: '',
-                campProgram: {
-                  id: '',
-                  title: '',
-                  description: null,
-                  imageUrl: undefined,
-                  videoUrl: undefined,
-                  slug: '',
-                  location: '',
-                  lat: 0,
-                  lng: 0,
-                  tShirtSizes: [],
-                  subscribeToProgram: false,
-                  createdAt: new Date('2025-02-20'),
-                  updatedAt: new Date('2025-02-20'),
-                  sessions: [],
-                  hosts: []
-                },
-                hostId: ''
-              }
-            ],
-            sessions: [
-              {
-                id: 's1',
-                label: 'Week 1',
-                priority: 1,
-                startDate: new Date('2023-07-10'),
-                startDateString: 'July 10, 2023',
-                endDateString: 'July 14, 2023',
-                endDate: new Date('2023-07-14'),
-                period: 'MORNING',
-                availableSlots: 15,
-                price: 199.99,
-                status: 'ACTIVE',
-                bookings: [{
-                  id: 'b1',
-                  campSessions: [],
-                  amount: 0,
-                  athleteName: '',
-                  email: '',
-                  phone: null,
-                  status: BookingStatus.CANCELLED,
-                  paymentStatus: PaymentStatus.UNPAID,
-                  acceptedTerms: false,
-                  attended: AttendanceStatus.PENDING,
-                  qrCodeData: null,
-                  qrCodeUrl: null,
-                  tShirtSize: null,
-                  subscribeToProgram: null,
-                  token: null,
-                  createdAt: new Date('2025-02-20'),
-                  updatedAt: new Date('2025-02-20')
-                }, {
-                  id: 'b2',
-                  campSessions: [],
-                  amount: 0,
-                  athleteName: '',
-                  email: '',
-                  phone: null,
-                  status: BookingStatus.CANCELLED,
-                  paymentStatus: PaymentStatus.UNPAID,
-                  acceptedTerms: false,
-                  attended: AttendanceStatus.PENDING,
-                  qrCodeData: null,
-                  qrCodeUrl: null,
-                  tShirtSize: null,
-                  subscribeToProgram: null,
-                  token: null,
-                  createdAt: new Date('2025-02-20'),
-                  updatedAt: new Date('2025-02-20')
-                }],
-                createdAt: new Date('2025-02-20'),
-                updatedAt: new Date('2025-02-20'),
-                campProgramId: ''
-              },
-              // More sample sessions...
-            ],
-            tShirtSizes: [],
-            subscribeToProgram: false
-          },
-          // More sample camp programs...
-        ];
-        setCampPrograms(mockCampPrograms);
-      } catch (error) {
-        console.error('Failed to fetch camp programs:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCampPrograms();
-  }, []);
-
   // Apply filters
-  const filteredPrograms = campPrograms.filter(program => {
+  const filteredPrograms = camps.filter(program => {
     if (filterOptions.searchQuery && 
         !program.title.toLowerCase().includes(filterOptions.searchQuery.toLowerCase()) &&
         !program.description?.toLowerCase().includes(filterOptions.searchQuery.toLowerCase()) &&
@@ -158,7 +37,7 @@ export default function CampsView() {
     return true;
   });
 
-  const filteredSessions = campPrograms.flatMap(program => 
+  const filteredSessions = camps.flatMap(program => 
     program.sessions.map(session => ({ ...session, programTitle: program.title }))
   ).filter(session => {
     if (filterOptions.searchQuery && 
@@ -169,19 +48,19 @@ export default function CampsView() {
     if (filterOptions.status && session.status !== filterOptions.status) return false;
     if (filterOptions.period && session.period !== filterOptions.period) return false;
     if (filterOptions.location && 
-        !campPrograms.find(p => p.id === session.id)?.location.toLowerCase().includes(filterOptions.location.toLowerCase())) {
+        !camps.find(p => p.id === session.id)?.location.toLowerCase().includes(filterOptions.location.toLowerCase())) {
       return false;
     }
     return true;
   });
 
-  const uniqueLocations = [...new Set(campPrograms.map(p => p.location))];
+  const uniqueLocations = [...new Set(camps.map(p => p.location))];
 
   const handleStatusUpdate = async (sessionId: string, newStatus: CampStatus) => {
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 300));
-      setCampPrograms(campPrograms.map(program => ({
+      setCampPrograms(camps.map(program => ({
         ...program,
         sessions: program.sessions.map(session => 
           session.id === sessionId ? { ...session, status: newStatus } : session
