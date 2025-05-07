@@ -30,8 +30,10 @@ export async function POST(request: NextRequest) {
     try {
       booking = await getBookingBySessionId(body.sessionId);
 
-
-      if (booking.BookingStatus === "CONFIRMED" && booking.paymentStatus === "PAID") {
+      if (
+        booking.BookingStatus === "CONFIRMED" &&
+        booking.paymentStatus === "PAID"
+      ) {
         return NextResponse.json(
           { error: "Booking is already confirmed" },
           { status: 201 }
@@ -53,10 +55,10 @@ export async function POST(request: NextRequest) {
 
       if (booking) {
         const qrData = `booking:${booking.id}:${Date.now()}`;
-        
+
         const { qrCodeData, qrCodeUrl } = await generateAndUploadQRCode(qrData);
         const token = generateBookingToken(booking.id);
-        
+
         // Update booking with QR code info
         await prisma.booking.update({
           where: { id: booking.id },
@@ -64,9 +66,8 @@ export async function POST(request: NextRequest) {
             qrCodeData,
             qrCodeUrl,
             token,
-          }
+          },
         });
-    
       }
     } catch (error) {
       console.error("Failed to update booking status:", error);
@@ -79,19 +80,35 @@ export async function POST(request: NextRequest) {
     // );
     // const totalAmount = campPriceInCents + stripeFee;
 
+    // TODO move this to Events / notification table
     booking = await getBookingBySessionId(body.sessionId);
     try {
       await sendConfirmationEmail({
         id: booking?.id ?? "Unknown ID",
         email: booking?.email ?? "info@nxtphs.com",
         name: booking?.athleteName ?? "Unknown Athlete",
-        camp: booking?.session?.label ?? "Unknown Camp",
-        startDate: booking?.session?.startDateString ?? "Unknown Start Date",
-        endDate: booking?.session?.endDateString ?? "Unknown End Date",
+        camp:
+          booking?.campSessions
+            ?.map((session: CampSession) => session.label)
+            .join(", ") ?? "Unknown Camp",
+
+        startDate:
+          booking?.campSessions
+            ?.map((session: CampSession) => session.startDateString)
+            .join(", ") ?? "Unknown Start Date",
+
+        endDate:
+          booking?.campSessions
+            ?.map((session: CampSession) => session.endDateString)
+            .join(", ") ?? "Unknown End Date",
         // amount: totalAmount ?? 0,
-        period: booking?.campSessions?.map((session: CampSession) =>
-          `${session.label} (${sessionPeriod(session.period)})`
-        ).join(', ') ?? "Unknown Period",
+        period:
+          booking?.campSessions
+            ?.map(
+              (session: CampSession) =>
+                `${session.label} (${sessionPeriod(session.period)})`
+            )
+            .join(", ") ?? "Unknown Period",
         qrCodeUrl: booking?.qrCodeUrl ?? "Unknown QR Code URL",
         location: booking?.session?.campProgram?.location ?? "Unknown Location",
       });
@@ -102,17 +119,31 @@ export async function POST(request: NextRequest) {
 
     try {
       await sendAdminNotificationEmail({
-        
         email: booking?.email ?? "info@nxtphs.com",
         phone: booking?.phone ?? "Unknown Phone",
         name: booking?.athleteName ?? "Unknown Athlete",
-        camp: booking?.session?.label ?? "Unknown Camp",
-        startDate: booking?.session?.startDateString ?? "Unknown Start Date",
-        endDate: booking?.session?.endDateString ?? "Unknown End Date",
+        camp:
+          booking?.campSessions
+            ?.map((session: CampSession) => session.label)
+            .join(", ") ?? "Unknown Camp",
+
+        startDate:
+          booking?.campSessions
+            ?.map((session: CampSession) => session.startDateString)
+            .join(", ") ?? "Unknown Start Date",
+
+        endDate:
+          booking?.campSessions
+            ?.map((session: CampSession) => session.endDateString)
+            .join(", ") ?? "Unknown End Date",
         // amount: totalAmount ?? 0,
-        period: booking?.campSessions?.map((session: CampSession) =>
-          `${session.label} (${sessionPeriod(session.period)})`
-        ).join(', ') ?? "Unknown Period",
+        period:
+          booking?.campSessions
+            ?.map(
+              (session: CampSession) =>
+                `${session.label} (${sessionPeriod(session.period)})`
+            )
+            .join(", ") ?? "Unknown Period",
       });
       console.log("Admin notification sent successfully");
     } catch (error) {
@@ -141,8 +172,6 @@ export async function POST(request: NextRequest) {
     //   console.error("Failed to send conversion event:", error);
     // }
 
-
-
     // Return success response
     return NextResponse.json({
       status: "succeeded",
@@ -168,7 +197,7 @@ async function getBookingBySessionId(stripeId: string): Promise<any> {
         },
         notifications: true,
         athlete_registrations: true,
-      }
+      },
     });
 
     if (!booking) {
