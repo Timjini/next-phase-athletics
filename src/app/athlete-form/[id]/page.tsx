@@ -12,8 +12,6 @@ const Page = () => {
   const token = pathname?.split("/").pop() || "xlr8";
   const { loading, error, booking } = useFetchBooking(token);
 
-  console.log("booking", booking);
-
   if (loading) {
     return <Loader />;
   }

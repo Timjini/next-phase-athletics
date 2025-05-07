@@ -160,8 +160,6 @@ export default function QRScannerPage() {
     }
   };
 
-  console.log("API Response:", apiResponse);
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-6">
       {/* Header */}
