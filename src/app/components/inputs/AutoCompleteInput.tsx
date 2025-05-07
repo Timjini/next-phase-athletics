@@ -51,7 +51,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
           type="text"
           placeholder={placeholder}
           autoComplete="on"
-          className="border border-gray-300 text-sm rounded-lg block w-full p-2.5"
+          className="border border-gray-300 text-gray-400 text-sm rounded-lg block w-full p-2.5"
         />
       </StandaloneSearchBox>
     </LoadScript>

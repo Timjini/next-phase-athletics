@@ -41,13 +41,15 @@ export default function Page() {
   return (
     <div className="bg-gray-50 min-h-screen">
           <CampHeroSection />
-          <Grantee />
-          {/* <CampDescription /> */}
-          <MapSection />
-          <div className= "bg-gradient-to-b from-black to-gray-800 py-16 px-4 sm:px-6 lg:px-8">
+          <div className= "bg-gradient-to-b from-white to-gray-50 py-16 px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto">
               <CampForm campProgram={campProgram} />
             </div>
+          </div>
+          <div className="bg-gradient-to-b from-black to-gray-800 ">
+            <Grantee />
+            {/* <CampDescription /> */}
+            <MapSection />
           </div>
           {/* <BookingForm /> */}
           {/* <Testimonials /> */}

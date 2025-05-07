@@ -3,7 +3,6 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormField,
@@ -12,14 +11,13 @@ import {
   FormControl,
   FormMessage,
 } from "@/components/ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { toast } from "sonner";
 import { formSchema, FormValues } from "../types/form";
 // import { createCheckoutSession } from "../lib/stripe";
 import { loadStripe } from "@stripe/stripe-js";
 import AutoCompleteInput from "../components/inputs/AutoCompleteInput";
 import { CampProgram } from "../types/camp";
-import { formatSession, sessionPeriod } from "../utils/dateUtils";
+import { sessionPeriod } from "../utils/dateUtils";
 import { useState } from "react";
 import { formatAddress } from "../lib/formatAddress";
 import TermsModal from "../components/modals/TermsModal";
@@ -33,6 +31,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import SizeChartModal from "../components/modals/SizeChartModal";
+import { MultipleAthletesDialog } from "../components/modals/MultipleAthletesDialog";
 
 interface CampFormProps {
   campProgram: CampProgram;
@@ -40,8 +39,9 @@ interface CampFormProps {
 
 export function CampForm({ campProgram }: CampFormProps) {
   const [selectedCampPrice, setSelectedCampPrice] = useState(0);
-  const [selectedCampId, setSelectedCampId] = useState("");
   const [isSizeChartOpen, setIsSizeChartOpen] = useState(false);
+  const [selected, setSelected] = useState("");
+  const [open, setOpen] = useState(false);
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -79,7 +79,9 @@ export function CampForm({ campProgram }: CampFormProps) {
         price: totalPrice,
       });
 
-      const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+      const stripe = await loadStripe(
+        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      );
       if (!stripe) throw new Error("Stripe failed to load");
 
       await stripe.redirectToCheckout({ sessionId });
@@ -89,18 +91,65 @@ export function CampForm({ campProgram }: CampFormProps) {
     }
   };
 
+  const handleChange = (value: string) => {
+    setSelected(value);
+    if (value === "multiple") {
+      setOpen(true);
+    }
+  };
+
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 mb-6 text-gray-50"
       >
+        <div className="grid grid-cols-2 gap-4">
+          {/* Single Athlete */}
+          <div className="flex items-center ps-4 border border-gray-200 rounded-sm">
+            <input
+              id="radio-single"
+              type="radio"
+              value="single"
+              name="bordered-radio"
+              checked={selected === "single"}
+              onChange={(e) => handleChange(e.target.value)}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label
+              htmlFor="radio-single"
+              className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Single Athlete
+            </label>
+          </div>
+
+          {/* Multiple Athletes */}
+          <div className="flex items-center ps-4 border border-gray-200 rounded-sm">
+            <input
+              id="radio-multiple"
+              type="radio"
+              value="multiple"
+              name="bordered-radio"
+              checked={selected === "multiple"}
+              onChange={(e) => handleChange(e.target.value)}
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            />
+            <label
+              htmlFor="radio-multiple"
+              className="w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Multiple Athletes
+            </label>
+          </div>
+        </div>
+
         <FormField
           control={form.control}
           name="camp"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-2xl mb-4 font-bold">
+              <FormLabel className="text-xl mb-4 font-bold text-gray-700">
                 Available Dates:
               </FormLabel>
               <div className="grid gap-2">
@@ -131,10 +180,10 @@ export function CampForm({ campProgram }: CampFormProps) {
                           );
                           setSelectedCampPrice(totalPrice);
                         }}
-                        className="w-4 h-4"
+                        className="w-4 h-4 text-gray-600"
                       />
                     </FormControl>
-                    <FormLabel className="font-normal">
+                    <FormLabel className="font-normal text-gray-600">
                       {camp.label} - {camp.startDateString} -{" "}
                       {camp.endDateString} - ({sessionPeriod(camp.period)})
                     </FormLabel>
@@ -152,9 +201,15 @@ export function CampForm({ campProgram }: CampFormProps) {
             name="athleteName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Athlete&apos;s Name</FormLabel>
+                <FormLabel className="text-gray-600">
+                  Athlete&apos;s Name
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Athlete's Name" {...field} />
+                  <Input
+                    className="text-gray-400"
+                    placeholder="Athlete's Name"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -166,9 +221,15 @@ export function CampForm({ campProgram }: CampFormProps) {
             name="guardianName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Parent/Guardian Name</FormLabel>
+                <FormLabel className="text-gray-600">
+                  Parent/Guardian Name
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Parent/Guardian Name" {...field} />
+                  <Input
+                    className="text-gray-400"
+                    placeholder="Parent/Guardian Name"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -181,9 +242,13 @@ export function CampForm({ campProgram }: CampFormProps) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email Address</FormLabel>
+              <FormLabel className="text-gray-600">Email Address</FormLabel>
               <FormControl>
-                <Input placeholder="you@example.com" {...field} />
+                <Input
+                  className="text-gray-400"
+                  placeholder="you@example.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -195,9 +260,9 @@ export function CampForm({ campProgram }: CampFormProps) {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Phone Number</FormLabel>
+              <FormLabel className="text-gray-600">Phone Number</FormLabel>
               <FormControl>
-                <PhoneInput {...field} />
+                <PhoneInput className="text-gray-400" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -209,7 +274,7 @@ export function CampForm({ campProgram }: CampFormProps) {
           name="address"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Address</FormLabel>
+              <FormLabel className="text-gray-600">Address</FormLabel>
               <FormControl>
                 <AutoCompleteInput
                   placeholder="1234 Street Name, City, State"
@@ -233,23 +298,26 @@ export function CampForm({ campProgram }: CampFormProps) {
           name="tShirtSize"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>T-Shirt Size</FormLabel>
+              <FormLabel className="text-gray-600">T-Shirt Size</FormLabel>
               <div className="flex items-center gap-2">
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl>
+                  <FormControl className="text-gray-400">
                     <SelectTrigger>
-                      <SelectValue placeholder="Select size" />
+                      <SelectValue
+                        className="text-gray-400"
+                        placeholder="Select size"
+                      />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-white text-gray-900">
+                  <SelectContent className="bg-white text-gray-600">
                     {tShirtSizes.map((size) => (
                       <SelectItem
                         key={size}
                         value={size}
-                        className="hover:bg-gray-200"
+                        className="hover:bg-gray-200 text-gray-500"
                       >
                         {size}
                       </SelectItem>
@@ -281,12 +349,15 @@ export function CampForm({ campProgram }: CampFormProps) {
                   onBlur={field.onBlur}
                   name={field.name}
                   ref={field.ref}
-                  className="w-4 h-4"
+                  className="w-4 h-4 text-gray-400"
                 />
               </FormControl>
               <FormLabel className="text-sm">
-                I accept the <TermsModal />
-                and I will complete the emailed post registration form.
+                <span className="text-gray-500">I accept the</span>{" "}
+                <TermsModal />
+                <span className="text-gray-500">
+                  and I will complete the emailed post registration form.
+                </span>
               </FormLabel>
               <FormMessage />
             </FormItem>
@@ -308,7 +379,7 @@ export function CampForm({ campProgram }: CampFormProps) {
                   className="w-4 h-4"
                 />
               </FormControl>
-              <FormLabel className="text-sm">
+              <FormLabel className="text-sm text-gray-500">
                 Sign me up for the free 12 week program to maximize what I have
                 learned in the Camp
               </FormLabel>
@@ -336,6 +407,7 @@ export function CampForm({ campProgram }: CampFormProps) {
           onClose={() => setIsSizeChartOpen(false)}
         />
       </form>
+      <MultipleAthletesDialog open={open} onOpenChange={setOpen} />
     </Form>
   );
 }

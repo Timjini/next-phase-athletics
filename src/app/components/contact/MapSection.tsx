@@ -5,9 +5,9 @@ export const MapSection = () => {
     "lng": "-87.884734"
   }
   return (
-    <div className="bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 ">
+    <div className=" py-12 px-4 sm:px-6 lg:px-8 ">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-2xl font-bold text-center text-gray-900 mb-8">
+        <h2 className="text-2xl font-bold text-center text-gray-50 mb-8">
           {campLocation.name}
         </h2>
         <div className=" shadow-lg rounded-lg overflow-hidden">
