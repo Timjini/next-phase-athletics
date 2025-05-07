@@ -15,9 +15,7 @@ type FilterOptions = {
 
 export default function CampsView() {
   const {loading, error, camps} = useFetchCamps();
-  console.log("camps ----->",camps)
   const [campPrograms, setCampPrograms] = useState<CampProgram[]>([]);
-  // const [loading, setLoading] = useState(true);
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({});
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCamp, setSelectedCamp] = useState<CampProgram | null>(null);
@@ -26,7 +24,6 @@ export default function CampsView() {
   const [editForm, setEditForm] = useState<Partial<CampProgram & CampSession>>({});
   const [activeTab, setActiveTab] = useState<'programs' | 'sessions'>('programs');
 
-  // Apply filters
   const filteredPrograms = camps.filter(program => {
     if (filterOptions.searchQuery && 
         !program.title.toLowerCase().includes(filterOptions.searchQuery.toLowerCase()) &&
@@ -73,9 +70,7 @@ export default function CampsView() {
 
   const handleEditSubmit = async () => {
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 500));
-      // Update logic would go here
       setIsEditing(false);
       setSelectedCamp(null);
       setSelectedSession(null);
@@ -272,7 +267,7 @@ export default function CampsView() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-wrap gap-1">
-                          {program.hosts.map(({ host }) => (
+                          {program.hosts?.map(({ host }) => (
                             <span key={host.id} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                               <FiUser className="mr-1" />
                               {host.name}

@@ -26,7 +26,7 @@ export type Booking = {
   stripeId?: string;
 
   amount: number;
-  campName: string[];
+  // campName: string[];
   athleteName: string;
   email: string;
   phone: string | null;
@@ -70,13 +70,13 @@ export type CampProgram = {
   location: string;
   lat: number;
   lng: number;
-  tShirtSizes: string[];
-  subscribeToProgram: boolean;
+  tShirtSizes?: string[];
+  subscribeToProgram?: boolean;
   createdAt: Date;
   updatedAt: Date;
 
   sessions: CampSession[];
-  hosts: CampProgramHost[];
+  hosts?: CampProgramHost[];
 };
 
 export type Host = {

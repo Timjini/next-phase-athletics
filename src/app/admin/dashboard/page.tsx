@@ -14,13 +14,20 @@ import { Bar, Doughnut } from 'react-chartjs-2';
 import useFetchCamps from '../hooks/useFetchCamps';
 import useFetchBookings from '../hooks/useFetchBookings';
 import BookingChart from '../_components/dashboard/BookingChart';
+import { FiRefreshCw } from 'react-icons/fi';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
 const Dashboard = () => {
   const { loading, error, camps } = useFetchCamps();
   const { bookings } = useFetchBookings();
-  console.log("bookings---->",bookings)
+
+  if (loading){
+    <div className="flex justify-center items-center p-12 bg-white rounded-lg shadow">
+                <FiRefreshCw className="animate-spin h-8 w-8 text-blue-500" />
+              </div>
+  }
+
   const bookedSlots = bookings?.filter(
     (booking) => booking.status === 'PENDING' || booking.status === 'CONFIRMED'
   ).length || 0;
@@ -28,7 +35,9 @@ const Dashboard = () => {
   // Step 1: Create map from camp label to slug
   const labelToSlugMap: { [label: string]: string } = {};
   camps?.forEach(camp => {
-    labelToSlugMap[camp.label] = camp.slug;
+    camp.sessions.forEach(session => {
+      labelToSlugMap[session.label] = camp.slug;
+    });
   });
 
   // Step 2: Initialize camp registration counts

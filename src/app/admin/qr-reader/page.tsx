@@ -47,7 +47,7 @@ export default function QRScannerPage() {
         const message = result.message || `Error ${response.status}`;
         if (response.status === 400) {
           toast(message, {
-            style: { backgroundColor: "#facc15", color: "#000" }, // yellow style
+            style: { backgroundColor: "#facc15", color: "#000" },
           });
         } else {
           toast.error(message);
