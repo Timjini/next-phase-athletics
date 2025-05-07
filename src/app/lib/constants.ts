@@ -127,15 +127,13 @@ export const BookingFAQ  = [
 ];
 
 export const schoolYears = [
-  'Year 5', 'Year 6', 'Year 7', 'Year 8', 'Year 9', 
-  'Year 10', 'Year 11', 'Year 12', 'Year 13',
-  'Grade 1', 'Grade 2', 'Grade 3', 'Grade 4', 'Grade 5',
+  'Grade 5',
   'Grade 6', 'Grade 7', 'Grade 8', 'Grade 9', 'Grade 10',
-  'Grade 11', 'Grade 12'
+  'Grade 11', 'Grade 12','College', 'Professional'
 ];
 
 export const popularSports = [
-  'Football', 'Basketball', 'Tennis', 'soccer', 'Swimming', 'Athletics',
-  'Cricket', 'Rugby', 'Hockey', 'Netball', 'Volleyball',
+  'Cross country', 'Football', 'Basketball', 'Tennis', 'Soccer', 'Swimming', 'Track and field',
+  'Rugby','Hockey', 'Netball', 'Volleyball',
   'Gymnastics', 'Badminton', 'Table Tennis', 'Cycling', 'Other'
 ];

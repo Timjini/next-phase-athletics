@@ -23,5 +23,5 @@ export const missingTokenBookingHandler = async () => {
 
 export const fetchMissingTokenBookingsConfig = {
   name: "fetch-missing-token-bookings",
-  cron: "* * * * *",
+  cron: "0 0 * * *",
 };

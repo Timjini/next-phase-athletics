@@ -44,11 +44,11 @@ export const athleteRegistrationSchema = z.object({
   athleticLevel: z
     .string()
     .refine(
-      (val) => ["Development", "Intermediate", "Advanced"].includes(val),
+      (val) => ["Beginner", "Intermediate", "Advanced","Professional"].includes(val),
       {
         message: "Please select your athletic level",
       }
-    ) as z.ZodType<"Development" | "Intermediate" | "Advanced">,
+    ) as z.ZodType<"Beginner" | "Intermediate" | "Advanced" | "Professional">,
 
   goals: z.string().min(1, "Please describe your goals"),
   preferredPosition: z.string().optional(),
@@ -68,9 +68,11 @@ export const athleteRegistrationSchema = z.object({
     .min(1, "Please enter a phone number for your emergency contact"),
   familyDoctor: z.string().optional(),
   doctorContactInfo: z.string().optional(),
+  insuranceNumber: z.string(),
+  insuranceHolder: z.string(),
 
   dietaryRestrictions: z.string().optional(),
-  photoPermission: z.boolean(),
+  // photoPermission: z.boolean(),
 
   hearAboutUs: z
     .string()
