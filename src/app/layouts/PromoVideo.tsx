@@ -9,7 +9,6 @@ import VideoModal from "../components/VideoModal";
 
 const PromoVideoSection = () => {
   // const { loading, campProgram } = useFetchCampProgram('xlr8');
-  // console.log("camps", campProgram)
   const router = useRouter();
 
   return (

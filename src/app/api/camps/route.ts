@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   try {
     const campPrograms = await campProgramRepository.findAll();
-    console.log('Camp programs:', campPrograms);
     if (campPrograms.length === 0 || campPrograms == null) {
       return NextResponse.json({ message: 'No camp programs found' }, { status: 404 });
     }
@@ -33,7 +32,6 @@ export async function POST(request: Request) {
         sessions: true,
       },
     });
-    console.log(JSON.stringify(test, null, 2));
 
     if (!campProgram) {
       return NextResponse.json({ message: 'Camp program not found' }, { status: 404 });

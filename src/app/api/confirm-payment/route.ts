@@ -7,6 +7,7 @@ import { generateAndUploadQRCode } from "@/app/lib/qrCode";
 import { updateBookingStatus } from "@/app/services/bookingService";
 import { formatDate, sessionPeriod } from "@/app/utils/dateUtils";
 import { generateBookingToken } from "@/app/utils/token";
+import { CampSession } from "@/generated/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 type RequestBody = {
@@ -27,18 +28,16 @@ export async function POST(request: NextRequest) {
 
     let booking;
     try {
-
       booking = await getBookingBySessionId(body.sessionId);
 
-      if (booking.status === "CONFIRMED" && booking.paymentStatus === "PAID") {
-        console.log("Booking is already confirmed");
+
+      if (booking.BookingStatus === "CONFIRMED" && booking.paymentStatus === "PAID") {
         return NextResponse.json(
           { error: "Booking is already confirmed" },
           { status: 201 }
         );
       }
       await updateBookingStatus(body.sessionId, "CONFIRMED", "PAID");
-      console.log("Booking status updated successfully");
 
       // Decrease availableSlots by 1
       if (booking?.sessionId) {
@@ -50,7 +49,6 @@ export async function POST(request: NextRequest) {
             },
           },
         });
-        console.log("Session slot decremented successfully");
       }
 
       if (booking) {
@@ -69,7 +67,6 @@ export async function POST(request: NextRequest) {
           }
         });
     
-        console.log("QR code generated and stored successfully");
       }
     } catch (error) {
       console.error("Failed to update booking status:", error);
@@ -83,7 +80,6 @@ export async function POST(request: NextRequest) {
     // const totalAmount = campPriceInCents + stripeFee;
 
     booking = await getBookingBySessionId(body.sessionId);
-    console.log("Booking details: fetched again", booking);
     try {
       await sendConfirmationEmail({
         id: booking?.id ?? "Unknown ID",
@@ -93,10 +89,11 @@ export async function POST(request: NextRequest) {
         startDate: booking?.session?.startDateString ?? "Unknown Start Date",
         endDate: booking?.session?.endDateString ?? "Unknown End Date",
         // amount: totalAmount ?? 0,
-        period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
+        period: booking?.campSessions?.map((session: CampSession) =>
+          `${session.label} (${sessionPeriod(session.period)})`
+        ).join(', ') ?? "Unknown Period",
         qrCodeUrl: booking?.qrCodeUrl ?? "Unknown QR Code URL",
         location: booking?.session?.campProgram?.location ?? "Unknown Location",
-        
       });
       console.log("Email sent successfully");
     } catch (error) {
@@ -113,7 +110,9 @@ export async function POST(request: NextRequest) {
         startDate: booking?.session?.startDateString ?? "Unknown Start Date",
         endDate: booking?.session?.endDateString ?? "Unknown End Date",
         // amount: totalAmount ?? 0,
-        period: sessionPeriod(booking?.session?.period) ?? "Unknown Period",
+        period: booking?.campSessions?.map((session: CampSession) =>
+          `${session.label} (${sessionPeriod(session.period)})`
+        ).join(', ') ?? "Unknown Period",
       });
       console.log("Admin notification sent successfully");
     } catch (error) {

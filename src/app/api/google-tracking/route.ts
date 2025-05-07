@@ -40,8 +40,6 @@ export async function POST(req: Request) {
     body: JSON.stringify(payload),
   });
 
-  console.log('Response from GA4:', res);
-
   if (!res.ok) {
     console.error('Failed to send GA4 event:', await res.text());
     return NextResponse.json({ error: 'Failed to send GA4 event' }, { status: 500 });

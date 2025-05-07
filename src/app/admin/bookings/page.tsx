@@ -17,7 +17,6 @@ type FilterOptions = {
 
 export default function BookingsView() {
   const { loading, error, bookings } = useFetchBookings();
-  console.log("bookings----->",bookings[0])
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({});
   const [showFilters, setShowFilters] = useState(false);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);

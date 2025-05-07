@@ -69,9 +69,6 @@ export function CampForm({ campProgram }: CampFormProps) {
       );
       const totalPrice = selectedSessions.reduce((acc, s) => acc + s.price, 0);
 
-      console.log("selectedSessions", selectedSessions);
-      console.log("totat price", totalPrice);
-
       const { sessionId } = await createCheckoutSession({
         ...data,
         campIds: data.camp,
